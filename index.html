@@ -1,0 +1,768 @@
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VRTX | Strategic Digital Partner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* Precision Grid Background */
+        .grid-lines {
+            background-image: linear-gradient(to right, #f3f4f6 1px, transparent 1px),
+                linear-gradient(to bottom, #f3f4f6 1px, transparent 1px);
+            background-size: 4rem 4rem;
+            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+        }
+
+        /* Smooth Scroll & Selection */
+        ::selection {
+            background-color: #f3f4f6;
+            color: #111827;
+        }
+
+        /* Marquee Animation */
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .animate-marquee {
+            animation: marquee 40s linear infinite;
+        }
+
+        /* Fade In Up Animation for Text */
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-load {
+            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            animation-delay: 0.3s;
+        }
+
+        /* Hide Scrollbar */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Font Families */
+        .font-sans {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .font-display {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        /* Cursor CSS */
+        body {
+            cursor: none;
+        }
+
+        .cursor {
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+            width: 100%;
+            height: 100%;
+        }
+
+        .cursor__ball {
+            position: fixed;
+            top: 0;
+            left: 0;
+            mix-blend-mode: difference;
+            z-index: 1000;
+            opacity: 0;
+        }
+
+        .cursor__ball circle {
+            fill: #f7f8fa;
+        }
+
+        /* Neon Card Styles */
+        #about-us-section .card-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 40px 0;
+        }
+
+        #about-us-section .card-box {
+            position: relative;
+            width: 320px;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 40px 30px;
+            transition: 0.5s;
+        }
+
+        #about-us-section .card-box::before {
+            content: ' ';
+            position: absolute;
+            top: 0;
+            left: 50px;
+            width: 50%;
+            height: 100%;
+            text-decoration: none;
+            background: #fff;
+            border-radius: 8px;
+            transform: skewX(15deg);
+            transition: 0.5s;
+        }
+
+        #about-us-section .card-box::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50px;
+            width: 50%;
+            height: 100%;
+            background: #fff;
+            border-radius: 8px;
+            transform: skewX(15deg);
+            transition: 0.5s;
+            filter: blur(30px);
+        }
+
+        #about-us-section .card-box:hover:before,
+        #about-us-section .card-box:hover:after {
+            transform: skewX(0deg);
+            left: 20px;
+            width: calc(100% - 90px);
+        }
+
+        /* Professional Grey Theme for Cards */
+        #about-us-section .card-box:nth-child(1):before,
+        #about-us-section .card-box:nth-child(1):after,
+        #about-us-section .card-box:nth-child(2):before,
+        #about-us-section .card-box:nth-child(2):after,
+        #about-us-section .card-box:nth-child(3):before,
+        #about-us-section .card-box:nth-child(3):after {
+            background: linear-gradient(315deg, #9ca3af, #4b5563);
+        }
+
+        #about-us-section .card-box span {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        #about-us-section .card-box span::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transition: 0.1s;
+            animation: cardAnimate 2s ease-in-out infinite;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        #about-us-section .card-box:hover span::before {
+            top: -50px;
+            left: 50px;
+            width: 100px;
+            height: 100px;
+            opacity: 1;
+        }
+
+        #about-us-section .card-box span::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transition: 0.5s;
+            animation: cardAnimate 2s ease-in-out infinite;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            animation-delay: -1s;
+        }
+
+        #about-us-section .card-box:hover span:after {
+            bottom: -50px;
+            right: 50px;
+            width: 100px;
+            height: 100px;
+            opacity: 1;
+        }
+
+        #about-us-section .card-box .card-content {
+            position: absolute;
+            z-index: 20;
+            top: 15px;
+            right: 15px;
+            bottom: 15px;
+            left: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow: hidden;
+            transition: 0.5s;
+        }
+
+        #about-us-section .card-box:hover .card-content {
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: -25px;
+            padding: 60px 40px;
+        }
+
+        @keyframes cardAnimate {
+
+            0%,
+            100% {
+                transform: translateY(10px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+    </style>
+</head>
+
+<body class="text-gray-600 antialiased font-sans" id="home">
+
+    <!-- Background (component) added by Aura -->
+    <div class="aura-background-component fixed top-0 w-full h-screen -z-10" data-alpha-mask="80"
+        style="; mask-image: linear-gradient(to bottom, transparent, black 0%, black 80%, transparent); -webkit-mask-image: linear-gradient(to bottom, transparent, black 0%, black 80%, transparent)">
+        <div class="spline-container absolute top-0 left-0 w-full h-full -z-10"><iframe
+                src="https://my.spline.design/animatedshapeblend-1gCFHvLukjcmK6imbIAFLY2d/" frameborder="0" width="100%"
+                height="100%" id="aura-spline"></iframe></div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor">
+        <div class="cursor__ball cursor__ball--big">
+            <svg height="30" width="30">
+                <circle cx="15" cy="15" r="12" stroke-width="0"></circle>
+            </svg>
+        </div>
+        <div class="cursor__ball cursor__ball--small">
+            <svg height="10" width="10">
+                <circle cx="5" cy="5" r="4" stroke-width="0"></circle>
+            </svg>
+        </div>
+    </div>
+
+    <!-- 1. Header -->
+    <header class="fixed top-0 w-full z-50 backdrop-blur-md border-b border-gray-200 bg-white/80">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <!-- Brand -->
+            <a href="#home" class="flex items-center gap-2 group hoverable">
+                <div class="w-3 h-3 bg-gray-900 rotate-45 group-hover:rotate-0 transition-transform duration-300"></div>
+                <span class="font-display font-semibold text-lg tracking-tight text-gray-900 uppercase">VRTX</span>
+            </a>
+
+            <!-- Nav (Desktop) -->
+            <nav class="hidden md:flex items-center gap-8">
+                <a href="#home"
+                    class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors duration-200 hoverable">Home</a>
+                <a href="#services-highlight"
+                    class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors duration-200 hoverable">Services</a>
+                <a href="#services"
+                    class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors duration-200 hoverable">About
+                    Us</a>
+                <a href="#contact"
+                    class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors duration-200 hoverable">Contact</a>
+            </nav>
+
+            <!-- CTA -->
+            <div class="flex items-center gap-4">
+                <a href="#contact"
+                    class="hidden sm:flex items-center gap-2 hover:bg-gray-800 transition-all duration-300 group text-xs font-medium text-white bg-gray-900 rounded-full pt-2 pr-5 pb-2 pl-5 hoverable">
+                    Start Project
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                        data-lucide="arrow-right"
+                        class="lucide lucide-arrow-right transition-transform group-hover:translate-x-1 w-[24px] h-[14px]"
+                        style="width: 24px; height: 14px; color: rgb(255, 255, 255);">
+                        <path d="M5 12h14"></path>
+                        <path d="m12 5 7 7-7 7"></path>
+                    </svg>
+                </a>
+                <button class="md:hidden text-gray-900 hoverable">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                        data-lucide="menu" class="lucide lucide-menu w-6 h-6">
+                        <path d="M4 5h16"></path>
+                        <path d="M4 12h16"></path>
+                        <path d="M4 19h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-16">
+
+        <!-- 2. Hero -->
+        <section
+            class="min-h-[90vh] flex flex-col overflow-hidden border-gray-200 border-b relative items-center justify-center">
+            <div class="absolute inset-0 grid-lines opacity-60 -z-10"></div>
+
+            <div class="z-10 text-center max-w-5xl mx-auto px-6">
+                <div
+                    class="inline-flex gap-2 animate-fade-in-up bg-white border-gray-200 border rounded-full mb-8 pt-1 pr-3 pb-1 pl-3 gap-x-2 gap-y-2 items-center">
+                    <span class="relative flex h-2 w-2">
+                        <span
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                    </span>
+                    <span class="uppercase text-xs font-medium text-gray-900 tracking-wider">AI Agents and
+                        Websites</span>
+                </div>
+
+                <h1
+                    class="md:text-8xl lg:text-9xl leading-[0.9] text-6xl font-semibold text-white mix-blend-difference tracking-tighter font-display mb-8">
+                    VRTX
+                </h1>
+
+                <p class="md:text-xl leading-relaxed text-lg font-light text-gray-500 max-w-2xl mr-auto mb-12 ml-auto">
+                    At VRTX, we design high-performance websites and AI agents that automate, convert, and scale modern
+                    businesses.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 gap-x-4 gap-y-4 items-center justify-center">
+                    <a href="#contact"
+                        class="group inline-flex items-center justify-center overflow-hidden transition-transform active:scale-95 text-white bg-gray-900 rounded-full pt-3 pr-8 pb-3 pl-8 relative hoverable">
+                        <span class="z-10 text-sm font-medium relative">Book a Call</span>
+                        <div
+                            class="transform group-hover:scale-x-100 transition-transform origin-left duration-300 bg-gray-800 absolute top-0 right-0 bottom-0 left-0 scale-x-0">
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Ticker -->
+            <div
+                class="overflow-hidden bg-white/50 w-full border-gray-200 border-t pt-4 pb-4 absolute bottom-0 backdrop-blur-sm">
+                <div class="flex whitespace-nowrap gap-16 animate-marquee">
+                    <span
+                        class="text-xs font-display font-medium uppercase tracking-widest text-gray-400">Strategy</span>
+                    <span
+                        class="uppercase text-xs font-medium text-gray-900 tracking-widest font-display">Development</span>
+                    <span class="text-xs font-display font-medium uppercase tracking-widest text-gray-400">Design</span>
+                    <span class="text-xs font-display font-medium uppercase tracking-widest text-gray-900">Growth</span>
+                    <span
+                        class="text-xs font-display font-medium uppercase tracking-widest text-gray-400">Strategy</span>
+                    <span
+                        class="text-xs font-display font-medium uppercase tracking-widest text-gray-900">Engineering</span>
+                    <span class="text-xs font-display font-medium uppercase tracking-widest text-gray-400">Design</span>
+                    <span class="text-xs font-display font-medium uppercase tracking-widest text-gray-900">Growth</span>
+                    <span
+                        class="text-xs font-display font-medium uppercase tracking-widest text-gray-400">Strategy</span>
+                    <span
+                        class="text-xs font-display font-medium uppercase tracking-widest text-gray-900">Engineering</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Services Highlight -->
+        <section class="py-24 md:py-32 bg-white border-gray-200 border-b overflow-hidden" id="services-highlight">
+            <div class="max-w-7xl mx-auto px-6 mb-24">
+                <div class="max-w-5xl">
+                    <h2
+                        class="block font-display text-6xl md:text-8xl font-black text-gray-900 leading-[0.9] tracking-tighter uppercase mb-6">
+                        Ready to build?<br>Let's get to work.
+                    </h2>
+                    <p class="font-sans text-xl font-light text-gray-500 leading-relaxed max-w-2xl mt-8">
+                        We bridge the gap between human creativity and machine intelligence.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Interaction Area -->
+            <div class="w-full grid grid-cols-1 md:grid-cols-2 min-h-[600px] border-t border-gray-100">
+                <!-- Option 1: Web Scalability -->
+                <div
+                    class="group relative md:border-r border-gray-100 p-12 lg:p-24 flex flex-col justify-between cursor-pointer hover:bg-gray-50/50 transition-colors hoverable">
+                    <div
+                        class="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-out">
+                        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&amp;w=2000&amp;auto=format&amp;fit=crop"
+                            class="w-full h-full object-cover opacity-100 mix-blend-multiply" alt="Web Architecture">
+                    </div>
+                    <div class="relative z-10 transition-colors duration-300">
+                        <span
+                            class="inline-block px-4 py-2 rounded-full border border-gray-200 bg-white text-xs font-mono uppercase tracking-wider mb-6 group-hover:bg-transparent group-hover:border-gray-900 group-hover:text-gray-900">Fixed
+                            Scope</span>
+                        <h3
+                            class="font-display text-5xl lg:text-6xl font-medium text-gray-900 tracking-tight mb-4 group-hover:translate-x-2 transition-transform duration-500">
+                            Web<br>Scalability</h3>
+                    </div>
+                    <div class="relative z-10">
+                        <p
+                            class="text-xl text-gray-500 font-light max-w-sm group-hover:text-gray-900 transition-colors">
+                            Plan-driven engineering for massive growth. Instant, secure, and infinitely scalable digital
+                            environments.
+                        </p>
+                        <div
+                            class="mt-8 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
+                            Explore Infrastructure <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-arrow-right w-4 h-4">
+                                <path d="M5 12h14"></path>
+                                <path d="m12 5 7 7-7 7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Option 2: AI Agents -->
+                <div
+                    class="group relative p-12 lg:p-24 flex flex-col justify-between cursor-pointer hover:bg-gray-50/50 transition-colors hoverable">
+                    <div
+                        class="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-out">
+                        <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&amp;w=2000&amp;auto=format&amp;fit=crop"
+                            class="w-full h-full object-cover opacity-100 mix-blend-multiply" alt="AI Neural Network">
+                    </div>
+                    <div class="relative z-10 transition-colors duration-300">
+                        <span
+                            class="inline-block px-4 py-2 rounded-full border border-gray-200 bg-white text-xs font-mono uppercase tracking-wider mb-6 group-hover:bg-transparent group-hover:border-gray-900 group-hover:text-gray-900">Flexible
+                            Scale</span>
+                        <h3
+                            class="font-display text-5xl lg:text-6xl font-medium text-gray-900 tracking-tight mb-4 group-hover:translate-x-2 transition-transform duration-500">
+                            AI Agents</h3>
+                    </div>
+                    <div class="relative z-10">
+                        <p
+                            class="text-xl text-gray-500 font-light max-w-sm group-hover:text-gray-900 transition-colors">
+                            Change-driven autonomous workflows. Deploy custom LLMs to handle complex decision-making
+                            24/7.
+                        </p>
+                        <div
+                            class="mt-8 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
+                            Deploy Intelligence <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-arrow-right w-4 h-4">
+                                <path d="M5 12h14"></path>
+                                <path d="m12 5 7 7-7 7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. About Us (Neon Cards) -->
+        <section id="services" class="bg-black py-24 md:py-32 border-b border-gray-200">
+            <div id="about-us-section">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="mb-16 text-center md:text-left">
+                        <span class="block text-xs font-mono mb-3 text-gray-400">Where we come into play.</span>
+                        <h2
+                            class="font-display text-6xl md:text-8xl font-black text-white leading-[0.9] tracking-tighter uppercase mb-6">
+                            About Us.</h2>
+                    </div>
+
+                    <div class="card-container">
+                        <!-- Card 1: Digital Product -->
+                        <div class="card-box hoverable">
+                            <span></span>
+                            <div class="card-content">
+                                <h2 class="font-display text-2xl font-bold mb-4 text-white">Digital Product</h2>
+                                <p class="text-base text-gray-300 mb-6 font-sans leading-relaxed">
+                                    We build scalable design systems and high-fidelity interfaces. Focusing on
+                                    interaction patterns that drive user retention and operational efficiency.
+                                </p>
+                                
+                            </div>
+                        </div>
+
+                        <!-- Card 2: Brand Identity -->
+                        <div class="card-box hoverable">
+                            <span></span>
+                            <div class="card-content">
+                                <h2 class="font-display text-2xl font-bold mb-4 text-white">Brand Identity</h2>
+                                <p class="text-base text-gray-300 mb-6 font-sans leading-relaxed">
+                                    Translating complex business logic into singular visual narratives. We create brands
+                                    that feel inevitable in their respective markets.
+                                </p>
+                                
+                            </div>
+                        </div>
+
+                        <!-- Card 3: AI Agents -->
+                        <div class="card-box hoverable">
+                            <span></span>
+                            <div class="card-content">
+                                <h2 class="font-display text-2xl font-bold mb-4 text-white">AI Agents</h2>
+                                <p class="text-base text-gray-300 mb-6 font-sans leading-relaxed">
+                                    Deploy autonomous workflows that handle complex decision-making and scale your
+                                    operations 24/7.
+                                </p>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Process (Timeline) -->
+        <section class="py-24 md:py-32 bg-gray-50 relative overflow-hidden border-b border-gray-200">
+            <div
+                class="absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2 hidden md:block bg-gray-200 border-l border-dashed border-gray-300">
+            </div>
+
+            <div class="max-w-4xl mx-auto px-6 relative">
+                <div class="text-center mb-20">
+                    
+                    <h2 class="font-display text-3xl md:text-4xl font-semibold text-gray-900 tracking-tight">Systematic
+                        Execution</h2>
+                </div>
+
+                <!-- Step 1 -->
+                <div class="relative grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
+                    <div class="md:text-right md:pr-16">
+                        <h3 class="text-xl font-display font-medium text-gray-900 mb-2 tracking-tight">Audit &amp;
+                            Discover</h3>
+                        <p class="text-sm text-gray-500">We map the terrain. Deep dive into technical constraints,
+                            audience psychology, and market gaps.</p>
+                    </div>
+                    <div
+                        class="hidden md:flex absolute left-1/2 top-0 -translate-x-1/2 w-8 h-8 rounded-full border border-gray-200 bg-white items-center justify-center z-10 text-xs font-mono text-gray-400">
+                        1</div>
+                    <div class="md:pl-16 md:col-start-2">
+                        <span class="text-xs font-mono text-gray-400 uppercase tracking-widest">Phase 01 / Input</span>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="relative grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
+                    <div class="hidden md:block md:text-right md:pr-16">
+                        <span class="text-xs font-mono text-gray-400 uppercase tracking-widest">Phase 02 /
+                            Process</span>
+                    </div>
+                    <div
+                        class="hidden md:flex absolute left-1/2 top-0 -translate-x-1/2 w-8 h-8 rounded-full border border-gray-200 bg-white items-center justify-center z-10 text-xs font-mono text-gray-400">
+                        2</div>
+                    <div class="md:pl-16">
+                        <h3 class="text-xl font-display font-medium text-gray-900 mb-2 tracking-tight">Architect &amp;
+                            Design</h3>
+                        <p class="text-sm text-gray-500">Iterative prototyping. We develop high-fidelity models and code
+                            structures aligned with OKRs.</p>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="relative grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div class="md:text-right md:pr-16">
+                        <h3 class="text-xl font-display font-medium text-gray-900 mb-2 tracking-tight">Deploy &amp;
+                            Scale</h3>
+                        <p class="text-sm text-gray-500">Execution with surgical precision. CI/CD pipelines, seamless
+                            launch, and continuous optimization.</p>
+                    </div>
+                    <div
+                        class="hidden md:flex absolute left-1/2 top-0 -translate-x-1/2 w-8 h-8 rounded-full border border-gray-200 bg-white items-center justify-center z-10 text-xs font-mono text-gray-400">
+                        3</div>
+                    <div class="md:pl-16 md:col-start-2">
+                        <span class="text-xs font-mono text-gray-400 uppercase tracking-widest">Phase 03 / Output</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Contact -->
+        <section id="contact" class="bg-white pt-32 pb-24 px-6 min-h-[50vh]">
+            <div class="max-w-7xl mx-auto">
+                <h2 class="font-display text-7xl md:text-9xl font-semibold tracking-tighter text-gray-900 mb-24">
+                    Let's get in<br>touch
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-12 font-sans text-lg">
+                    <div class="space-y-4">
+                        <span class="block text-gray-400 text-sm font-medium">Located</span>
+                        <p class="text-gray-900">India<br></p>
+                    </div>
+                    <div class="space-y-4">
+                        <span class="block text-gray-400 text-sm font-medium">Contact</span>
+                        <p class="text-gray-900">VRTX Team</p>
+                        <a href="mailto:hello@vrtx.studio"
+                            class="text-gray-900 hover:text-gray-600 transition-colors block hoverable">vrtxbuisness@gmail.com</a>
+                    </div>
+                    <div class="space-y-4">
+                        <span class="block text-gray-400 text-sm font-medium">Follow</span>
+                        <div class="flex flex-col gap-2">
+                            <a href="#"
+                                class="text-gray-900 hover:text-gray-600 transition-colors hoverable">Instagram</a>
+                            <a href="#"
+                                class="text-gray-900 hover:text-gray-600 transition-colors hoverable">Linkedin</a>
+                        </div>
+                    </div>
+                    <div class="flex items-start justify-start md:justify-end">
+                        <a href="mailto:vrtxbuisness@gmail.com"
+                            class="w-20 h-20 rounded-full border border-gray-200 flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-all duration-300 hoverable">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-plus w-8 h-8">
+                                <path d="M5 12h14"></path>
+                                <path d="M12 5v14"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-black text-white py-24 border-t border-gray-900">
+            <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12">
+                <!-- Branding -->
+                <div class="flex flex-col justify-between h-full min-h-[100px]">
+                    <span class="font-display text-4xl font-bold tracking-tight text-white flex items-center gap-2">
+                        
+                        VRTX
+                    </span>
+                </div>
+
+                <!-- Column 1: Contact -->
+                <div>
+                    <h4 class="text-lg font-medium mb-8">Contact</h4>
+                    <a href="mailto:vrtxbuisness@gmail.com"
+                        class="text-gray-400 hover:text-white transition-colors text-lg hoverable">vrtxbuisness@gmail.com</a>
+                </div>
+
+                <!-- Column 2: Team -->
+                <div>
+                    <h4 class="text-lg font-medium mb-8">Founders</h4>
+                    <ul class="space-y-4 text-gray-400">
+                        <li class="hover:text-white transition-colors cursor-default">Arnav Vasisht Sharma</li>
+                        <li class="hover:text-white transition-colors cursor-default">Sandesh Rajbhar</li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Follow Us -->
+                <div>
+                    <h4 class="text-lg font-medium mb-8">Follow Us</h4>
+                    <ul class="space-y-4 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors hoverable">On Instagram</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors hoverable">On Linkedin</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        // Initialize Icons
+        lucide.createIcons({
+            attrs: {
+                class: "lucide",
+                "stroke-width": 1.5
+            }
+        });
+
+        // Intersection Observer for Fade In
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-4');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Cursor Animation Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const bigBall = document.querySelector('.cursor__ball--big');
+            const smallBall = document.querySelector('.cursor__ball--small');
+            const hoverables = document.querySelectorAll('a, button, .hoverable, .card-box');
+
+            // Show cursor on first mouse move
+            document.body.addEventListener('mousemove', onMouseMove);
+
+            function onMouseMove(e) {
+                gsap.to(bigBall, .4, {
+                    x: e.clientX - 15,
+                    y: e.clientY - 15,
+                    opacity: 1
+                });
+                gsap.to(smallBall, .1, {
+                    x: e.clientX - 5,
+                    y: e.clientY - 7,
+                    opacity: 1
+                });
+            }
+
+            // Hover logic
+            function onMouseHover() {
+                gsap.to(bigBall, .3, {
+                    scale: 4,
+                    opacity: 1
+                });
+            }
+
+            function onMouseHoverOut() {
+                gsap.to(bigBall, .3, {
+                    scale: 1,
+                    opacity: 1
+                });
+            }
+
+            // Add listeners to all interactive elements
+            hoverables.forEach(el => {
+                el.addEventListener('mouseenter', onMouseHover);
+                el.addEventListener('mouseleave', onMouseHoverOut);
+            });
+        });
+    </script>
+
+
+
+</body>
+
+</html>
