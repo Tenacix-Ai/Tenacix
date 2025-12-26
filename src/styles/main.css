@@ -1,0 +1,556 @@
+/* ============================================
+   VRTX Design System
+   Premium animations & visual effects
+   ============================================ */
+
+/* CSS Custom Properties */
+:root {
+  /* Colors */
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-dark: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+  --gradient-mesh: radial-gradient(at 40% 20%, hsla(240, 100%, 74%, 0.15) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, hsla(189, 100%, 56%, 0.1) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, hsla(355, 85%, 63%, 0.1) 0px, transparent 50%),
+    radial-gradient(at 80% 50%, hsla(240, 100%, 70%, 0.1) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, hsla(22, 100%, 77%, 0.1) 0px, transparent 50%);
+
+  /* Timing */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in-out-circ: cubic-bezier(0.85, 0, 0.15, 1);
+  --ease-elastic: cubic-bezier(0.68, -0.6, 0.32, 1.6);
+
+  /* Spacing */
+  --section-padding: clamp(4rem, 10vw, 8rem);
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-display: 'Space Grotesk', sans-serif;
+}
+
+/* ============================================
+   Base Styles
+   ============================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: auto;
+  /* Lenis handles this */
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-white);
+  color: var(--color-gray-600);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ============================================
+   Preloader
+   ============================================ */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-black);
+  pointer-events: all;
+}
+
+.preloader__logo {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 8vw, 5rem);
+  font-weight: 700;
+  color: var(--color-white);
+  letter-spacing: -0.05em;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.preloader__progress {
+  width: 200px;
+  height: 2px;
+  background: var(--color-gray-800);
+  margin-top: 2rem;
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.preloader__progress-bar {
+  height: 100%;
+  width: 0%;
+  background: var(--color-white);
+  border-radius: 1px;
+}
+
+.preloader__counter {
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  color: var(--color-gray-500);
+  margin-top: 1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============================================
+   Reveal Animations
+   Content starts VISIBLE, GSAP handles animation
+   ============================================ */
+.reveal {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  /* GPU acceleration for sharpness */
+  backface-visibility: hidden;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0) translateZ(0);
+}
+
+.reveal-fade {
+  will-change: opacity;
+  backface-visibility: hidden;
+}
+
+.reveal-fade.active {
+  opacity: 1;
+}
+
+.reveal-scale {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.reveal-scale.active {
+  opacity: 1;
+  transform: scale(1) translateZ(0);
+}
+
+.reveal-left {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.reveal-left.active {
+  opacity: 1;
+  transform: translateX(0) translateZ(0);
+}
+
+.reveal-right {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.reveal-right.active {
+  opacity: 1;
+  transform: translateX(0) translateZ(0);
+}
+
+/* ============================================
+   Split Text Animations
+   ============================================ */
+.split-text .char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(100%);
+  will-change: transform, opacity;
+}
+
+.split-text .word {
+  display: inline-block;
+  overflow: hidden;
+}
+
+.split-text .line {
+  overflow: hidden;
+}
+
+/* ============================================
+   Magnetic Button
+   ============================================ */
+.magnetic-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.3s var(--ease-out-expo);
+}
+
+.magnetic-btn__content {
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s var(--ease-out-expo);
+}
+
+.magnetic-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--color-gray-800);
+  border-radius: inherit;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s var(--ease-out-expo);
+}
+
+.magnetic-btn:hover::before {
+  transform: scaleX(1);
+}
+
+/* ============================================
+   3D Card Tilt
+   ============================================ */
+.tilt-card {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: transform 0.1s ease-out;
+}
+
+.tilt-card__inner {
+  transform: translateZ(50px);
+  transition: transform 0.3s var(--ease-out-expo);
+}
+
+.tilt-card__shine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg,
+      transparent 40%,
+      rgba(255, 255, 255, 0.1) 45%,
+      rgba(255, 255, 255, 0.2) 50%,
+      rgba(255, 255, 255, 0.1) 55%,
+      transparent 60%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.tilt-card:hover .tilt-card__shine {
+  opacity: 1;
+}
+
+/* ============================================
+   Gradient Text
+   ============================================ */
+.gradient-text {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-animated {
+  background: linear-gradient(90deg,
+      #667eea,
+      #764ba2,
+      #f093fb,
+      #f5576c,
+      #667eea);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 3s linear infinite;
+}
+
+@keyframes gradient-shift {
+  to {
+    background-position: 200% center;
+  }
+}
+
+/* ============================================
+   Glassmorphism
+   ============================================ */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-dark {
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ============================================
+   Floating Particles
+   ============================================ */
+.particles-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--color-gray-400);
+  border-radius: 50%;
+  opacity: 0.3;
+}
+
+/* ============================================
+   Glow Effects
+   ============================================ */
+.glow {
+  box-shadow: 0 0 60px rgba(102, 126, 234, 0.3);
+}
+
+.glow-text {
+  text-shadow: 0 0 40px rgba(102, 126, 234, 0.5);
+}
+
+/* ============================================
+   Hover Line Animation
+   ============================================ */
+.hover-line {
+  position: relative;
+  display: inline-block;
+}
+
+.hover-line::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s var(--ease-out-expo);
+}
+
+.hover-line:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ============================================
+   Stagger Container
+   Content visible by default - GSAP animates from set values
+   ============================================ */
+.stagger-container>* {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.stagger-container.active>* {
+  opacity: 1;
+  transform: translateY(0) translateZ(0);
+}
+
+/* ============================================
+   Parallax Layers
+   ============================================ */
+.parallax-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.parallax-layer {
+  will-change: transform;
+}
+
+/* ============================================
+   Marquee Enhancement
+   ============================================ */
+.marquee-wrapper {
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  gap: 4rem;
+}
+
+.marquee-content {
+  display: flex;
+  gap: 4rem;
+  animation: marquee 30s linear infinite;
+  flex-shrink: 0;
+}
+
+.marquee-wrapper:hover .marquee-content {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+/* ============================================
+   Hero Enhancements
+   ============================================ */
+.hero-title {
+  position: relative;
+}
+
+.hero-title::before {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 60%, rgba(102, 126, 234, 0.1) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  z-index: -1;
+  transform: translateY(2px);
+  filter: blur(8px);
+  opacity: 0.5;
+}
+
+/* ============================================
+   Button Ripple Effect
+   ============================================ */
+.ripple-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple-btn .ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(0);
+  animation: ripple-animation 0.6s ease-out;
+  pointer-events: none;
+}
+
+@keyframes ripple-animation {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* ============================================
+   Cursor Enhancements - DISABLED for normal cursor
+   ============================================ */
+.cursor {
+  display: none !important;
+}
+
+.cursor__ball {
+  display: none !important;
+}
+
+.cursor__ball circle {
+  fill: #f7f8fa;
+}
+
+.cursor__ball--big {
+  display: none !important;
+}
+
+.cursor__ball--small {
+  display: none !important;
+}
+
+@media (pointer: coarse) {
+  .cursor {
+    display: none;
+  }
+
+  body {
+    cursor: auto;
+  }
+}
+
+/* ============================================
+   Loading State
+   ============================================ */
+.is-loading {
+  overflow: hidden;
+}
+
+.is-loading .preloader {
+  pointer-events: all;
+}
+
+/* ============================================
+   Responsive Utilities
+   ============================================ */
+@media (max-width: 768px) {
+  .reveal {
+    transform: translateY(40px);
+  }
+
+  .reveal-left,
+  .reveal-right {
+    transform: translateY(40px);
+  }
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+@media print {
+
+  .preloader,
+  .cursor,
+  .particles-container {
+    display: none !important;
+  }
+}

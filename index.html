@@ -1,19 +1,90 @@
-<html lang="en" class="scroll-smooth">
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VRTX | Strategic Digital Partner</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <!-- SEO Meta Tags -->
+    <title>VRTX | AI Agents & High-Performance Websites</title>
+    <meta name="description"
+        content="VRTX is your strategic digital partner. We design high-performance websites and AI agents that automate, convert, and scale modern businesses.">
+    <meta name="keywords"
+        content="AI agents, web development, digital agency, AI automation, website design, custom AI solutions">
+    <meta name="author" content="VRTX">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="VRTX | AI Agents & High-Performance Websites">
+    <meta property="og:description"
+        content="We design high-performance websites and AI agents that automate, convert, and scale modern businesses.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="VRTX | AI Agents & High-Performance Websites">
+    <meta name="twitter:description"
+        content="We design high-performance websites and AI agents that automate, convert, and scale modern businesses.">
+
+    <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://my.spline.design">
+
+    <!-- Fonts -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
         rel="stylesheet">
 
+    <!-- Lucide Icons (lightweight) -->
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+
+    <!-- Vite Entry Point -->
+    <script type="module" src="/src/main.js"></script>
+
+    <!-- TailwindCSS (will be optimized in production build) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    animation: {
+                        'marquee': 'marquee 40s linear infinite',
+                        'ping-slow': 'ping 2s cubic-bezier(0, 0, 0.2, 1) infinite',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(-50%)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
+        /* Critical CSS - Above the fold */
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .font-display {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        /* Hide content until loaded */
+        .is-loading main {
+            opacity: 0;
+        }
+
         /* Precision Grid Background */
         .grid-lines {
             background-image: linear-gradient(to right, #f3f4f6 1px, transparent 1px),
@@ -23,91 +94,164 @@
             -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
         }
 
-        /* Smooth Scroll & Selection */
+        /* Selection */
         ::selection {
-            background-color: #f3f4f6;
-            color: #111827;
+            background-color: #a855f7;
+            color: #ffffff;
         }
 
-        /* Marquee Animation */
-        @keyframes marquee {
-            0% {
-                transform: translateX(0);
-            }
-
-            100% {
-                transform: translateX(-50%);
-            }
-        }
-
-        .animate-marquee {
-            animation: marquee 40s linear infinite;
-        }
-
-        /* Fade In Up Animation for Text */
-        @keyframes fadeInUp {
-            0% {
+        /* Custom Animations */
+        @keyframes fade-in-up {
+            from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(30px);
             }
 
-            100% {
+            to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        .animate-load {
-            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            opacity: 0;
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes scale-in {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes pulse-slow {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -200% 0;
+            }
+
+            100% {
+                background-position: 200% 0;
+            }
+        }
+
+        @keyframes glow-pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 0 40px rgba(168, 85, 247, 0.6);
+            }
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .bg-300\% {
+            background-size: 300% 300%;
+        }
+
+        .animate-gradient {
+            animation: gradient 4s ease infinite;
+        }
+
+        .animate-fade-in-up {
+            animation: fade-in-up 0.8s ease-out forwards;
+        }
+
+        .animate-fade-in {
+            animation: fade-in 0.6s ease-out forwards;
+        }
+
+        .animate-scale-in {
+            animation: scale-in 0.5s ease-out forwards;
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .animate-pulse-slow {
+            animation: pulse-slow 2s ease-in-out infinite;
+        }
+
+        .animate-shimmer {
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+        }
+
+        .animate-glow-pulse {
+            animation: glow-pulse 2s ease-in-out infinite;
+        }
+
+        /* Animation Delays */
+        .animation-delay-100 {
+            animation-delay: 0.1s;
+        }
+
+        .animation-delay-200 {
+            animation-delay: 0.2s;
+        }
+
+        .animation-delay-300 {
             animation-delay: 0.3s;
         }
 
-        /* Hide Scrollbar */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
+        .animation-delay-400 {
+            animation-delay: 0.4s;
         }
 
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-
-        /* Font Families */
-        .font-sans {
-            font-family: 'Inter', sans-serif;
-        }
-
-        .font-display {
-            font-family: 'Space Grotesk', sans-serif;
-        }
-
-        /* Cursor CSS */
-        body {
-            cursor: none;
-        }
-
-        .cursor {
-            pointer-events: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 9999;
-            width: 100%;
-            height: 100%;
-        }
-
-        .cursor__ball {
-            position: fixed;
-            top: 0;
-            left: 0;
-            mix-blend-mode: difference;
-            z-index: 1000;
-            opacity: 0;
-        }
-
-        .cursor__ball circle {
-            fill: #f7f8fa;
+        .animation-delay-500 {
+            animation-delay: 0.5s;
         }
 
         /* Neon Card Styles */
@@ -119,142 +263,47 @@
             padding: 40px 0;
         }
 
+
         #about-us-section .card-box {
             position: relative;
             width: 320px;
-            height: 400px;
+            height: auto;
+            min-height: 280px;
             display: flex;
             justify-content: center;
-            align-items: center;
-            margin: 40px 30px;
-            transition: 0.5s;
+            align-items: flex-start;
+            margin: 20px;
+            transition: all 0.4s ease;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px 30px;
         }
 
-        #about-us-section .card-box::before {
-            content: ' ';
-            position: absolute;
-            top: 0;
-            left: 50px;
-            width: 50%;
-            height: 100%;
-            text-decoration: none;
-            background: #fff;
-            border-radius: 8px;
-            transform: skewX(15deg);
-            transition: 0.5s;
+        #about-us-section .card-box:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(102, 126, 234, 0.3);
+            box-shadow: 0 25px 50px rgba(102, 126, 234, 0.2);
         }
 
+        #about-us-section .card-box::before,
         #about-us-section .card-box::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50px;
-            width: 50%;
-            height: 100%;
-            background: #fff;
-            border-radius: 8px;
-            transform: skewX(15deg);
-            transition: 0.5s;
-            filter: blur(30px);
-        }
-
-        #about-us-section .card-box:hover:before,
-        #about-us-section .card-box:hover:after {
-            transform: skewX(0deg);
-            left: 20px;
-            width: calc(100% - 90px);
-        }
-
-        /* Professional Grey Theme for Cards */
-        #about-us-section .card-box:nth-child(1):before,
-        #about-us-section .card-box:nth-child(1):after,
-        #about-us-section .card-box:nth-child(2):before,
-        #about-us-section .card-box:nth-child(2):after,
-        #about-us-section .card-box:nth-child(3):before,
-        #about-us-section .card-box:nth-child(3):after {
-            background: linear-gradient(315deg, #9ca3af, #4b5563);
+            display: none;
         }
 
         #about-us-section .card-box span {
-            display: block;
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: 5;
-            pointer-events: none;
-        }
-
-        #about-us-section .card-box span::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 0;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            opacity: 0;
-            transition: 0.1s;
-            animation: cardAnimate 2s ease-in-out infinite;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-        }
-
-        #about-us-section .card-box:hover span::before {
-            top: -50px;
-            left: 50px;
-            width: 100px;
-            height: 100px;
-            opacity: 1;
-        }
-
-        #about-us-section .card-box span::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            opacity: 0;
-            transition: 0.5s;
-            animation: cardAnimate 2s ease-in-out infinite;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            animation-delay: -1s;
-        }
-
-        #about-us-section .card-box:hover span:after {
-            bottom: -50px;
-            right: 50px;
-            width: 100px;
-            height: 100px;
-            opacity: 1;
+            display: none;
         }
 
         #about-us-section .card-box .card-content {
-            position: absolute;
+            position: relative;
             z-index: 20;
-            top: 15px;
-            right: 15px;
-            bottom: 15px;
-            left: 15px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             overflow: hidden;
-            transition: 0.5s;
-        }
-
-        #about-us-section .card-box:hover .card-content {
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: -25px;
-            padding: 60px 40px;
         }
 
         @keyframes cardAnimate {
@@ -268,73 +317,137 @@
                 transform: translateY(-10px);
             }
         }
+
+        /* Glowing border effect */
+        .glow-border {
+            position: relative;
+        }
+
+        .glow-border::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb, #667eea);
+            background-size: 300% 300%;
+            border-radius: inherit;
+            animation: gradient-rotate 4s linear infinite;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .glow-border:hover::before {
+            opacity: 1;
+        }
+
+        @keyframes gradient-rotate {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Smooth fade for images */
+        img {
+            transition: opacity 0.3s ease, transform 0.5s ease;
+        }
+
+        /* Mobile cursor fix */
+        @media (pointer: coarse) {
+            body {
+                cursor: auto;
+            }
+
+            .cursor {
+                display: none !important;
+            }
+        }
+
+        /* Performance: will-change hints */
+        .animate-marquee {
+            will-change: transform;
+        }
+
+        /* Ticker duplicate for seamless loop */
+        .ticker-content {
+            display: flex;
+            gap: 4rem;
+        }
     </style>
 </head>
 
-<body class="text-gray-600 antialiased font-sans" id="home">
+<body class="dark:bg-black bg-white dark:text-gray-400 text-gray-600 antialiased transition-colors duration-300"
+    id="home">
 
-    <!-- Background (component) added by Aura -->
-    <div class="aura-background-component fixed top-0 w-full h-screen -z-10" data-alpha-mask="80"
-        style="; mask-image: linear-gradient(to bottom, transparent, black 0%, black 80%, transparent); -webkit-mask-image: linear-gradient(to bottom, transparent, black 0%, black 80%, transparent)">
-        <div class="spline-container absolute top-0 left-0 w-full h-full -z-10"><iframe
-                src="https://my.spline.design/animatedshapeblend-1gCFHvLukjcmK6imbIAFLY2d/" frameborder="0" width="100%"
-                height="100%" id="aura-spline"></iframe></div>
-    </div>
-
-    <!-- Custom Cursor -->
-    <div class="cursor">
-        <div class="cursor__ball cursor__ball--big">
-            <svg height="30" width="30">
-                <circle cx="15" cy="15" r="12" stroke-width="0"></circle>
-            </svg>
-        </div>
-        <div class="cursor__ball cursor__ball--small">
-            <svg height="10" width="10">
-                <circle cx="5" cy="5" r="4" stroke-width="0"></circle>
-            </svg>
-        </div>
-    </div>
+    <!-- Background container - populated by gravity-field.js -->
+    <div class="aura-background-component fixed top-0 w-full h-screen -z-10"></div>
 
     <!-- 1. Header -->
-    <header class="fixed top-0 w-full z-50 backdrop-blur-md border-b border-gray-200 bg-white/80">
+    <header
+        class="fixed top-0 w-full z-50 backdrop-blur-md border-b border-gray-800/50 dark:bg-black/80 bg-white/80 dark:border-gray-800/50 border-gray-200/50 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
             <!-- Brand -->
-            <a href="#home" class="flex items-center gap-2 group hoverable">
-                <div class="w-3 h-3 bg-gray-900 rotate-45 group-hover:rotate-0 transition-transform duration-300"></div>
-                <span class="font-display font-semibold text-lg tracking-tight text-gray-900 uppercase">VRTX</span>
+            <a href="#home" class="flex items-center gap-2 group hoverable" data-magnetic="0.15">
+                <span
+                    class="font-display font-bold text-xl tracking-tight dark:text-white text-gray-900 uppercase">VRTX</span>
             </a>
 
             <!-- Nav (Desktop) -->
             <nav class="hidden md:flex items-center gap-8">
                 <a href="#home"
-                    class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors duration-200 hoverable">Home</a>
+                    class="text-sm font-medium dark:text-gray-400 text-gray-600 dark:hover:text-white hover:text-gray-900 transition-colors duration-200 hoverable hover-line">Home</a>
                 <a href="#services-highlight"
-                    class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors duration-200 hoverable">Services</a>
+                    class="text-sm font-medium dark:text-gray-400 text-gray-600 dark:hover:text-white hover:text-gray-900 transition-colors duration-200 hoverable hover-line">Services</a>
                 <a href="#services"
-                    class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors duration-200 hoverable">About
+                    class="text-sm font-medium dark:text-gray-400 text-gray-600 dark:hover:text-white hover:text-gray-900 transition-colors duration-200 hoverable hover-line">About
                     Us</a>
                 <a href="#contact"
-                    class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors duration-200 hoverable">Contact</a>
+                    class="text-sm font-medium dark:text-gray-400 text-gray-600 dark:hover:text-white hover:text-gray-900 transition-colors duration-200 hoverable hover-line">Contact</a>
             </nav>
 
-            <!-- CTA -->
+            <!-- CTA & Theme Toggle -->
             <div class="flex items-center gap-4">
-                <a href="#contact"
-                    class="hidden sm:flex items-center gap-2 hover:bg-gray-800 transition-all duration-300 group text-xs font-medium text-white bg-gray-900 rounded-full pt-2 pr-5 pb-2 pl-5 hoverable">
-                    Start Project
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                        data-lucide="arrow-right"
-                        class="lucide lucide-arrow-right transition-transform group-hover:translate-x-1 w-[24px] h-[14px]"
-                        style="width: 24px; height: 14px; color: rgb(255, 255, 255);">
-                        <path d="M5 12h14"></path>
-                        <path d="m12 5 7 7-7 7"></path>
+                <!-- Theme Toggle -->
+                <button id="theme-toggle"
+                    class="p-2 rounded-full dark:bg-gray-800 bg-gray-100 dark:hover:bg-gray-700 hover:bg-gray-200 transition-all duration-300 hoverable"
+                    aria-label="Toggle theme">
+                    <svg id="sun-icon" class="w-5 h-5 dark:text-yellow-400 text-gray-600 hidden dark:block"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                     </svg>
+                    <svg id="moon-icon" class="w-5 h-5 dark:text-gray-400 text-gray-600 block dark:hidden"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+                <a href="#contact"
+                    class="hidden sm:flex items-center gap-2 hover:gap-3 transition-all duration-300 group text-xs font-medium text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 rounded-full py-2.5 px-5 hoverable magnetic-btn shadow-lg hover:shadow-purple-500/25"
+                    data-magnetic="0.2">
+                    <span class="magnetic-btn__content flex items-center gap-2">
+                        Start Project
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="transition-transform group-hover:translate-x-1">
+                            <path d="M5 12h14"></path>
+                            <path d="m12 5 7 7-7 7"></path>
+                        </svg>
+                    </span>
                 </a>
-                <button class="md:hidden text-gray-900 hoverable">
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden dark:text-white text-gray-900 hoverable p-2" aria-label="Open menu">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                        data-lucide="menu" class="lucide lucide-menu w-6 h-6">
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M4 5h16"></path>
                         <path d="M4 12h16"></path>
                         <path d="M4 19h16"></path>
@@ -346,112 +459,154 @@
 
     <main class="pt-16">
 
-        <!-- 2. Hero -->
+        <!-- 2. Hero Section -->
         <section
-            class="min-h-[90vh] flex flex-col overflow-hidden border-gray-200 border-b relative items-center justify-center">
-            <div class="absolute inset-0 grid-lines opacity-60 -z-10"></div>
+            class="min-h-[90vh] flex flex-col overflow-hidden dark:border-gray-800 border-gray-200 border-b relative items-center justify-center dark:bg-black bg-white transition-colors duration-300"
+            id="hero">
 
             <div class="z-10 text-center max-w-5xl mx-auto px-6">
+                <!-- Status Badge -->
                 <div
-                    class="inline-flex gap-2 animate-fade-in-up bg-white border-gray-200 border rounded-full mb-8 pt-1 pr-3 pb-1 pl-3 gap-x-2 gap-y-2 items-center">
+                    class="inline-flex gap-2 dark:bg-white/10 bg-purple-100 dark:border-purple-500/30 border-purple-300 border rounded-full mb-8 py-1.5 px-4 items-center backdrop-blur-sm animate-pulse-slow">
                     <span class="relative flex h-2 w-2">
                         <span
-                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-purple-500"></span>
                     </span>
-                    <span class="uppercase text-xs font-medium text-gray-900 tracking-wider">AI Agents and
+                    <span class="uppercase text-xs font-medium dark:text-white text-purple-700 tracking-wider">AI Agents
+                        and
                         Websites</span>
                 </div>
 
-                <h1
-                    class="md:text-8xl lg:text-9xl leading-[0.9] text-6xl font-semibold text-white mix-blend-difference tracking-tighter font-display mb-8">
+                <!-- Main Title with Animation -->
+                <h1 class="md:text-8xl lg:text-9xl leading-[0.9] text-6xl font-bold dark:text-white text-gray-900 tracking-tighter font-display mb-8 hero-title animate-fade-in-up"
+                    data-text="VRTX">
                     VRTX
                 </h1>
 
-                <p class="md:text-xl leading-relaxed text-lg font-light text-gray-500 max-w-2xl mr-auto mb-12 ml-auto">
-                    At VRTX, we design high-performance websites and AI agents that automate, convert, and scale modern
+                <!-- Description -->
+                <p
+                    class="md:text-xl leading-relaxed text-lg font-light dark:text-gray-400 text-gray-600 max-w-2xl mx-auto mb-12 animate-fade-in-up animation-delay-200">
+                    At VRTX, we design <span class="dark:text-white text-gray-900 font-medium">high-performance
+                        websites</span> and
+                    <span class="dark:text-white text-gray-900 font-medium">AI agents</span> that automate, convert, and
+                    scale modern
                     businesses.
                 </p>
 
-                <div class="flex flex-col sm:flex-row gap-4 gap-x-4 gap-y-4 items-center justify-center">
+                <!-- CTA Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4 items-center justify-center">
                     <a href="#contact"
-                        class="group inline-flex items-center justify-center overflow-hidden transition-transform active:scale-95 text-white bg-gray-900 rounded-full pt-3 pr-8 pb-3 pl-8 relative hoverable">
-                        <span class="z-10 text-sm font-medium relative">Book a Call</span>
-                        <div
-                            class="transform group-hover:scale-x-100 transition-transform origin-left duration-300 bg-gray-800 absolute top-0 right-0 bottom-0 left-0 scale-x-0">
-                        </div>
+                        class="group inline-flex items-center justify-center overflow-hidden transition-all duration-300 text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 rounded-full py-3.5 px-8 relative hoverable ripple-btn magnetic-btn shadow-lg hover:shadow-xl hover:shadow-purple-500/25"
+                        data-magnetic="0.15">
+                        <span class="z-10 text-sm font-medium relative magnetic-btn__content flex items-center gap-2">
+                            Book a Call
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="transition-transform group-hover:rotate-45">
+                                <path d="M5 12h14"></path>
+                                <path d="m12 5 7 7-7 7"></path>
+                            </svg>
+                        </span>
+                    </a>
+                    <a href="#services-highlight"
+                        class="group inline-flex items-center justify-center text-gray-400 hover:text-white text-sm font-medium transition-colors duration-300 hoverable">
+                        <span>Explore Services</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="ml-2 transition-transform group-hover:translate-y-1">
+                            <path d="M12 5v14"></path>
+                            <path d="m19 12-7 7-7-7"></path>
+                        </svg>
                     </a>
                 </div>
             </div>
 
             <!-- Ticker -->
             <div
-                class="overflow-hidden bg-white/50 w-full border-gray-200 border-t pt-4 pb-4 absolute bottom-0 backdrop-blur-sm">
-                <div class="flex whitespace-nowrap gap-16 animate-marquee">
+                class="overflow-hidden dark:bg-black/80 bg-white/80 w-full dark:border-gray-800 border-gray-200 border-t py-4 absolute bottom-0 backdrop-blur-sm">
+                <div class="flex whitespace-nowrap gap-16 animate-marquee ticker-content">
                     <span
-                        class="text-xs font-display font-medium uppercase tracking-widest text-gray-400">Strategy</span>
+                        class="text-xs font-display font-medium uppercase tracking-widest text-gray-500">Strategy</span>
                     <span
-                        class="uppercase text-xs font-medium text-gray-900 tracking-widest font-display">Development</span>
-                    <span class="text-xs font-display font-medium uppercase tracking-widest text-gray-400">Design</span>
-                    <span class="text-xs font-display font-medium uppercase tracking-widest text-gray-900">Growth</span>
+                        class="text-xs font-display font-semibold uppercase tracking-widest text-purple-400">Development</span>
+                    <span class="text-xs font-display font-medium uppercase tracking-widest text-gray-500">Design</span>
                     <span
-                        class="text-xs font-display font-medium uppercase tracking-widest text-gray-400">Strategy</span>
+                        class="text-xs font-display font-semibold uppercase tracking-widest text-purple-400">Growth</span>
+                    <span class="text-xs font-display font-medium uppercase tracking-widest text-gray-500">AI
+                        Agents</span>
                     <span
-                        class="text-xs font-display font-medium uppercase tracking-widest text-gray-900">Engineering</span>
-                    <span class="text-xs font-display font-medium uppercase tracking-widest text-gray-400">Design</span>
-                    <span class="text-xs font-display font-medium uppercase tracking-widest text-gray-900">Growth</span>
+                        class="text-xs font-display font-semibold uppercase tracking-widest text-purple-400">Engineering</span>
                     <span
-                        class="text-xs font-display font-medium uppercase tracking-widest text-gray-400">Strategy</span>
+                        class="text-xs font-display font-medium uppercase tracking-widest text-gray-500">Automation</span>
                     <span
-                        class="text-xs font-display font-medium uppercase tracking-widest text-gray-900">Engineering</span>
+                        class="text-xs font-display font-semibold uppercase tracking-widest text-purple-400">Scale</span>
+                    <!-- Duplicate for seamless loop -->
+                    <span
+                        class="text-xs font-display font-medium uppercase tracking-widest text-gray-500">Strategy</span>
+                    <span
+                        class="text-xs font-display font-semibold uppercase tracking-widest text-purple-400">Development</span>
+                    <span class="text-xs font-display font-medium uppercase tracking-widest text-gray-500">Design</span>
+                    <span
+                        class="text-xs font-display font-semibold uppercase tracking-widest text-purple-400">Growth</span>
+                    <span class="text-xs font-display font-medium uppercase tracking-widest text-gray-500">AI
+                        Agents</span>
+                    <span
+                        class="text-xs font-display font-semibold uppercase tracking-widest text-purple-400">Engineering</span>
+                    <span
+                        class="text-xs font-display font-medium uppercase tracking-widest text-gray-500">Automation</span>
+                    <span
+                        class="text-xs font-display font-semibold uppercase tracking-widest text-purple-400">Scale</span>
                 </div>
             </div>
         </section>
 
         <!-- 3. Services Highlight -->
-        <section class="py-24 md:py-32 bg-white border-gray-200 border-b overflow-hidden" id="services-highlight">
+        <section
+            class="py-24 md:py-32 dark:bg-gray-900 bg-white dark:border-gray-800 border-gray-200 border-b overflow-hidden transition-colors duration-300"
+            id="services-highlight">
             <div class="max-w-7xl mx-auto px-6 mb-24">
                 <div class="max-w-5xl">
-                    <h2
-                        class="block font-display text-6xl md:text-8xl font-black text-gray-900 leading-[0.9] tracking-tighter uppercase mb-6">
+                    <h2 class="block font-display text-5xl sm:text-6xl md:text-8xl font-black dark:text-white text-gray-900 leading-[0.9] tracking-tighter uppercase mb-6"
+                        data-split="words">
                         Ready to build?<br>Let's get to work.
                     </h2>
-                    <p class="font-sans text-xl font-light text-gray-500 leading-relaxed max-w-2xl mt-8">
-                        We bridge the gap between human creativity and machine intelligence.
+                    <p class="text-xl font-light dark:text-gray-400 text-gray-500 leading-relaxed max-w-2xl mt-8">
+                        We bridge the gap between <span class="dark:text-white text-gray-900 font-medium">human
+                            creativity</span> and
+                        <span class="dark:text-white text-gray-900 font-medium">machine intelligence</span>.
                     </p>
                 </div>
             </div>
 
-            <!-- Interaction Area -->
-            <div class="w-full grid grid-cols-1 md:grid-cols-2 min-h-[600px] border-t border-gray-100">
-                <!-- Option 1: Web Scalability -->
-                <div
-                    class="group relative md:border-r border-gray-100 p-12 lg:p-24 flex flex-col justify-between cursor-pointer hover:bg-gray-50/50 transition-colors hoverable">
-                    <div
-                        class="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-out">
-                        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&amp;w=2000&amp;auto=format&amp;fit=crop"
-                            class="w-full h-full object-cover opacity-100 mix-blend-multiply" alt="Web Architecture">
-                    </div>
+            <!-- Service Cards Grid -->
+            <div
+                class="w-full grid grid-cols-1 md:grid-cols-2 min-h-[600px] border-t dark:border-gray-800 border-gray-100">
+                <!-- Web Scalability Card -->
+                <div class="group relative md:border-r dark:border-gray-800 border-gray-100 p-12 lg:p-24 flex flex-col justify-between cursor-pointer dark:hover:bg-white/5 hover:bg-gray-50/50 transition-colors hoverable tilt-card"
+                    data-tilt="5">
                     <div class="relative z-10 transition-colors duration-300">
                         <span
-                            class="inline-block px-4 py-2 rounded-full border border-gray-200 bg-white text-xs font-mono uppercase tracking-wider mb-6 group-hover:bg-transparent group-hover:border-gray-900 group-hover:text-gray-900">Fixed
-                            Scope</span>
+                            class="inline-block px-4 py-2 rounded-full border dark:border-gray-700 border-gray-200 dark:bg-gray-800 bg-white text-xs font-mono uppercase tracking-wider mb-6 group-hover:bg-purple-600 group-hover:border-purple-600 group-hover:text-white transition-all">
+                            Fixed Scope
+                        </span>
                         <h3
-                            class="font-display text-5xl lg:text-6xl font-medium text-gray-900 tracking-tight mb-4 group-hover:translate-x-2 transition-transform duration-500">
-                            Web<br>Scalability</h3>
+                            class="font-display text-5xl lg:text-6xl font-medium dark:text-white text-gray-900 tracking-tight mb-4 group-hover:translate-x-2 transition-transform duration-500">
+                            Web<br>Scalability
+                        </h3>
                     </div>
                     <div class="relative z-10">
                         <p
-                            class="text-xl text-gray-500 font-light max-w-sm group-hover:text-gray-900 transition-colors">
+                            class="text-xl dark:text-gray-400 text-gray-500 font-light max-w-sm dark:group-hover:text-white group-hover:text-gray-900 transition-colors">
                             Plan-driven engineering for massive growth. Instant, secure, and infinitely scalable digital
                             environments.
                         </p>
                         <div
-                            class="mt-8 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
-                            Explore Infrastructure <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round"
-                                class="lucide lucide-arrow-right w-4 h-4">
+                            class="mt-8 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-purple-500 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
+                            Explore Infrastructure
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="transition-transform group-hover:translate-x-1">
                                 <path d="M5 12h14"></path>
                                 <path d="m12 5 7 7-7 7"></path>
                             </svg>
@@ -459,34 +614,31 @@
                     </div>
                 </div>
 
-                <!-- Option 2: AI Agents -->
-                <div
-                    class="group relative p-12 lg:p-24 flex flex-col justify-between cursor-pointer hover:bg-gray-50/50 transition-colors hoverable">
-                    <div
-                        class="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-out">
-                        <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&amp;w=2000&amp;auto=format&amp;fit=crop"
-                            class="w-full h-full object-cover opacity-100 mix-blend-multiply" alt="AI Neural Network">
-                    </div>
+                <!-- AI Agents Card -->
+                <div class="group relative p-12 lg:p-24 flex flex-col justify-between cursor-pointer dark:hover:bg-white/5 hover:bg-gray-50/50 transition-colors hoverable tilt-card"
+                    data-tilt="5">
                     <div class="relative z-10 transition-colors duration-300">
                         <span
-                            class="inline-block px-4 py-2 rounded-full border border-gray-200 bg-white text-xs font-mono uppercase tracking-wider mb-6 group-hover:bg-transparent group-hover:border-gray-900 group-hover:text-gray-900">Flexible
-                            Scale</span>
+                            class="inline-block px-4 py-2 rounded-full border dark:border-gray-700 border-gray-200 dark:bg-gray-800 bg-white text-xs font-mono uppercase tracking-wider mb-6 group-hover:bg-indigo-600 group-hover:border-indigo-600 group-hover:text-white transition-all">
+                            Flexible Scale
+                        </span>
                         <h3
-                            class="font-display text-5xl lg:text-6xl font-medium text-gray-900 tracking-tight mb-4 group-hover:translate-x-2 transition-transform duration-500">
-                            AI Agents</h3>
+                            class="font-display text-5xl lg:text-6xl font-medium dark:text-white text-gray-900 tracking-tight mb-4 group-hover:translate-x-2 transition-transform duration-500">
+                            AI Agents
+                        </h3>
                     </div>
                     <div class="relative z-10">
                         <p
-                            class="text-xl text-gray-500 font-light max-w-sm group-hover:text-gray-900 transition-colors">
+                            class="text-xl dark:text-gray-400 text-gray-500 font-light max-w-sm dark:group-hover:text-white group-hover:text-gray-900 transition-colors">
                             Change-driven autonomous workflows. Deploy custom LLMs to handle complex decision-making
                             24/7.
                         </p>
                         <div
-                            class="mt-8 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
-                            Deploy Intelligence <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round"
-                                class="lucide lucide-arrow-right w-4 h-4">
+                            class="mt-8 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-indigo-500 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
+                            Deploy Intelligence
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="transition-transform group-hover:translate-x-1">
                                 <path d="M5 12h14"></path>
                                 <path d="m12 5 7 7-7 7"></path>
                             </svg>
@@ -497,53 +649,88 @@
         </section>
 
         <!-- 4. About Us (Neon Cards) -->
-        <section id="services" class="bg-black py-24 md:py-32 border-b border-gray-200">
-            <div id="about-us-section">
+        <section id="services"
+            class="bg-gradient-to-b from-black via-gray-900 to-black py-24 md:py-32 border-b border-gray-800 relative overflow-hidden">
+            <!-- Gradient orbs for background -->
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none">
+            </div>
+            <div
+                class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl pointer-events-none">
+            </div>
+
+            <div id="about-us-section" class="relative z-10">
                 <div class="max-w-7xl mx-auto px-6">
                     <div class="mb-16 text-center md:text-left">
-                        <span class="block text-xs font-mono mb-3 text-gray-400">Where we come into play.</span>
+                        <span class="block text-xs font-mono mb-3 text-indigo-400 uppercase tracking-widest">Where we
+                            come into play</span>
                         <h2
-                            class="font-display text-6xl md:text-8xl font-black text-white leading-[0.9] tracking-tighter uppercase mb-6">
-                            About Us.</h2>
+                            class="font-display text-5xl sm:text-6xl md:text-8xl font-black text-white leading-[0.9] tracking-tighter uppercase mb-6">
+                            About Us.
+                        </h2>
                     </div>
 
-                    <div class="card-container">
+                    <div class="card-container stagger-container">
                         <!-- Card 1: Digital Product -->
-                        <div class="card-box hoverable">
+                        <div class="card-box hoverable" data-tilt="8">
                             <span></span>
                             <div class="card-content">
+                                <div class="mb-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" class="text-indigo-400">
+                                        <rect width="18" height="18" x="3" y="3" rx="2" />
+                                        <path d="M3 9h18" />
+                                        <path d="M9 21V9" />
+                                    </svg>
+                                </div>
                                 <h2 class="font-display text-2xl font-bold mb-4 text-white">Digital Product</h2>
-                                <p class="text-base text-gray-300 mb-6 font-sans leading-relaxed">
+                                <p class="text-base text-gray-300 mb-6 leading-relaxed">
                                     We build scalable design systems and high-fidelity interfaces. Focusing on
                                     interaction patterns that drive user retention and operational efficiency.
                                 </p>
-                                
                             </div>
                         </div>
 
                         <!-- Card 2: Brand Identity -->
-                        <div class="card-box hoverable">
+                        <div class="card-box hoverable" data-tilt="8">
                             <span></span>
                             <div class="card-content">
+                                <div class="mb-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" class="text-purple-400">
+                                        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+                                    </svg>
+                                </div>
                                 <h2 class="font-display text-2xl font-bold mb-4 text-white">Brand Identity</h2>
-                                <p class="text-base text-gray-300 mb-6 font-sans leading-relaxed">
+                                <p class="text-base text-gray-300 mb-6 leading-relaxed">
                                     Translating complex business logic into singular visual narratives. We create brands
                                     that feel inevitable in their respective markets.
                                 </p>
-                                
                             </div>
                         </div>
 
                         <!-- Card 3: AI Agents -->
-                        <div class="card-box hoverable">
+                        <div class="card-box hoverable" data-tilt="8">
                             <span></span>
                             <div class="card-content">
+                                <div class="mb-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" class="text-pink-400">
+                                        <path d="M12 8V4H8" />
+                                        <rect width="16" height="12" x="4" y="8" rx="2" />
+                                        <path d="M2 14h2" />
+                                        <path d="M20 14h2" />
+                                        <path d="M15 13v2" />
+                                        <path d="M9 13v2" />
+                                    </svg>
+                                </div>
                                 <h2 class="font-display text-2xl font-bold mb-4 text-white">AI Agents</h2>
-                                <p class="text-base text-gray-300 mb-6 font-sans leading-relaxed">
+                                <p class="text-base text-gray-300 mb-6 leading-relaxed">
                                     Deploy autonomous workflows that handle complex decision-making and scale your
                                     operations 24/7.
                                 </p>
-                                
                             </div>
                         </div>
                     </div>
@@ -552,216 +739,492 @@
         </section>
 
         <!-- 5. Process (Timeline) -->
-        <section class="py-24 md:py-32 bg-gray-50 relative overflow-hidden border-b border-gray-200">
+        <section
+            class="py-24 md:py-32 dark:bg-black bg-gray-50 relative overflow-hidden border-b dark:border-gray-800 border-gray-200 transition-colors duration-300">
+            <!-- Timeline line -->
             <div
-                class="absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2 hidden md:block bg-gray-200 border-l border-dashed border-gray-300">
+                class="absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2 hidden md:block bg-gradient-to-b from-transparent via-purple-500 to-transparent">
             </div>
 
             <div class="max-w-4xl mx-auto px-6 relative">
                 <div class="text-center mb-20">
-                    
-                    <h2 class="font-display text-3xl md:text-4xl font-semibold text-gray-900 tracking-tight">Systematic
-                        Execution</h2>
+                    <span class="block text-xs font-mono mb-3 text-purple-500 uppercase tracking-widest">Our
+                        Process</span>
+                    <h2
+                        class="font-display text-3xl md:text-4xl font-semibold dark:text-white text-gray-900 tracking-tight">
+                        Systematic Execution
+                    </h2>
                 </div>
 
                 <!-- Step 1 -->
-                <div class="relative grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
+                <div class="relative grid grid-cols-1 md:grid-cols-2 gap-12 mb-20 reveal-left">
                     <div class="md:text-right md:pr-16">
-                        <h3 class="text-xl font-display font-medium text-gray-900 mb-2 tracking-tight">Audit &amp;
-                            Discover</h3>
-                        <p class="text-sm text-gray-500">We map the terrain. Deep dive into technical constraints,
-                            audience psychology, and market gaps.</p>
+                        <h3 class="text-xl font-display font-medium dark:text-white text-gray-900 mb-2 tracking-tight">
+                            Audit & Discover
+                        </h3>
+                        <p class="text-sm dark:text-gray-400 text-gray-500">
+                            We map the terrain. Deep dive into technical constraints, audience psychology, and market
+                            gaps.
+                        </p>
                     </div>
                     <div
-                        class="hidden md:flex absolute left-1/2 top-0 -translate-x-1/2 w-8 h-8 rounded-full border border-gray-200 bg-white items-center justify-center z-10 text-xs font-mono text-gray-400">
-                        1</div>
+                        class="hidden md:flex absolute left-1/2 top-0 -translate-x-1/2 w-10 h-10 rounded-full border-2 border-purple-500 dark:bg-gray-900 bg-white items-center justify-center z-10 shadow-lg">
+                        <span class="text-sm font-display font-semibold text-purple-500">1</span>
+                    </div>
                     <div class="md:pl-16 md:col-start-2">
-                        <span class="text-xs font-mono text-gray-400 uppercase tracking-widest">Phase 01 / Input</span>
+                        <span class="text-xs font-mono text-purple-500 uppercase tracking-widest">Phase 01 /
+                            Input</span>
                     </div>
                 </div>
 
                 <!-- Step 2 -->
-                <div class="relative grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
+                <div class="relative grid grid-cols-1 md:grid-cols-2 gap-12 mb-20 reveal-right">
                     <div class="hidden md:block md:text-right md:pr-16">
-                        <span class="text-xs font-mono text-gray-400 uppercase tracking-widest">Phase 02 /
+                        <span class="text-xs font-mono text-indigo-500 uppercase tracking-widest">Phase 02 /
                             Process</span>
                     </div>
                     <div
-                        class="hidden md:flex absolute left-1/2 top-0 -translate-x-1/2 w-8 h-8 rounded-full border border-gray-200 bg-white items-center justify-center z-10 text-xs font-mono text-gray-400">
-                        2</div>
+                        class="hidden md:flex absolute left-1/2 top-0 -translate-x-1/2 w-10 h-10 rounded-full border-2 border-indigo-500 dark:bg-gray-900 bg-white items-center justify-center z-10 shadow-lg">
+                        <span class="text-sm font-display font-semibold text-indigo-500">2</span>
+                    </div>
                     <div class="md:pl-16">
-                        <h3 class="text-xl font-display font-medium text-gray-900 mb-2 tracking-tight">Architect &amp;
-                            Design</h3>
-                        <p class="text-sm text-gray-500">Iterative prototyping. We develop high-fidelity models and code
-                            structures aligned with OKRs.</p>
+                        <h3 class="text-xl font-display font-medium dark:text-white text-gray-900 mb-2 tracking-tight">
+                            Architect & Design
+                        </h3>
+                        <p class="text-sm dark:text-gray-400 text-gray-500">
+                            Iterative prototyping. We develop high-fidelity models and code structures aligned with
+                            OKRs.
+                        </p>
                     </div>
                 </div>
 
                 <!-- Step 3 -->
-                <div class="relative grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="relative grid grid-cols-1 md:grid-cols-2 gap-12 reveal-left">
                     <div class="md:text-right md:pr-16">
-                        <h3 class="text-xl font-display font-medium text-gray-900 mb-2 tracking-tight">Deploy &amp;
-                            Scale</h3>
-                        <p class="text-sm text-gray-500">Execution with surgical precision. CI/CD pipelines, seamless
-                            launch, and continuous optimization.</p>
+                        <h3 class="text-xl font-display font-medium dark:text-white text-gray-900 mb-2 tracking-tight">
+                            Deploy & Scale
+                        </h3>
+                        <p class="text-sm dark:text-gray-400 text-gray-500">
+                            Execution with surgical precision. CI/CD pipelines, seamless launch, and continuous
+                            optimization.
+                        </p>
                     </div>
                     <div
-                        class="hidden md:flex absolute left-1/2 top-0 -translate-x-1/2 w-8 h-8 rounded-full border border-gray-200 bg-white items-center justify-center z-10 text-xs font-mono text-gray-400">
-                        3</div>
+                        class="hidden md:flex absolute left-1/2 top-0 -translate-x-1/2 w-10 h-10 rounded-full border-2 border-pink-500 dark:bg-gray-900 bg-white items-center justify-center z-10 shadow-lg">
+                        <span class="text-sm font-display font-semibold text-pink-500">3</span>
+                    </div>
                     <div class="md:pl-16 md:col-start-2">
-                        <span class="text-xs font-mono text-gray-400 uppercase tracking-widest">Phase 03 / Output</span>
+                        <span class="text-xs font-mono text-pink-500 uppercase tracking-widest">Phase 03 / Output</span>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- 6. Contact -->
-        <section id="contact" class="bg-white pt-32 pb-24 px-6 min-h-[50vh]">
-            <div class="max-w-7xl mx-auto">
-                <h2 class="font-display text-7xl md:text-9xl font-semibold tracking-tighter text-gray-900 mb-24">
-                    Let's get in<br>touch
-                </h2>
+        <section id="contact"
+            class="dark:bg-gradient-to-b dark:from-gray-900 dark:via-black dark:to-black bg-gradient-to-b from-gray-50 to-white pt-32 pb-24 px-6 min-h-[60vh] relative overflow-hidden">
+            <!-- Background gradient orbs -->
+            <div class="absolute top-0 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl pointer-events-none">
+            </div>
+            <div
+                class="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none">
+            </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-12 font-sans text-lg">
-                    <div class="space-y-4">
-                        <span class="block text-gray-400 text-sm font-medium">Located</span>
-                        <p class="text-gray-900">India<br></p>
-                    </div>
-                    <div class="space-y-4">
-                        <span class="block text-gray-400 text-sm font-medium">Contact</span>
-                        <p class="text-gray-900">VRTX Team</p>
-                        <a href="mailto:hello@vrtx.studio"
-                            class="text-gray-900 hover:text-gray-600 transition-colors block hoverable">vrtxbuisness@gmail.com</a>
-                    </div>
-                    <div class="space-y-4">
-                        <span class="block text-gray-400 text-sm font-medium">Follow</span>
-                        <div class="flex flex-col gap-2">
-                            <a href="#"
-                                class="text-gray-900 hover:text-gray-600 transition-colors hoverable">Instagram</a>
-                            <a href="#"
-                                class="text-gray-900 hover:text-gray-600 transition-colors hoverable">Linkedin</a>
-                        </div>
-                    </div>
-                    <div class="flex items-start justify-start md:justify-end">
-                        <a href="mailto:vrtxbuisness@gmail.com"
-                            class="w-20 h-20 rounded-full border border-gray-200 flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-all duration-300 hoverable">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="lucide lucide-plus w-8 h-8">
-                                <path d="M5 12h14"></path>
-                                <path d="M12 5v14"></path>
+            <div class="max-w-7xl mx-auto relative z-10">
+                <!-- Animated gradient heading -->
+                <h2
+                    class="font-display text-5xl sm:text-6xl md:text-8xl font-bold tracking-tighter mb-6 animate-fade-in-up bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500 bg-clip-text text-transparent bg-300% animate-gradient">
+                    Let's Build Something<br />Amazing Together
+                </h2>
+                <p
+                    class="text-lg dark:text-gray-400 text-gray-600 max-w-2xl mb-16 animate-fade-in-up animation-delay-200">
+                    Ready to transform your business with cutting-edge AI and stunning web experiences? Let's talk.
+                </p>
+
+                <!-- Contact Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+                    <!-- Location Card -->
+                    <div
+                        class="group p-6 rounded-2xl dark:bg-white/5 bg-white dark:border-gray-800 border-gray-200 border backdrop-blur-sm hover:border-purple-500/50 transition-all duration-300 animate-fade-in-up animation-delay-100">
+                        <div
+                            class="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="white" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                                <circle cx="12" cy="10" r="3" />
                             </svg>
+                        </div>
+                        <span
+                            class="block text-xs font-mono text-purple-500 uppercase tracking-wider mb-2">Location</span>
+                        <p class="dark:text-white text-gray-900 font-semibold text-lg">India</p>
+                    </div>
+
+                    <!-- Email Card -->
+                    <div
+                        class="group p-6 rounded-2xl dark:bg-white/5 bg-white dark:border-gray-800 border-gray-200 border backdrop-blur-sm hover:border-purple-500/50 transition-all duration-300 animate-fade-in-up animation-delay-200">
+                        <div
+                            class="w-12 h-12 rounded-full bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="white" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <rect width="20" height="16" x="2" y="4" rx="2" />
+                                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                            </svg>
+                        </div>
+                        <span class="block text-xs font-mono text-pink-500 uppercase tracking-wider mb-2">Email</span>
+                        <a href="mailto:vrtxbuisness@gmail.com"
+                            class="dark:text-white text-gray-900 font-semibold text-lg hover:text-purple-500 transition-colors hoverable">
+                            vrtxbuisness@gmail.com
                         </a>
                     </div>
+
+                    <!-- Instagram Card -->
+                    <div
+                        class="group p-6 rounded-2xl dark:bg-white/5 bg-white dark:border-gray-800 border-gray-200 border backdrop-blur-sm hover:border-purple-500/50 transition-all duration-300 animate-fade-in-up animation-delay-300">
+                        <div
+                            class="w-12 h-12 rounded-full bg-gradient-to-br from-orange-500 to-pink-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="white" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+                            </svg>
+                        </div>
+                        <span
+                            class="block text-xs font-mono text-orange-500 uppercase tracking-wider mb-2">Instagram</span>
+                        <a href="#"
+                            class="dark:text-white text-gray-900 font-semibold text-lg hover:text-purple-500 transition-colors hoverable">
+                            @vrtx.agency
+                        </a>
+                    </div>
+
+                    <!-- LinkedIn Card -->
+                    <div
+                        class="group p-6 rounded-2xl dark:bg-white/5 bg-white dark:border-gray-800 border-gray-200 border backdrop-blur-sm hover:border-purple-500/50 transition-all duration-300 animate-fade-in-up animation-delay-400">
+                        <div
+                            class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="white" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                                <rect width="4" height="12" x="2" y="9" />
+                                <circle cx="4" cy="4" r="2" />
+                            </svg>
+                        </div>
+                        <span
+                            class="block text-xs font-mono text-blue-500 uppercase tracking-wider mb-2">LinkedIn</span>
+                        <a href="#"
+                            class="dark:text-white text-gray-900 font-semibold text-lg hover:text-purple-500 transition-colors hoverable">
+                            VRTX Agency
+                        </a>
+                    </div>
+                </div>
+
+                <!-- CTA Button -->
+                <div class="flex justify-center">
+                    <a href="mailto:vrtxbuisness@gmail.com"
+                        class="group inline-flex items-center gap-4 px-10 py-5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 rounded-full text-white font-semibold text-lg shadow-2xl shadow-purple-500/30 hover:shadow-purple-500/50 transition-all duration-300 hoverable animate-glow-pulse">
+                        <span>Start Your Project</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="transition-transform group-hover:translate-x-2">
+                            <path d="M5 12h14" />
+                            <path d="m12 5 7 7-7 7" />
+                        </svg>
+                    </a>
                 </div>
             </div>
         </section>
 
         <!-- Footer -->
-        <footer class="bg-black text-white py-24 border-t border-gray-900">
-            <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12">
-                <!-- Branding -->
-                <div class="flex flex-col justify-between h-full min-h-[100px]">
-                    <span class="font-display text-4xl font-bold tracking-tight text-white flex items-center gap-2">
-                        
-                        VRTX
-                    </span>
+        <footer class="dark:bg-black bg-gray-900 text-white py-16 relative overflow-hidden">
+            <!-- Animated gradient line -->
+            <div
+                class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent">
+            </div>
+
+            <!-- Glow effects -->
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-32 bg-purple-500/20 blur-3xl"></div>
+
+            <div class="max-w-7xl mx-auto px-6 relative z-10">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                    <!-- Branding -->
+                    <div class="lg:col-span-1">
+                        <a href="#home"
+                            class="font-display text-3xl font-bold tracking-tight text-white hoverable inline-block mb-4">
+                            VRTX
+                        </a>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Crafting digital experiences that push boundaries. AI-powered solutions for modern
+                            businesses.
+                        </p>
+                    </div>
+
+                    <!-- Quick Links -->
+                    <div>
+                        <h4 class="text-sm font-semibold uppercase tracking-wider text-purple-400 mb-6">Quick Links</h4>
+                        <ul class="space-y-3 text-gray-400">
+                            <li><a href="#home" class="hover:text-white transition-colors hoverable">Home</a></li>
+                            <li><a href="#services-highlight"
+                                    class="hover:text-white transition-colors hoverable">Services</a></li>
+                            <li><a href="#services" class="hover:text-white transition-colors hoverable">About Us</a>
+                            </li>
+                            <li><a href="#contact" class="hover:text-white transition-colors hoverable">Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Founders -->
+                    <div>
+                        <h4 class="text-sm font-semibold uppercase tracking-wider text-purple-400 mb-6">Founders</h4>
+                        <ul class="space-y-3 text-gray-400">
+                            <li class="flex items-center gap-2">
+                                <div class="w-2 h-2 rounded-full bg-purple-500"></div>
+                                Arnav Vasisht Sharma
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <div class="w-2 h-2 rounded-full bg-indigo-500"></div>
+                                Sandesh Rajbhar
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Social -->
+                    <div>
+                        <h4 class="text-sm font-semibold uppercase tracking-wider text-purple-400 mb-6">Connect</h4>
+                        <div class="flex gap-4">
+                            <a href="#"
+                                class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-purple-500 transition-all duration-300 hoverable">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                                    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+                                </svg>
+                            </a>
+                            <a href="#"
+                                class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-indigo-500 transition-all duration-300 hoverable">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path
+                                        d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                                    <rect width="4" height="12" x="2" y="9" />
+                                    <circle cx="4" cy="4" r="2" />
+                                </svg>
+                            </a>
+                            <a href="mailto:vrtxbuisness@gmail.com"
+                                class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-pink-500 transition-all duration-300 hoverable">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <rect width="20" height="16" x="2" y="4" rx="2" />
+                                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Column 1: Contact -->
-                <div>
-                    <h4 class="text-lg font-medium mb-8">Contact</h4>
-                    <a href="mailto:vrtxbuisness@gmail.com"
-                        class="text-gray-400 hover:text-white transition-colors text-lg hoverable">vrtxbuisness@gmail.com</a>
-                </div>
-
-                <!-- Column 2: Team -->
-                <div>
-                    <h4 class="text-lg font-medium mb-8">Founders</h4>
-                    <ul class="space-y-4 text-gray-400">
-                        <li class="hover:text-white transition-colors cursor-default">Arnav Vasisht Sharma</li>
-                        <li class="hover:text-white transition-colors cursor-default">Sandesh Rajbhar</li>
-                    </ul>
-                </div>
-
-                <!-- Column 3: Follow Us -->
-                <div>
-                    <h4 class="text-lg font-medium mb-8">Follow Us</h4>
-                    <ul class="space-y-4 text-gray-400">
-                        <li><a href="#" class="hover:text-white transition-colors hoverable">On Instagram</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors hoverable">On Linkedin</a></li>
-
-                    </ul>
+                <!-- Bottom bar -->
+                <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <p class="text-gray-500 text-sm">© 2025 VRTX. All rights reserved.</p>
+                    <p class="text-gray-500 text-sm flex items-center gap-2">
+                        Made with <span class="text-purple-500">♥</span> in India
+                    </p>
                 </div>
             </div>
         </footer>
     </main>
 
+    <!-- AI Chatbot Widget -->
+    <div id="chatbot-widget" class="fixed bottom-6 right-6 z-50">
+        <!-- Chat Toggle Button -->
+        <button id="chatbot-toggle"
+            class="w-14 h-14 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 flex items-center justify-center text-white">
+            <svg id="chat-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z" />
+            </svg>
+            <svg id="close-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M18 6 6 18" />
+                <path d="m6 6 12 12" />
+            </svg>
+        </button>
+
+        <!-- Chat Window -->
+        <div id="chatbot-window"
+            class="hidden absolute bottom-20 right-0 w-80 sm:w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden">
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-indigo-600 to-purple-600 p-4 text-white">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 8V4H8" />
+                            <rect width="16" height="12" x="4" y="8" rx="2" />
+                            <path d="M2 14h2" />
+                            <path d="M20 14h2" />
+                            <path d="M15 13v2" />
+                            <path d="M9 13v2" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold">VRTX AI Assistant</h3>
+                        <p class="text-xs text-white/70">Always here to help</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Messages -->
+            <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
+                <div class="flex gap-2">
+                    <div class="w-8 h-8 bg-indigo-100 rounded-full flex-shrink-0 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                            stroke="#6366f1" stroke-width="2">
+                            <path d="M12 8V4H8" />
+                            <rect width="16" height="12" x="4" y="8" rx="2" />
+                        </svg>
+                    </div>
+                    <div class="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm max-w-[80%]">
+                        <p class="text-sm text-gray-700">Hi! 👋 I'm the VRTX AI assistant. How can I help you today? I
+                            can tell you about our services, pricing, or help you get started!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input -->
+            <div class="p-4 border-t border-gray-200 bg-white">
+                <div class="flex gap-2">
+                    <input type="text" id="chat-input" placeholder="Type a message..."
+                        class="flex-1 px-4 py-2 border border-gray-300 rounded-full text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20">
+                    <button id="chat-send"
+                        class="w-10 h-10 bg-indigo-600 hover:bg-indigo-700 rounded-full flex items-center justify-center text-white transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m22 2-7 20-4-9-9-4Z" />
+                            <path d="M22 2 11 13" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Initialize Icons
-        lucide.createIcons({
-            attrs: {
-                class: "lucide",
-                "stroke-width": 1.5
-            }
-        });
+            // AI Chatbot functionality
+            (function () {
+                const toggle = document.getElementById('chatbot-toggle');
+                const window = document.getElementById('chatbot-window');
+                const chatIcon = document.getElementById('chat-icon');
+                const closeIcon = document.getElementById('close-icon');
+                const messages = document.getElementById('chat-messages');
+                const input = document.getElementById('chat-input');
+                const sendBtn = document.getElementById('chat-send');
 
-        // Intersection Observer for Fade In
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('opacity-100', 'translate-y-0');
-                    entry.target.classList.remove('opacity-0', 'translate-y-4');
+                const responses = {
+                    'hello': 'Hello! Welcome to VRTX. How can I assist you today?',
+                    'hi': 'Hi there! 👋 What would you like to know about VRTX?',
+                    'services': 'We offer three main services:\n\n🎨 **Digital Product** - Scalable design systems & high-fidelity interfaces\n\n✨ **Brand Identity** - Visual narratives that make your brand inevitable\n\n🤖 **AI Agents** - Autonomous workflows that scale your operations 24/7',
+                    'pricing': 'Our pricing depends on project scope. For web development, projects typically start at $5,000. For AI agents, we offer both fixed-price and retainer models. Book a call to discuss your specific needs!',
+                    'contact': 'You can reach us at vrtxbuisness@gmail.com or click the "Book a Call" button on our website!',
+                    'ai': 'We build custom AI agents that automate complex workflows, handle decision-making, and scale your operations around the clock. They can be integrated with your existing tools and processes.',
+                    'website': 'We design high-performance websites with premium animations, modern design patterns, and optimized performance. Every site we build is crafted to convert visitors into customers.',
+                    'default': 'Thanks for your message! I can help you with:\n\n• Our services (web, branding, AI)\n• Pricing information\n• How to get started\n\nOr feel free to book a call with our team!'
+                };
+
+                function getResponse(msg) {
+                    const lower = msg.toLowerCase();
+                    for (const [key, value] of Object.entries(responses)) {
+                        if (lower.includes(key)) return value;
+                    }
+                    return responses.default;
                 }
-            });
-        }, { threshold: 0.1 });
 
-        // Cursor Animation Logic
-        document.addEventListener('DOMContentLoaded', () => {
-            const bigBall = document.querySelector('.cursor__ball--big');
-            const smallBall = document.querySelector('.cursor__ball--small');
-            const hoverables = document.querySelectorAll('a, button, .hoverable, .card-box');
+                function addMessage(text, isUser) {
+                    const div = document.createElement('div');
+                    div.className = 'flex gap-2' + (isUser ? ' justify-end' : '');
+                    div.innerHTML = isUser
+                        ? `<div class="bg-indigo-600 text-white p-3 rounded-2xl rounded-tr-none max-w-[80%]"><p class="text-sm">${text}</p></div>`
+                        : `<div class="w-8 h-8 bg-indigo-100 rounded-full flex-shrink-0 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/></svg>
+                       </div>
+                       <div class="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm max-w-[80%]"><p class="text-sm text-gray-700">${text.replace(/\n/g, '<br>')}</p></div>`;
+                    messages.appendChild(div);
+                    messages.scrollTop = messages.scrollHeight;
+                }
 
-            // Show cursor on first mouse move
-            document.body.addEventListener('mousemove', onMouseMove);
+                function showTyping() {
+                    const div = document.createElement('div');
+                    div.id = 'typing';
+                    div.className = 'flex gap-2';
+                    div.innerHTML = `<div class="w-8 h-8 bg-indigo-100 rounded-full flex-shrink-0 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/></svg>
+                </div>
+                <div class="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm"><div class="flex gap-1"><span class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></span><span class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay:0.1s"></span><span class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay:0.2s"></span></div></div>`;
+                    messages.appendChild(div);
+                    messages.scrollTop = messages.scrollHeight;
+                }
 
-            function onMouseMove(e) {
-                gsap.to(bigBall, .4, {
-                    x: e.clientX - 15,
-                    y: e.clientY - 15,
-                    opacity: 1
+                function hideTyping() {
+                    const typing = document.getElementById('typing');
+                    if (typing) typing.remove();
+                }
+
+                function send() {
+                    const text = input.value.trim();
+                    if (!text) return;
+                    addMessage(text, true);
+                    input.value = '';
+                    showTyping();
+                    setTimeout(() => {
+                        hideTyping();
+                        addMessage(getResponse(text), false);
+                    }, 1000 + Math.random() * 500);
+                }
+
+                toggle.addEventListener('click', () => {
+                    const isOpen = !window.classList.contains('hidden');
+                    window.classList.toggle('hidden');
+                    chatIcon.classList.toggle('hidden', !isOpen);
+                    closeIcon.classList.toggle('hidden', isOpen);
                 });
-                gsap.to(smallBall, .1, {
-                    x: e.clientX - 5,
-                    y: e.clientY - 7,
-                    opacity: 1
-                });
-            }
 
-            // Hover logic
-            function onMouseHover() {
-                gsap.to(bigBall, .3, {
-                    scale: 4,
-                    opacity: 1
-                });
-            }
-
-            function onMouseHoverOut() {
-                gsap.to(bigBall, .3, {
-                    scale: 1,
-                    opacity: 1
-                });
-            }
-
-            // Add listeners to all interactive elements
-            hoverables.forEach(el => {
-                el.addEventListener('mouseenter', onMouseHover);
-                el.addEventListener('mouseleave', onMouseHoverOut);
-            });
-        });
+                sendBtn.addEventListener('click', send);
+                input.addEventListener('keypress', (e) => { if (e.key === 'Enter') send(); });
+            })();
     </script>
 
+    <!-- Theme Toggle Script -->
+    <script>
+        (function () {
+            const themeToggle = document.getElementById('theme-toggle');
+            const html = document.documentElement;
 
+            // Check saved preference or system preference
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                html.classList.toggle('dark', savedTheme === 'dark');
+            } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+                html.classList.remove('dark');
+            }
+
+            themeToggle.addEventListener('click', () => {
+                html.classList.toggle('dark');
+                localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+
+                // Update animation colors based on theme
+                const isDark = html.classList.contains('dark');
+                document.body.style.setProperty('--animation-color', isDark ? '#a855f7' : '#111111');
+                document.body.style.setProperty('--animation-bg', isDark ? 'transparent' : '#ffffff');
+            });
+        })();
+    </script>
 
 </body>
 
