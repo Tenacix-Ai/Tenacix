@@ -9,7 +9,7 @@ const services = [
         title: 'Web\nScalability',
         description: 'Plan-driven engineering for massive growth. Instant, secure, and infinitely scalable digital environments.',
         cta: 'Explore Infrastructure',
-        color: 'purple',
+        color: 'zinc',
         borderPosition: 'md:border-r',
     },
     {
@@ -17,7 +17,7 @@ const services = [
         title: 'AI Agents',
         description: 'Change-driven autonomous workflows. Deploy custom LLMs to handle complex decision-making 24/7.',
         cta: 'Deploy Intelligence',
-        color: 'indigo',
+        color: 'zinc',
         borderPosition: '',
     },
 ];
@@ -26,7 +26,7 @@ export default function ServicesHighlight() {
     return (
         <section
             id="services-highlight"
-            className="py-24 md:py-32 dark:bg-gray-900 bg-white dark:border-gray-800 border-gray-200 border-b overflow-hidden transition-colors duration-300"
+            className="py-24 md:py-32 dark:bg-black bg-white dark:border-white/10 border-gray-100 border-b overflow-hidden transition-colors duration-300"
         >
             <div className="max-w-7xl mx-auto px-6 mb-24">
                 <motion.div
@@ -50,7 +50,7 @@ export default function ServicesHighlight() {
             </div>
 
             {/* Service Cards Grid */}
-            <div className="w-full grid grid-cols-1 md:grid-cols-2 min-h-[600px] border-t dark:border-gray-800 border-gray-100">
+            <div className="w-full grid grid-cols-1 md:grid-cols-2 min-h-[600px] border-t dark:border-white/10 border-gray-100">
                 {services.map((service, idx) => (
                     <motion.div
                         key={service.title}
@@ -58,11 +58,11 @@ export default function ServicesHighlight() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8, delay: idx * 0.1 }}
-                        className={`group relative ${service.borderPosition} dark:border-gray-800 border-gray-100 p-12 lg:p-24 flex flex-col justify-between cursor-pointer dark:hover:bg-white/5 hover:bg-gray-50/50 transition-colors`}
+                        className={`group relative ${service.borderPosition} dark:border-white/10 border-gray-100 p-12 lg:p-24 flex flex-col justify-between cursor-pointer dark:hover:bg-white/5 hover:bg-black/5 transition-colors`}
                     >
                         <div className="relative z-10 transition-colors duration-300">
                             <span
-                                className={`inline-block px-4 py-2 rounded-full border dark:border-gray-700 border-gray-200 dark:bg-gray-800 bg-white text-xs font-mono uppercase tracking-wider mb-6 group-hover:bg-${service.color}-600 group-hover:border-${service.color}-600 group-hover:text-white transition-all`}
+                                className={`inline-block px-4 py-2 rounded-full liquid-glass-button text-xs font-mono uppercase tracking-wider mb-6 transition-all`}
                             >
                                 {service.badge}
                             </span>
@@ -75,7 +75,7 @@ export default function ServicesHighlight() {
                                 {service.description}
                             </p>
                             <div
-                                className={`mt-8 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-${service.color}-500 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100`}
+                                className={`mt-8 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide dark:text-white text-black opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100`}
                             >
                                 {service.cta}
                                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />

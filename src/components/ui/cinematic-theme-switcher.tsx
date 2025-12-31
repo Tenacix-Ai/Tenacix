@@ -122,16 +122,16 @@ export default function CinematicThemeSwitcher() {
                 className="relative flex h-[64px] w-[104px] items-center rounded-full p-[6px] transition-all duration-300 focus:outline-none"
                 style={{
                     background: isDark
-                        ? 'radial-gradient(ellipse at top left, #1e293b 0%, #0f172a 40%, #020617 100%)'
-                        : 'radial-gradient(ellipse at top left, #ffffff 0%, #f1f5f9 40%, #cbd5e1 100%)',
+                        ? 'radial-gradient(ellipse at top left, #18181b 0%, #09090b 40%, #000000 100%)'
+                        : 'radial-gradient(ellipse at top left, #ffffff 0%, #f4f4f5 40%, #e4e4e7 100%)',
                     boxShadow: isDark
                         ? `
               inset 5px 5px 12px rgba(0, 0, 0, 0.9),
-              inset -5px -5px 12px rgba(71, 85, 105, 0.4),
+              inset -5px -5px 12px rgba(113, 113, 122, 0.15),
               inset 8px 8px 16px rgba(0, 0, 0, 0.7),
-              inset -8px -8px 16px rgba(100, 116, 139, 0.2),
+              inset -8px -8px 16px rgba(161, 161, 170, 0.1),
               inset 0 2px 4px rgba(0, 0, 0, 1),
-              inset 0 -2px 4px rgba(71, 85, 105, 0.4),
+              inset 0 -2px 4px rgba(113, 113, 122, 0.2),
               inset 0 0 20px rgba(0, 0, 0, 0.6),
               0 1px 1px rgba(255, 255, 255, 0.05),
               0 2px 4px rgba(0, 0, 0, 0.4),
@@ -140,13 +140,13 @@ export default function CinematicThemeSwitcher() {
               0 24px 48px rgba(0, 0, 0, 0.2)
             `
                         : `
-              inset 5px 5px 12px rgba(148, 163, 184, 0.5),
+              inset 5px 5px 12px rgba(161, 161, 170, 0.3),
               inset -5px -5px 12px rgba(255, 255, 255, 1),
-              inset 8px 8px 16px rgba(100, 116, 139, 0.3),
+              inset 8px 8px 16px rgba(113, 113, 122, 0.2),
               inset -8px -8px 16px rgba(255, 255, 255, 0.9),
-              inset 0 2px 4px rgba(148, 163, 184, 0.4),
+              inset 0 2px 4px rgba(161, 161, 170, 0.3),
               inset 0 -2px 4px rgba(255, 255, 255, 1),
-              inset 0 0 20px rgba(203, 213, 225, 0.3),
+              inset 0 0 20px rgba(228, 228, 231, 0.3),
               0 1px 2px rgba(255, 255, 255, 1),
               0 2px 4px rgba(0, 0, 0, 0.1),
               0 8px 16px rgba(0, 0, 0, 0.08),
@@ -154,8 +154,8 @@ export default function CinematicThemeSwitcher() {
               0 24px 48px rgba(0, 0, 0, 0.04)
             `,
                     border: isDark
-                        ? '2px solid rgba(51, 65, 85, 0.6)'
-                        : '2px solid rgba(203, 213, 225, 0.6)',
+                        ? '2px solid rgba(82, 82, 91, 0.4)'
+                        : '2px solid rgba(161, 161, 170, 0.5)',
                     position: 'relative',
                 }}
                 aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
@@ -168,8 +168,8 @@ export default function CinematicThemeSwitcher() {
                     className="absolute inset-[3px] rounded-full pointer-events-none"
                     style={{
                         boxShadow: isDark
-                            ? 'inset 0 2px 6px rgba(0, 0, 0, 0.9), inset 0 -1px 3px rgba(71, 85, 105, 0.3)'
-                            : 'inset 0 2px 6px rgba(100, 116, 139, 0.4), inset 0 -1px 3px rgba(255, 255, 255, 0.8)',
+                            ? 'inset 0 2px 6px rgba(0, 0, 0, 0.9), inset 0 -1px 3px rgba(113, 113, 122, 0.2)'
+                            : 'inset 0 2px 6px rgba(161, 161, 170, 0.25), inset 0 -1px 3px rgba(255, 255, 255, 0.8)',
                     }}
                 />
 
@@ -196,13 +196,13 @@ export default function CinematicThemeSwitcher() {
                     style={{
                         boxShadow: isDark
                             ? 'inset 0 0 15px rgba(0, 0, 0, 0.5)'
-                            : 'inset 0 0 15px rgba(148, 163, 184, 0.2)',
+                            : 'inset 0 0 15px rgba(161, 161, 170, 0.15)',
                     }}
                 />
                 {/* Background Icons */}
                 <div className="absolute inset-0 flex items-center justify-between px-4">
-                    <Sun size={20} className={isDark ? 'text-yellow-100' : 'text-amber-600'} />
-                    <Moon size={20} className={isDark ? 'text-yellow-100' : 'text-slate-700'} />
+                    <Sun size={20} className={isDark ? 'text-neutral-200' : 'text-neutral-600'} />
+                    <Moon size={20} className={isDark ? 'text-neutral-200' : 'text-neutral-700'} />
                 </div>
 
                 {/* Circular Thumb with Bouncy Spring Physics */}
@@ -210,11 +210,11 @@ export default function CinematicThemeSwitcher() {
                     className="relative z-10 flex h-[44px] w-[44px] items-center justify-center rounded-full overflow-hidden"
                     style={{
                         background: isDark
-                            ? 'linear-gradient(145deg, #64748b 0%, #475569 50%, #334155 100%)'
-                            : 'linear-gradient(145deg, #ffffff 0%, #fefefe 50%, #f8fafc 100%)',
+                            ? 'linear-gradient(145deg, #71717a 0%, #3f3f46 50%, #27272a 100%)'
+                            : 'linear-gradient(145deg, #ffffff 0%, #fefefe 50%, #f4f4f5 100%)',
                         boxShadow: isDark
                             ? `
-                inset 2px 2px 4px rgba(100, 116, 139, 0.4),
+                inset 2px 2px 4px rgba(161, 161, 170, 0.4),
                 inset -2px -2px 4px rgba(0, 0, 0, 0.8),
                 inset 0 1px 1px rgba(255, 255, 255, 0.15),
                 0 1px 2px rgba(255, 255, 255, 0.1),
@@ -223,7 +223,7 @@ export default function CinematicThemeSwitcher() {
                 0 2px 4px rgba(0, 0, 0, 0.4)
               `
                             : `
-                inset 2px 2px 4px rgba(203, 213, 225, 0.3),
+                inset 2px 2px 4px rgba(228, 228, 231, 0.4),
                 inset -2px -2px 4px rgba(255, 255, 255, 1),
                 inset 0 1px 2px rgba(255, 255, 255, 1),
                 0 1px 2px rgba(255, 255, 255, 1),
@@ -232,7 +232,7 @@ export default function CinematicThemeSwitcher() {
                 0 2px 4px rgba(0, 0, 0, 0.08)
               `,
                         border: isDark
-                            ? '2px solid rgba(148, 163, 184, 0.3)'
+                            ? '2px solid rgba(113, 113, 122, 0.5)'
                             : '2px solid rgba(255, 255, 255, 0.9)',
                     }}
                     animate={{
@@ -291,9 +291,9 @@ export default function CinematicThemeSwitcher() {
                     {/* Icon */}
                     <div className="relative z-10">
                         {isDark ? (
-                            <Moon size={20} className="text-yellow-200" />
+                            <Moon size={20} className="text-white" />
                         ) : (
-                            <Sun size={20} className="text-amber-500" />
+                            <Sun size={20} className="text-neutral-600" />
                         )}
                     </div>
                 </motion.div>

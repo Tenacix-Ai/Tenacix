@@ -11,24 +11,24 @@ const quickLinks = [
 ];
 
 const founders = [
-    { name: 'Arnav Vasisht Sharma', color: 'bg-purple-500' },
-    { name: 'Sandesh Rajbhar', color: 'bg-indigo-500' },
+    { name: 'Arnav Vasisht Sharma', color: 'bg-zinc-500' },
+    { name: 'Sandesh Rajbhar', color: 'bg-zinc-400' },
 ];
 
 const socialLinks = [
-    { href: '#', icon: Instagram, hoverColor: 'hover:bg-purple-500' },
-    { href: '#', icon: Linkedin, hoverColor: 'hover:bg-indigo-500' },
-    { href: 'mailto:vrtxbuisness@gmail.com', icon: Mail, hoverColor: 'hover:bg-pink-500' },
+    { href: '#', icon: Instagram, hoverColor: 'hover:bg-zinc-800' },
+    { href: '#', icon: Linkedin, hoverColor: 'hover:bg-zinc-800' },
+    { href: 'mailto:vrtxbuisness@gmail.com', icon: Mail, hoverColor: 'hover:bg-zinc-800' },
 ];
 
 export default function Footer() {
     return (
-        <footer className="dark:bg-black bg-gray-900 text-white py-16 relative overflow-hidden">
+        <footer className="dark:bg-black bg-white border-t dark:border-white/10 border-black/5 text-zinc-600 dark:text-zinc-400 py-16 relative overflow-hidden">
             {/* Animated gradient line */}
-            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent" />
+            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-zinc-500/20 to-transparent" />
 
-            {/* Glow effects */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-32 bg-purple-500/20 blur-3xl" />
+            {/* Glow effects - REMOVED for monochrome cleanliness, or keep subtle white */}
+            {/* <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-32 bg-white/5 blur-3xl" /> */}
 
             <div className="max-w-7xl mx-auto px-6 relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
@@ -36,11 +36,11 @@ export default function Footer() {
                     <div className="lg:col-span-1">
                         <Link
                             href="#home"
-                            className="text-3xl font-bold tracking-tight text-white inline-block mb-4"
+                            className="text-3xl font-bold tracking-tight dark:text-white text-black inline-block mb-4"
                         >
                             VRTX
                         </Link>
-                        <p className="text-gray-400 text-sm leading-relaxed">
+                        <p className="dark:text-zinc-400 text-zinc-600 text-sm leading-relaxed">
                             Crafting digital experiences that push boundaries. AI-powered solutions for modern
                             businesses.
                         </p>
@@ -48,13 +48,13 @@ export default function Footer() {
 
                     {/* Quick Links */}
                     <div>
-                        <h4 className="text-sm font-semibold uppercase tracking-wider text-purple-400 mb-6">
+                        <h4 className="text-sm font-semibold uppercase tracking-wider dark:text-zinc-200 text-zinc-900 mb-6">
                             Quick Links
                         </h4>
-                        <ul className="space-y-3 text-gray-400">
+                        <ul className="space-y-3 dark:text-zinc-400 text-zinc-600">
                             {quickLinks.map((link) => (
                                 <li key={link.href}>
-                                    <Link href={link.href} className="hover:text-white transition-colors">
+                                    <Link href={link.href} className="dark:hover:text-white hover:text-black transition-colors">
                                         {link.label}
                                     </Link>
                                 </li>
@@ -64,10 +64,10 @@ export default function Footer() {
 
                     {/* Founders */}
                     <div>
-                        <h4 className="text-sm font-semibold uppercase tracking-wider text-purple-400 mb-6">
+                        <h4 className="text-sm font-semibold uppercase tracking-wider dark:text-zinc-200 text-zinc-900 mb-6">
                             Founders
                         </h4>
-                        <ul className="space-y-3 text-gray-400">
+                        <ul className="space-y-3 dark:text-zinc-400 text-zinc-600">
                             {founders.map((founder) => (
                                 <li key={founder.name} className="flex items-center gap-2">
                                     <div className={`w-2 h-2 rounded-full ${founder.color}`} />
@@ -79,7 +79,7 @@ export default function Footer() {
 
                     {/* Social */}
                     <div>
-                        <h4 className="text-sm font-semibold uppercase tracking-wider text-purple-400 mb-6">
+                        <h4 className="text-sm font-semibold uppercase tracking-wider dark:text-zinc-200 text-zinc-900 mb-6">
                             Connect
                         </h4>
                         <div className="flex gap-4">
@@ -87,7 +87,7 @@ export default function Footer() {
                                 <Link
                                     key={idx}
                                     href={social.href}
-                                    className={`w-10 h-10 rounded-full bg-white/10 flex items-center justify-center ${social.hoverColor} transition-all duration-300`}
+                                    className={`w-10 h-10 rounded-full dark:bg-zinc-800 bg-zinc-200 flex items-center justify-center dark:hover:bg-white hover:bg-black dark:hover:text-black hover:text-white transition-all duration-300`}
                                 >
                                     <social.icon size={18} />
                                 </Link>
@@ -97,10 +97,10 @@ export default function Footer() {
                 </div>
 
                 {/* Bottom bar */}
-                <div className="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
-                    <p className="text-gray-500 text-sm">© 2025 VRTX. All rights reserved.</p>
-                    <p className="text-gray-500 text-sm flex items-center gap-2">
-                        Made with <span className="text-purple-500">♥</span> in India
+                <div className="pt-8 border-t dark:border-white/10 border-black/5 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <p className="dark:text-zinc-500 text-zinc-400 text-sm">© 2025 VRTX. All rights reserved.</p>
+                    <p className="dark:text-zinc-500 text-zinc-400 text-sm flex items-center gap-2">
+                        Made with <span className="dark:text-white text-black">♥</span> in India
                     </p>
                 </div>
             </div>
