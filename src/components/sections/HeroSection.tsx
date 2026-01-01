@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, ArrowDown } from 'lucide-react';
 import Link from 'next/link';
-import { FloatingPaths } from '@/components/ui/background-paths';
+import { LavaLamp } from '@/components/ui/fluid-blob';
 import { Button } from '@/components/ui/button';
 
 const tickerItems = [
@@ -17,7 +17,11 @@ const tickerItems = [
     { text: 'Scale', highlight: true },
 ];
 
-export default function HeroSection() {
+interface HeroSectionProps {
+    isLoaded?: boolean;
+}
+
+export default function HeroSection({ isLoaded = false }: HeroSectionProps) {
     const title = "VRTX";
     const words = title.split(" ");
 
@@ -26,55 +30,42 @@ export default function HeroSection() {
             id="home"
             className="relative min-h-[90vh] w-full flex flex-col items-center justify-center overflow-hidden bg-white dark:bg-neutral-950 border-b border-black/10 dark:border-white/10"
         >
-            {/* Background Paths Animation */}
+            {/* Background Lava Lamp Animation */}
             <div className="absolute inset-0 z-0">
-                <FloatingPaths position={1} />
-                <FloatingPaths position={-1} />
+                <LavaLamp />
             </div>
 
-            <div className="relative z-10 text-center max-w-5xl mx-auto px-6">
+            <div className="relative z-10 text-center max-w-5xl mx-auto px-6 pointer-events-none">
                 {/* Status Badge */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    className="inline-flex gap-2 dark:bg-white/5 bg-neutral-100 dark:border-white/10 border-neutral-200 border rounded-full mb-8 py-1.5 px-4 items-center backdrop-blur-md"
+                    animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                    className="inline-flex gap-2 bg-neutral-100/50 dark:bg-white/10 border-neutral-200 dark:border-white/20 border rounded-full mb-8 py-1.5 px-4 items-center backdrop-blur-md pointer-events-auto dark:mix-blend-difference"
                 >
                     <span className="relative flex h-2 w-2">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-neutral-400 opacity-75" />
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-neutral-500 dark:bg-white" />
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-neutral-900 dark:bg-white opacity-75" />
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-neutral-900 dark:bg-white" />
                     </span>
-                    <span className="uppercase text-xs font-medium dark:text-neutral-300 text-neutral-600 tracking-wider">
+                    <span className="uppercase text-xs font-medium text-neutral-900 dark:text-white tracking-wider">
                         AI Agents and Websites
                     </span>
                 </motion.div>
 
                 {/* Main Title with Letter Animation */}
-                <h1 className="md:text-8xl lg:text-9xl leading-[0.9] text-6xl font-bold tracking-tighter mb-8 cursor-default">
+                <h1 className="md:text-8xl lg:text-9xl leading-[0.9] text-6xl font-black tracking-tighter mb-8 cursor-default text-neutral-950 dark:text-white dark:mix-blend-difference">
                     {words.map((word, wordIndex) => (
                         <span
                             key={wordIndex}
                             className="inline-block mr-4 last:mr-0"
                         >
                             {word.split("").map((letter, letterIndex) => (
-                                <motion.span
+                                <span
                                     key={`${wordIndex}-${letterIndex}`}
-                                    initial={{ y: 100, opacity: 0 }}
-                                    animate={{ y: 0, opacity: 1 }}
-                                    transition={{
-                                        delay:
-                                            wordIndex * 0.1 +
-                                            letterIndex * 0.03,
-                                        type: "spring",
-                                        stiffness: 150,
-                                        damping: 25,
-                                    }}
-                                    className="inline-block text-transparent bg-clip-text 
-                                    bg-gradient-to-r from-neutral-900 to-neutral-700/80 
-                                    dark:from-white dark:to-white/80"
+                                    className="inline-block"
                                 >
                                     {letter}
-                                </motion.span>
+                                </span>
                             ))}
                         </span>
                     ))}
@@ -83,22 +74,22 @@ export default function HeroSection() {
                 {/* Description */}
                 <motion.p
                     initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                    className="md:text-xl leading-relaxed text-lg font-light dark:text-neutral-400 text-neutral-600 max-w-2xl mx-auto mb-12"
+                    animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                    transition={{ duration: 0.8, delay: 0.3 }}
+                    className="md:text-xl leading-relaxed text-lg font-light text-neutral-600 dark:text-white max-w-2xl mx-auto mb-12 dark:mix-blend-difference"
                 >
                     At VRTX, we design{' '}
-                    <span className="dark:text-white text-neutral-900 font-medium">high-performance websites</span> and{' '}
-                    <span className="dark:text-white text-neutral-900 font-medium">AI agents</span> that automate, convert, and
+                    <span className="font-bold text-neutral-900 dark:text-white">high-performance websites</span> and{' '}
+                    <span className="font-bold text-neutral-900 dark:text-white">AI agents</span> that automate, convert, and
                     scale modern businesses.
                 </motion.p>
 
                 {/* CTA Buttons */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.3 }}
-                    className="flex flex-col sm:flex-row gap-4 items-center justify-center"
+                    animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                    transition={{ duration: 0.8, delay: 0.4 }}
+                    className="flex flex-col sm:flex-row gap-4 items-center justify-center pointer-events-auto"
                 >
                     <Link href="#contact" passHref>
                         <Button
@@ -119,7 +110,7 @@ export default function HeroSection() {
 
                     <Link
                         href="#services-highlight"
-                        className="group inline-flex items-center justify-center dark:text-neutral-400 text-neutral-600 dark:hover:text-white hover:text-neutral-900 text-sm font-medium transition-colors duration-300 px-6 py-4"
+                        className="group inline-flex items-center justify-center text-neutral-600 dark:text-white dark:mix-blend-difference hover:text-neutral-900 dark:hover:text-white/80 text-sm font-medium transition-colors duration-300 px-6 py-4"
                     >
                         <span>Explore Services</span>
                         <ArrowDown className="ml-2 w-4 h-4 transition-transform group-hover:translate-y-1" />
@@ -128,15 +119,15 @@ export default function HeroSection() {
             </div>
 
             {/* Ticker */}
-            <div className="overflow-hidden dark:bg-black/0 bg-white/0 w-full dark:border-white/5 border-black/5 border-t py-4 absolute bottom-0 backdrop-blur-sm z-20">
+            <div className="overflow-hidden bg-neutral-100/50 dark:bg-white/5 w-full border-t border-neutral-200 dark:border-white/10 py-4 absolute bottom-0 backdrop-blur-sm z-20 dark:mix-blend-difference pointer-events-none">
                 <div className="flex whitespace-nowrap gap-16 animate-marquee">
                     {/* Double the items for seamless loop */}
                     {[...tickerItems, ...tickerItems].map((item, idx) => (
                         <span
                             key={idx}
                             className={`text-xs font-medium uppercase tracking-widest ${item.highlight
-                                ? 'dark:text-white text-black font-bold'
-                                : 'dark:text-neutral-500 text-neutral-400'
+                                ? 'text-neutral-900 dark:text-white font-bold'
+                                : 'text-neutral-400'
                                 }`}
                         >
                             {item.text}

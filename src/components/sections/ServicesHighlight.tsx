@@ -26,63 +26,78 @@ export default function ServicesHighlight() {
     return (
         <section
             id="services-highlight"
-            className="py-24 md:py-32 dark:bg-black bg-white dark:border-white/10 border-gray-100 border-b overflow-hidden transition-colors duration-300"
+            className="py-32 bg-white dark:bg-black text-neutral-900 dark:text-white relative overflow-hidden transition-colors duration-500"
         >
-            <div className="max-w-7xl mx-auto px-6 mb-24">
+
+            <div className="max-w-[90%] mx-auto relative z-10">
                 <motion.div
                     initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
-                    className="max-w-5xl"
+                    className="mb-16 px-4"
                 >
-                    <h2 className="block text-5xl sm:text-6xl md:text-8xl font-black dark:text-white text-gray-900 leading-[0.9] tracking-tighter uppercase mb-6">
-                        Ready to build?
-                        <br />
-                        Let&apos;s get to work.
+                    <h2 className="text-sm font-mono uppercase tracking-[0.2em] text-neutral-500 mb-4">
+                        Our Expertise
                     </h2>
-                    <p className="text-xl font-light dark:text-gray-400 text-gray-500 leading-relaxed max-w-2xl mt-8">
-                        We bridge the gap between{' '}
-                        <span className="dark:text-white text-gray-900 font-medium">human creativity</span> and{' '}
-                        <span className="dark:text-white text-gray-900 font-medium">machine intelligence</span>.
+                    <p className="text-3xl md:text-4xl font-light text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-3xl">
+                        Precision engineering for the <span className="text-black dark:text-white">autonomous age</span>.
                     </p>
                 </motion.div>
-            </div>
 
-            {/* Service Cards Grid */}
-            <div className="w-full grid grid-cols-1 md:grid-cols-2 min-h-[600px] border-t dark:border-white/10 border-gray-100">
-                {services.map((service, idx) => (
-                    <motion.div
-                        key={service.title}
-                        initial={{ opacity: 0, y: 40 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8, delay: idx * 0.1 }}
-                        className={`group relative ${service.borderPosition} dark:border-white/10 border-gray-100 p-12 lg:p-24 flex flex-col justify-between cursor-pointer dark:hover:bg-white/5 hover:bg-black/5 transition-colors`}
-                    >
-                        <div className="relative z-10 transition-colors duration-300">
-                            <span
-                                className={`inline-block px-4 py-2 rounded-full liquid-glass-button text-xs font-mono uppercase tracking-wider mb-6 transition-all`}
-                            >
-                                {service.badge}
-                            </span>
-                            <h3 className="text-5xl lg:text-6xl font-medium dark:text-white text-gray-900 tracking-tight mb-4 group-hover:translate-x-2 transition-transform duration-500 whitespace-pre-line">
-                                {service.title}
-                            </h3>
-                        </div>
-                        <div className="relative z-10">
-                            <p className="text-xl dark:text-gray-400 text-gray-500 font-light max-w-sm dark:group-hover:text-white group-hover:text-gray-900 transition-colors">
-                                {service.description}
-                            </p>
-                            <div
-                                className={`mt-8 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide dark:text-white text-black opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100`}
-                            >
-                                {service.cta}
-                                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                <div className="flex flex-col">
+                    {services.map((service, idx) => (
+                        <motion.div
+                            key={service.title}
+                            initial={{ opacity: 0, y: 40 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8, delay: idx * 0.1 }}
+                            className="group relative border-t border-neutral-200 dark:border-white/10 py-16 px-6 flex flex-col md:flex-row gap-8 md:items-start justify-between transition-all duration-500 hover:border-neutral-300 dark:hover:border-white/20"
+                        >
+                            {/* LIQUID GLASS HOVER LAYER */}
+                            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                                {/* Soft Radial Shine - Adapted for Light/Dark */}
+                                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.03),transparent_70%)] dark:bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.06),transparent_70%)] blur-xl" />
+                                {/* Glass Shimmer */}
+                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-black/5 dark:via-white/5 to-transparent -translate-x-full group-hover:animate-shimmer" />
                             </div>
-                        </div>
-                    </motion.div>
-                ))}
+
+                            <div className="md:w-1/2 relative z-10">
+                                <div className="mb-6 overflow-hidden flex items-center gap-3">
+                                    <span className="text-xs font-mono text-neutral-500 uppercase tracking-widest">
+                                        0{idx + 1}
+                                    </span>
+                                    {/* Refined Liquid Badge */}
+                                    <span className="px-3 py-1 rounded-full bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/10 text-[10px] font-bold uppercase tracking-wider text-neutral-600 dark:text-white/70 backdrop-blur-md group-hover:bg-black/10 dark:group-hover:bg-white/10 group-hover:border-black/10 dark:group-hover:border-white/20 transition-all duration-300">
+                                        {service.badge}
+                                    </span>
+                                </div>
+                                <h3 className="text-6xl md:text-7xl lg:text-8xl font-medium tracking-tighter text-neutral-400 dark:text-neutral-500 group-hover:text-black dark:group-hover:text-white transition-colors duration-500 leading-[0.9] whitespace-pre-line group-hover:translate-x-2 transition-transform ease-out drop-shadow-sm dark:drop-shadow-2xl">
+                                    {service.title}
+                                </h3>
+                            </div>
+
+                            <div className="md:w-1/3 flex flex-col justify-between pt-4 relative z-10">
+                                <p className="text-lg text-neutral-500 group-hover:text-neutral-700 dark:group-hover:text-neutral-300 transition-colors duration-500 leading-relaxed max-w-sm">
+                                    {service.description}
+                                </p>
+
+                                <div className="mt-12 flex items-center gap-4 group/btn cursor-pointer">
+                                    <span className="text-sm font-bold uppercase tracking-widest text-neutral-900 dark:text-white group-hover:text-black dark:group-hover:text-white transition-colors duration-300">
+                                        {service.cta}
+                                    </span>
+                                    {/* Liquid Button Circle */}
+                                    <div className="w-12 h-12 rounded-full border border-neutral-200 dark:border-white/10 flex items-center justify-center group-hover:border-black/20 dark:group-hover:border-white/30 group-hover:bg-black/5 dark:group-hover:bg-white/10 group-hover:backdrop-blur-md group-hover:shadow-[0_0_20px_rgba(0,0,0,0.05)] dark:group-hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-all duration-500">
+                                        <ArrowRight className="w-5 h-5 text-neutral-400 dark:text-white/50 group-hover:text-black dark:group-hover:text-white -rotate-45 group-hover:rotate-0 transition-transform duration-500" />
+                                    </div>
+                                </div>
+                            </div>
+                        </motion.div>
+                    ))}
+                    {/* Bottom border */}
+                    <div className="border-t border-neutral-200 dark:border-white/10" />
+                </div>
             </div>
         </section>
     );

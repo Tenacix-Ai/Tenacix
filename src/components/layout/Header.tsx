@@ -20,9 +20,11 @@ export default function Header() {
             <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between relative">
                 {/* Brand */}
                 <Link href="#home" className="flex items-center gap-2 group z-20">
-                    <span className="font-bold text-xl tracking-tight dark:text-white text-gray-900 uppercase font-sans">
-                        VRTX
-                    </span>
+                    <div className="flex items-center gap-1">
+                        <span className="font-bold text-2xl tracking-tighter dark:text-white text-black font-sans">
+                            VRTX
+                        </span>
+                    </div>
                 </Link>
 
                 {/* Nav (Desktop) - Centered */}
