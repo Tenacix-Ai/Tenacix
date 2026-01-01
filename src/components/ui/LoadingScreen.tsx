@@ -105,7 +105,7 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
             style={{ clipPath: 'inset(0 0 0 0)' }}
         >
             <div ref={logoRef} className="preloader__logo">
-                VRTXZ
+                TENACIX
             </div>
             <div className="preloader__progress">
                 <div ref={progressBarRef} className="preloader__progress-bar" />

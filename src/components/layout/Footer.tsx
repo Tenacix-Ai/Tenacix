@@ -38,7 +38,7 @@ export default function Footer() {
                             href="#home"
                             className="text-3xl font-bold tracking-tight dark:text-white text-black inline-block mb-4"
                         >
-                            VRTXZ
+                            TENACIX
                         </Link>
                         <p className="dark:text-zinc-400 text-zinc-600 text-sm leading-relaxed">
                             Crafting digital experiences that push boundaries. AI-powered solutions for modern
@@ -98,7 +98,7 @@ export default function Footer() {
 
                 {/* Bottom bar */}
                 <div className="pt-8 border-t dark:border-white/10 border-black/5 flex flex-col md:flex-row justify-between items-center gap-4">
-                    <p className="dark:text-zinc-500 text-zinc-400 text-sm">© 2025 VRTXZ. All rights reserved.</p>
+                    <p className="dark:text-zinc-500 text-zinc-400 text-sm">© 2025 TENACIX. All rights reserved.</p>
                     <p className="dark:text-zinc-500 text-zinc-400 text-sm flex items-center gap-2">
                         Made with <span className="dark:text-white text-black">♥</span> in India
                     </p>

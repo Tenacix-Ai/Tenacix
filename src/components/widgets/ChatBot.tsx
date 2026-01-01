@@ -1,49 +1,52 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { MessageCircle, X, Send } from 'lucide-react';
+import { MessageCircle, X, Send, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface Message {
     id: number;
     text: string;
     isUser: boolean;
+    timestamp: Date;
 }
 
 const responses: Record<string, string> = {
     services:
-        'We offer three main services:\n\n🎨 **Digital Product** - Scalable design systems & high-fidelity interfaces\n\n✨ **Brand Identity** - Visual narratives that make your brand inevitable\n\n🤖 **AI Agents** - Autonomous workflows that scale your operations 24/7',
+        'We offer three core services:\n\n• **Web Development** - High-performance, scalable websites\n• **Brand Identity** - Visual systems that define your presence\n• **AI Agents** - Autonomous workflows for 24/7 operations',
     pricing:
-        'Our pricing depends on project scope. For web development, projects typically start at $5,000. For AI agents, we offer both fixed-price and retainer models. Book a call to discuss your specific needs!',
+        'Pricing varies by scope. Web projects start at $5,000, with AI solutions on fixed-price or retainer models. Let\'s discuss your specific needs.',
     contact:
-        'You can reach us at vrtxbuisness@gmail.com or click the "Book a Call" button on our website!',
-    ai: 'We build custom AI agents that automate complex workflows, handle decision-making, and scale your operations around the clock. They can be integrated with your existing tools and processes.',
+        'Reach us at vrtxbuisness@gmail.com or use the "Book a Call" button above.',
+    ai: 'We build AI agents that automate workflows, handle decisions, and integrate with your existing systems seamlessly.',
     website:
-        'We design high-performance websites with premium animations, modern design patterns, and optimized performance. Every site we build is crafted to convert visitors into customers.',
+        'We craft high-performance websites with premium animations and optimized conversions.',
     appointment:
-        'Great! To schedule a call with our team, click the "Book a Call" button in the hero section or send us an email at vrtxbuisness@gmail.com. We\'ll get back to you within 24 hours!',
+        'Click "Book a Call" in the header or email vrtxbuisness@gmail.com. We respond within 24 hours.',
     schedule:
-        'To schedule a consultation, you can either click the "Book a Call" button on our website or email us at vrtxbuisness@gmail.com. We\'d love to discuss your project!',
+        'Use the "Book a Call" button or email us at vrtxbuisness@gmail.com to schedule a consultation.',
     book:
-        'Ready to book a call? Click the "Book a Call" button in the header or hero section, or reach out to us at vrtxbuisness@gmail.com!',
+        'Ready to start? Click "Book a Call" or email vrtxbuisness@gmail.com.',
     call:
-        'Want to schedule a call? Use the "Book a Call" button on our website or email us at vrtxbuisness@gmail.com. We respond within 24 hours!',
-    hello: 'Hello! Welcome to VRTXZ. How can I assist you today?',
-    hey: 'Hey there! 👋 What would you like to know about VRTXZ?',
+        'Schedule a call via the "Book a Call" button or email vrtxbuisness@gmail.com.',
+    hello: 'Hello! How can I assist you today?',
+    hey: 'Hey! What would you like to know about TENACIX?',
     default:
-        'Thanks for your message! I can help you with:\n\n• Our services (web, branding, AI)\n• Pricing information\n• Scheduling a call\n• How to get started\n\nOr feel free to book a call with our team!',
+        'I can help with:\n\n• Services & capabilities\n• Pricing information\n• Scheduling a consultation\n\nWhat interests you?',
 };
 
 function getResponse(msg: string): string {
     const lower = msg.toLowerCase();
-    // Check each keyword - longer keywords first to avoid partial matches
     const keywords = Object.keys(responses).filter(k => k !== 'default').sort((a, b) => b.length - a.length);
     for (const key of keywords) {
-        // Use word boundary check to avoid partial matches like "hi" in "this"
         const regex = new RegExp(`\\b${key}\\b`, 'i');
         if (regex.test(lower)) return responses[key];
     }
     return responses.default;
+}
+
+function formatTime(date: Date): string {
+    return date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
 }
 
 export default function ChatBot() {
@@ -51,8 +54,9 @@ export default function ChatBot() {
     const [messages, setMessages] = useState<Message[]>([
         {
             id: 0,
-            text: "Hi! 👋 I'm the VRTXZ AI assistant. How can I help you today? I can tell you about our services, pricing, or help you get started!",
+            text: "Welcome to TENACIX. How can I help you today?",
             isUser: false,
+            timestamp: new Date(),
         },
     ]);
     const [input, setInput] = useState('');
@@ -72,6 +76,7 @@ export default function ChatBot() {
             id: prev.length,
             text: userText,
             isUser: true,
+            timestamp: new Date(),
         }]);
         setInput('');
         setIsTyping(true);
@@ -82,99 +87,148 @@ export default function ChatBot() {
                 id: prev.length,
                 text: getResponse(userText),
                 isUser: false,
+                timestamp: new Date(),
             }]);
-        }, 1000 + Math.random() * 500);
+        }, 800 + Math.random() * 400);
     };
 
     return (
         <div className="fixed bottom-6 right-6 z-50">
-            {/* Chat Toggle Button */}
+            {/* Floating Action Button */}
             <motion.button
-                whileHover={{ scale: 1.1 }}
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsOpen(!isOpen)}
-                className="w-14 h-14 bg-zinc-900 dark:bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center text-white dark:text-black border border-white/10 dark:border-black/10"
+                className={`w-14 h-14 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 ${isOpen
+                    ? 'bg-neutral-800 dark:bg-neutral-200'
+                    : 'bg-neutral-900 dark:bg-white'
+                    }`}
             >
-                {isOpen ? <X size={24} /> : <MessageCircle size={24} />}
+                <AnimatePresence mode="wait">
+                    {isOpen ? (
+                        <motion.div
+                            key="close"
+                            initial={{ rotate: -90, opacity: 0 }}
+                            animate={{ rotate: 0, opacity: 1 }}
+                            exit={{ rotate: 90, opacity: 0 }}
+                            transition={{ duration: 0.15 }}
+                        >
+                            <X size={22} className="text-white dark:text-black" />
+                        </motion.div>
+                    ) : (
+                        <motion.div
+                            key="chat"
+                            initial={{ scale: 0, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0, opacity: 0 }}
+                            transition={{ duration: 0.15 }}
+                        >
+                            <MessageCircle size={22} className="text-white dark:text-black" />
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </motion.button>
 
             {/* Chat Window */}
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
-                        initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 20, scale: 0.95 }}
-                        transition={{ duration: 0.2 }}
-                        className="absolute bottom-20 right-0 w-80 sm:w-96 h-[500px] bg-white dark:bg-neutral-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-white/10 flex flex-col overflow-hidden"
+                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                        transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
+                        className="absolute bottom-20 right-0 w-[340px] sm:w-[380px] bg-white dark:bg-neutral-900 rounded-2xl shadow-2xl border border-neutral-200 dark:border-neutral-800 flex flex-col overflow-hidden"
+                        style={{ height: '520px' }}
                     >
                         {/* Header */}
-                        <div className="bg-zinc-900 dark:bg-white p-4 text-white dark:text-black border-b border-white/5">
-                            <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 bg-white/10 dark:bg-black/10 rounded-full flex items-center justify-center font-bold text-sm">
-                                    V
-                                </div>
-                                <div>
-                                    <h3 className="font-semibold">VRTXZ Assistant</h3>
-                                    <p className="text-xs opacity-70">Always here to help</p>
+                        <div className="px-5 py-4 border-b border-neutral-100 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900">
+                            <div className="flex items-center justify-between">
+                                <div className="flex items-center gap-3">
+                                    <div className="w-9 h-9 bg-neutral-900 dark:bg-white rounded-lg flex items-center justify-center">
+                                        <Sparkles size={16} className="text-white dark:text-black" />
+                                    </div>
+                                    <div>
+                                        <h3 className="font-semibold text-sm text-neutral-900 dark:text-white">TENACIX</h3>
+                                        <div className="flex items-center gap-1.5">
+                                            <span className="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
+                                            <span className="text-xs text-neutral-500">Online</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
                         {/* Messages */}
-                        <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50 dark:bg-zinc-900/50">
+                        <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-white dark:bg-neutral-950">
                             {messages.map((message) => (
-                                <div
+                                <motion.div
                                     key={message.id}
-                                    className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}
+                                    initial={{ opacity: 0, y: 8 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.2 }}
+                                    className={`flex flex-col ${message.isUser ? 'items-end' : 'items-start'}`}
                                 >
                                     <div
-                                        className={`p-3 rounded-2xl max-w-[85%] ${message.isUser
-                                            ? 'bg-zinc-900 dark:bg-white text-white dark:text-black rounded-tr-sm'
-                                            : 'bg-white dark:bg-zinc-800 shadow-sm border border-gray-100 dark:border-white/5 rounded-tl-sm'
+                                        className={`px-4 py-2.5 rounded-2xl max-w-[85%] ${message.isUser
+                                            ? 'bg-neutral-900 dark:bg-white text-white dark:text-black rounded-br-md'
+                                            : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 rounded-bl-md'
                                             }`}
                                     >
                                         <p
-                                            className={`text-sm ${message.isUser ? '' : 'text-gray-700 dark:text-gray-300'}`}
+                                            className="text-[13px] leading-relaxed"
                                             dangerouslySetInnerHTML={{
-                                                __html: message.text.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'),
+                                                __html: message.text
+                                                    .replace(/\n/g, '<br>')
+                                                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'),
                                             }}
                                         />
                                     </div>
-                                </div>
+                                    <span className="text-[10px] text-neutral-400 mt-1 px-1">
+                                        {formatTime(message.timestamp)}
+                                    </span>
+                                </motion.div>
                             ))}
+
                             {isTyping && (
-                                <div className="flex justify-start">
-                                    <div className="bg-white dark:bg-zinc-800 p-3 rounded-2xl rounded-tl-sm shadow-sm border border-gray-100 dark:border-white/5">
+                                <motion.div
+                                    initial={{ opacity: 0, y: 8 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    className="flex items-start"
+                                >
+                                    <div className="bg-neutral-100 dark:bg-neutral-800 px-4 py-3 rounded-2xl rounded-bl-md">
                                         <div className="flex gap-1">
-                                            <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
-                                            <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:0.1s]" />
-                                            <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:0.2s]" />
+                                            <span className="w-1.5 h-1.5 bg-neutral-400 rounded-full animate-bounce" />
+                                            <span className="w-1.5 h-1.5 bg-neutral-400 rounded-full animate-bounce [animation-delay:0.15s]" />
+                                            <span className="w-1.5 h-1.5 bg-neutral-400 rounded-full animate-bounce [animation-delay:0.3s]" />
                                         </div>
                                     </div>
-                                </div>
+                                </motion.div>
                             )}
                             <div ref={messagesEndRef} />
                         </div>
 
                         {/* Input */}
-                        <div className="p-4 border-t border-gray-200 dark:border-white/10 bg-white dark:bg-neutral-900">
+                        <div className="p-3 border-t border-neutral-100 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900">
                             <div className="flex gap-2">
                                 <input
                                     type="text"
                                     value={input}
                                     onChange={(e) => setInput(e.target.value)}
                                     onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-                                    placeholder="Type a message..."
-                                    className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-800 rounded-full text-sm focus:outline-none focus:border-zinc-500 focus:ring-2 focus:ring-zinc-500/20 dark:bg-zinc-900 dark:text-white transition-all"
+                                    placeholder="Type your message..."
+                                    className="flex-1 px-4 py-2.5 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl text-sm text-neutral-900 dark:text-white placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-900 dark:focus:ring-white/20 transition-all"
                                 />
                                 <button
                                     onClick={handleSend}
-                                    className="w-10 h-10 bg-zinc-900 dark:bg-white hover:bg-black dark:hover:bg-zinc-200 rounded-full flex items-center justify-center text-white dark:text-black transition-colors"
+                                    disabled={!input.trim()}
+                                    className="w-10 h-10 bg-neutral-900 dark:bg-white hover:bg-neutral-800 dark:hover:bg-neutral-100 disabled:opacity-40 disabled:cursor-not-allowed rounded-xl flex items-center justify-center transition-all"
                                 >
-                                    <Send size={18} />
+                                    <Send size={16} className="text-white dark:text-black" />
                                 </button>
                             </div>
+                            <p className="text-[10px] text-neutral-400 text-center mt-2">
+                                Powered by TENACIX
+                            </p>
                         </div>
                     </motion.div>
                 )}

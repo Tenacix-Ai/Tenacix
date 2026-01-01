@@ -22,7 +22,7 @@ export default function Header() {
                 <Link href="#home" className="flex items-center gap-2 group z-20">
                     <div className="flex items-center gap-1">
                         <span className="font-bold text-2xl tracking-tighter dark:text-white text-black font-sans">
-                            VRTXZ
+                            TENACIX
                         </span>
                     </div>
                 </Link>
