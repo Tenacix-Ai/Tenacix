@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "VRTX | AI Agents & High-Performance Websites",
-  description: "VRTX is your strategic digital partner. We design high-performance websites and AI agents that automate, convert, and scale modern businesses.",
+  title: "VRTXZ | AI Agents & High-Performance Websites",
+  description: "VRTXZ is your strategic digital partner. We design high-performance websites and AI agents that automate, convert, and scale modern businesses.",
 };
 
 export default function RootLayout({

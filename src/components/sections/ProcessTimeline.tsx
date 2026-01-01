@@ -31,7 +31,7 @@ const steps = [
 
 export default function ProcessTimeline() {
     return (
-        <section className="py-24 md:py-32 dark:bg-black bg-white relative overflow-hidden border-b dark:border-white/10 border-gray-100 transition-colors duration-300">
+        <section className="py-24 md:py-32 dark:bg-neutral-900 bg-white relative overflow-hidden border-b dark:border-white/10 border-gray-100 transition-colors duration-300">
             {/* Timeline line */}
             <div className="absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2 hidden md:block bg-gradient-to-b from-transparent via-zinc-500/20 to-transparent" />
 
@@ -71,7 +71,7 @@ export default function ProcessTimeline() {
                                 </div>
                                 {/* Circle */}
                                 <div
-                                    className={`hidden md:flex absolute left-1/2 top-0 -translate-x-1/2 w-10 h-10 rounded-full border dark:border-white/20 border-black/10 dark:bg-black bg-white items-center justify-center z-10 shadow-lg`}
+                                    className={`hidden md:flex absolute left-1/2 top-0 -translate-x-1/2 w-10 h-10 rounded-full border dark:border-white/20 border-black/10 dark:bg-neutral-900 bg-white items-center justify-center z-10 shadow-lg`}
                                 >
                                     <span className={`text-sm font-semibold dark:text-white text-black`}>{step.number}</span>
                                 </div>
@@ -90,7 +90,7 @@ export default function ProcessTimeline() {
                                 </div>
                                 {/* Circle */}
                                 <div
-                                    className={`hidden md:flex absolute left-1/2 top-0 -translate-x-1/2 w-10 h-10 rounded-full border dark:border-white/20 border-black/10 dark:bg-black bg-white items-center justify-center z-10 shadow-lg`}
+                                    className={`hidden md:flex absolute left-1/2 top-0 -translate-x-1/2 w-10 h-10 rounded-full border dark:border-white/20 border-black/10 dark:bg-neutral-900 bg-white items-center justify-center z-10 shadow-lg`}
                                 >
                                     <span className={`text-sm font-semibold dark:text-white text-black`}>{step.number}</span>
                                 </div>

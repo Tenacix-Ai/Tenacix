@@ -22,7 +22,7 @@ interface HeroSectionProps {
 }
 
 export default function HeroSection({ isLoaded = false }: HeroSectionProps) {
-    const title = "VRTX";
+    const title = "VRTXZ";
     const words = title.split(" ");
 
     return (
@@ -78,7 +78,7 @@ export default function HeroSection({ isLoaded = false }: HeroSectionProps) {
                     transition={{ duration: 0.8, delay: 0.3 }}
                     className="md:text-xl leading-relaxed text-lg font-light text-neutral-600 dark:text-white max-w-2xl mx-auto mb-12 dark:mix-blend-difference"
                 >
-                    At VRTX, we design{' '}
+                    At VRTXZ, we design{' '}
                     <span className="font-bold text-neutral-900 dark:text-white">high-performance websites</span> and{' '}
                     <span className="font-bold text-neutral-900 dark:text-white">AI agents</span> that automate, convert, and
                     scale modern businesses.

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { MessageCircle, X, Send, Bot } from 'lucide-react';
+import { MessageCircle, X, Send } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface Message {
@@ -11,8 +11,6 @@ interface Message {
 }
 
 const responses: Record<string, string> = {
-    hello: 'Hello! Welcome to VRTX. How can I assist you today?',
-    hi: 'Hi there! 👋 What would you like to know about VRTX?',
     services:
         'We offer three main services:\n\n🎨 **Digital Product** - Scalable design systems & high-fidelity interfaces\n\n✨ **Brand Identity** - Visual narratives that make your brand inevitable\n\n🤖 **AI Agents** - Autonomous workflows that scale your operations 24/7',
     pricing:
@@ -22,14 +20,28 @@ const responses: Record<string, string> = {
     ai: 'We build custom AI agents that automate complex workflows, handle decision-making, and scale your operations around the clock. They can be integrated with your existing tools and processes.',
     website:
         'We design high-performance websites with premium animations, modern design patterns, and optimized performance. Every site we build is crafted to convert visitors into customers.',
+    appointment:
+        'Great! To schedule a call with our team, click the "Book a Call" button in the hero section or send us an email at vrtxbuisness@gmail.com. We\'ll get back to you within 24 hours!',
+    schedule:
+        'To schedule a consultation, you can either click the "Book a Call" button on our website or email us at vrtxbuisness@gmail.com. We\'d love to discuss your project!',
+    book:
+        'Ready to book a call? Click the "Book a Call" button in the header or hero section, or reach out to us at vrtxbuisness@gmail.com!',
+    call:
+        'Want to schedule a call? Use the "Book a Call" button on our website or email us at vrtxbuisness@gmail.com. We respond within 24 hours!',
+    hello: 'Hello! Welcome to VRTXZ. How can I assist you today?',
+    hey: 'Hey there! 👋 What would you like to know about VRTXZ?',
     default:
-        'Thanks for your message! I can help you with:\n\n• Our services (web, branding, AI)\n• Pricing information\n• How to get started\n\nOr feel free to book a call with our team!',
+        'Thanks for your message! I can help you with:\n\n• Our services (web, branding, AI)\n• Pricing information\n• Scheduling a call\n• How to get started\n\nOr feel free to book a call with our team!',
 };
 
 function getResponse(msg: string): string {
     const lower = msg.toLowerCase();
-    for (const [key, value] of Object.entries(responses)) {
-        if (key !== 'default' && lower.includes(key)) return value;
+    // Check each keyword - longer keywords first to avoid partial matches
+    const keywords = Object.keys(responses).filter(k => k !== 'default').sort((a, b) => b.length - a.length);
+    for (const key of keywords) {
+        // Use word boundary check to avoid partial matches like "hi" in "this"
+        const regex = new RegExp(`\\b${key}\\b`, 'i');
+        if (regex.test(lower)) return responses[key];
     }
     return responses.default;
 }
@@ -39,7 +51,7 @@ export default function ChatBot() {
     const [messages, setMessages] = useState<Message[]>([
         {
             id: 0,
-            text: "Hi! 👋 I'm the VRTX AI assistant. How can I help you today? I can tell you about our services, pricing, or help you get started!",
+            text: "Hi! 👋 I'm the VRTXZ AI assistant. How can I help you today? I can tell you about our services, pricing, or help you get started!",
             isUser: false,
         },
     ]);
@@ -54,24 +66,23 @@ export default function ChatBot() {
     const handleSend = () => {
         if (!input.trim()) return;
 
-        const userMessage: Message = {
-            id: messages.length,
-            text: input.trim(),
-            isUser: true,
-        };
+        const userText = input.trim();
 
-        setMessages((prev) => [...prev, userMessage]);
+        setMessages((prev) => [...prev, {
+            id: prev.length,
+            text: userText,
+            isUser: true,
+        }]);
         setInput('');
         setIsTyping(true);
 
         setTimeout(() => {
-            const botMessage: Message = {
-                id: messages.length + 1,
-                text: getResponse(input),
-                isUser: false,
-            };
             setIsTyping(false);
-            setMessages((prev) => [...prev, botMessage]);
+            setMessages((prev) => [...prev, {
+                id: prev.length,
+                text: getResponse(userText),
+                isUser: false,
+            }]);
         }, 1000 + Math.random() * 500);
     };
 
@@ -95,16 +106,16 @@ export default function ChatBot() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 20, scale: 0.95 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute bottom-20 right-0 w-80 sm:w-96 h-[500px] bg-white dark:bg-black rounded-2xl shadow-2xl border border-gray-200 dark:border-white/10 flex flex-col overflow-hidden"
+                        className="absolute bottom-20 right-0 w-80 sm:w-96 h-[500px] bg-white dark:bg-neutral-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-white/10 flex flex-col overflow-hidden"
                     >
                         {/* Header */}
                         <div className="bg-zinc-900 dark:bg-white p-4 text-white dark:text-black border-b border-white/5">
                             <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 bg-white/10 dark:bg-black/10 rounded-full flex items-center justify-center">
-                                    <Bot size={20} />
+                                <div className="w-10 h-10 bg-white/10 dark:bg-black/10 rounded-full flex items-center justify-center font-bold text-sm">
+                                    V
                                 </div>
                                 <div>
-                                    <h3 className="font-semibold">VRTX AI Assistant</h3>
+                                    <h3 className="font-semibold">VRTXZ Assistant</h3>
                                     <p className="text-xs opacity-70">Always here to help</p>
                                 </div>
                             </div>
@@ -115,17 +126,12 @@ export default function ChatBot() {
                             {messages.map((message) => (
                                 <div
                                     key={message.id}
-                                    className={`flex gap-2 ${message.isUser ? 'justify-end' : ''}`}
+                                    className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}
                                 >
-                                    {!message.isUser && (
-                                        <div className="w-8 h-8 bg-black/5 dark:bg-white/10 rounded-full flex-shrink-0 flex items-center justify-center">
-                                            <Bot size={14} className="text-zinc-600 dark:text-zinc-400" />
-                                        </div>
-                                    )}
                                     <div
-                                        className={`p-3 rounded-2xl max-w-[80%] ${message.isUser
-                                            ? 'bg-zinc-900 dark:bg-white text-white dark:text-black rounded-tr-none'
-                                            : 'bg-white dark:bg-zinc-800 shadow-sm border border-gray-100 dark:border-white/5 rounded-tl-none'
+                                        className={`p-3 rounded-2xl max-w-[85%] ${message.isUser
+                                            ? 'bg-zinc-900 dark:bg-white text-white dark:text-black rounded-tr-sm'
+                                            : 'bg-white dark:bg-zinc-800 shadow-sm border border-gray-100 dark:border-white/5 rounded-tl-sm'
                                             }`}
                                     >
                                         <p
@@ -138,11 +144,8 @@ export default function ChatBot() {
                                 </div>
                             ))}
                             {isTyping && (
-                                <div className="flex gap-2">
-                                    <div className="w-8 h-8 bg-black/5 dark:bg-white/10 rounded-full flex-shrink-0 flex items-center justify-center">
-                                        <Bot size={14} className="text-zinc-600 dark:text-zinc-400" />
-                                    </div>
-                                    <div className="bg-white dark:bg-zinc-800 p-3 rounded-2xl rounded-tl-none shadow-sm border border-gray-100 dark:border-white/5">
+                                <div className="flex justify-start">
+                                    <div className="bg-white dark:bg-zinc-800 p-3 rounded-2xl rounded-tl-sm shadow-sm border border-gray-100 dark:border-white/5">
                                         <div className="flex gap-1">
                                             <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
                                             <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:0.1s]" />
@@ -155,7 +158,7 @@ export default function ChatBot() {
                         </div>
 
                         {/* Input */}
-                        <div className="p-4 border-t border-gray-200 dark:border-white/10 bg-white dark:bg-black">
+                        <div className="p-4 border-t border-gray-200 dark:border-white/10 bg-white dark:bg-neutral-900">
                             <div className="flex gap-2">
                                 <input
                                     type="text"

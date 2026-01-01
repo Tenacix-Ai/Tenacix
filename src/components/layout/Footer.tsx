@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { MapPin, Mail, Instagram, Linkedin } from 'lucide-react';
+import { MapPin, Mail, Instagram, Twitter } from 'lucide-react';
 
 const quickLinks = [
     { href: '#home', label: 'Home' },
@@ -17,13 +17,13 @@ const founders = [
 
 const socialLinks = [
     { href: '#', icon: Instagram, hoverColor: 'hover:bg-zinc-800' },
-    { href: '#', icon: Linkedin, hoverColor: 'hover:bg-zinc-800' },
+    { href: '#', icon: Twitter, hoverColor: 'hover:bg-zinc-800' },
     { href: 'mailto:vrtxbuisness@gmail.com', icon: Mail, hoverColor: 'hover:bg-zinc-800' },
 ];
 
 export default function Footer() {
     return (
-        <footer className="dark:bg-black bg-white border-t dark:border-white/10 border-black/5 text-zinc-600 dark:text-zinc-400 py-16 relative overflow-hidden">
+        <footer className="dark:bg-neutral-900 bg-white border-t dark:border-white/10 border-black/5 text-zinc-600 dark:text-zinc-400 py-16 relative overflow-hidden">
             {/* Animated gradient line */}
             <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-zinc-500/20 to-transparent" />
 
@@ -38,7 +38,7 @@ export default function Footer() {
                             href="#home"
                             className="text-3xl font-bold tracking-tight dark:text-white text-black inline-block mb-4"
                         >
-                            VRTX
+                            VRTXZ
                         </Link>
                         <p className="dark:text-zinc-400 text-zinc-600 text-sm leading-relaxed">
                             Crafting digital experiences that push boundaries. AI-powered solutions for modern
@@ -98,7 +98,7 @@ export default function Footer() {
 
                 {/* Bottom bar */}
                 <div className="pt-8 border-t dark:border-white/10 border-black/5 flex flex-col md:flex-row justify-between items-center gap-4">
-                    <p className="dark:text-zinc-500 text-zinc-400 text-sm">© 2025 VRTX. All rights reserved.</p>
+                    <p className="dark:text-zinc-500 text-zinc-400 text-sm">© 2025 VRTXZ. All rights reserved.</p>
                     <p className="dark:text-zinc-500 text-zinc-400 text-sm flex items-center gap-2">
                         Made with <span className="dark:text-white text-black">♥</span> in India
                     </p>

@@ -1,121 +1,118 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import gsap from 'gsap';
 
 interface LoadingScreenProps {
     onLoadingComplete?: () => void;
 }
 
 export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps) {
+    const preloaderRef = useRef<HTMLDivElement>(null);
+    const logoRef = useRef<HTMLDivElement>(null);
+    const progressBarRef = useRef<HTMLDivElement>(null);
+    const counterRef = useRef<HTMLDivElement>(null);
     const [isVisible, setIsVisible] = useState(true);
-    const [progress, setProgress] = useState(0);
-    const [isFadingOut, setIsFadingOut] = useState(false);
-    const letters = ['V', 'R', 'T', 'X'];
 
     useEffect(() => {
+        if (!preloaderRef.current || !logoRef.current || !progressBarRef.current || !counterRef.current) return;
+
+        document.body.classList.add('is-loading');
+        document.documentElement.classList.add('is-loading');
         document.body.style.overflow = 'hidden';
 
-        // Animate progress bar
-        const progressInterval = setInterval(() => {
-            setProgress(prev => {
-                if (prev >= 100) {
-                    clearInterval(progressInterval);
-                    return 100;
-                }
-                return prev + 3;
-            });
-        }, 40);
+        const logo = logoRef.current;
+        const progressBar = progressBarRef.current;
+        const counter = counterRef.current;
+        const preloader = preloaderRef.current;
 
-        // Start fading out - background fades but VRTX stays
-        const fadeTimer = setTimeout(() => {
-            setIsFadingOut(true);
-            onLoadingComplete?.();
-        }, 1800);
+        // Ease function
+        const easeOutExpo = (x: number) => (x === 1 ? 1 : 1 - Math.pow(2, -10 * x));
 
-        // Remove loading screen completely
-        const removeTimer = setTimeout(() => {
-            setIsVisible(false);
-            document.body.style.overflow = '';
-        }, 2800);
+        // Animate logo in
+        gsap.fromTo(logo,
+            { opacity: 0, y: 30 },
+            { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }
+        );
+
+        // Simulate loading progress
+        const duration = 1.5;
+        const startTime = Date.now();
+
+        const updateProgress = () => {
+            const elapsed = (Date.now() - startTime) / 1000;
+            const progress = Math.min(elapsed / duration, 1);
+            const easedProgress = easeOutExpo(progress);
+            const progressValue = Math.round(easedProgress * 100);
+
+            progressBar.style.width = `${progressValue}%`;
+            counter.textContent = `${progressValue}%`;
+
+            if (progress < 1) {
+                requestAnimationFrame(updateProgress);
+            } else {
+                // Loading complete - start hide animation
+                setTimeout(() => {
+                    hidePreloader();
+                }, 300);
+            }
+        };
+
+        const hidePreloader = () => {
+            const tl = gsap.timeline();
+
+            // Scale logo and fade
+            tl.to(logo, {
+                scale: 0.9,
+                opacity: 0,
+                duration: 0.4,
+                ease: 'power2.in'
+            })
+                .to([progressBar.parentElement, counter], {
+                    opacity: 0,
+                    duration: 0.3,
+                    ease: 'power2.in'
+                }, '<')
+                .to(preloader, {
+                    clipPath: 'inset(0 0 100% 0)',
+                    duration: 0.8,
+                    ease: 'power4.inOut',
+                    onComplete: () => {
+                        document.body.classList.remove('is-loading');
+                        document.documentElement.classList.remove('is-loading');
+                        document.body.style.overflow = '';
+                        setIsVisible(false);
+                        onLoadingComplete?.();
+                    }
+                });
+        };
+
+        requestAnimationFrame(updateProgress);
 
         return () => {
-            clearInterval(progressInterval);
-            clearTimeout(fadeTimer);
-            clearTimeout(removeTimer);
+            document.body.classList.remove('is-loading');
+            document.documentElement.classList.remove('is-loading');
             document.body.style.overflow = '';
         };
     }, [onLoadingComplete]);
 
+    if (!isVisible) return null;
+
     return (
-        <AnimatePresence>
-            {isVisible && (
-                <motion.div
-                    className="fixed inset-0 z-[9999]"
-                    initial={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.01 }}
-                >
-                    {/* Black background - this fades away */}
-                    <motion.div
-                        className="absolute inset-0 bg-black dark:bg-neutral-950"
-                        initial={{ opacity: 1 }}
-                        animate={{ opacity: isFadingOut ? 0 : 1 }}
-                        transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                    />
-
-                    {/* Content container - matches hero section layout EXACTLY */}
-                    <div className="relative min-h-[90vh] w-full flex flex-col items-center justify-center pointer-events-none">
-                        <div className="relative z-10 text-center max-w-5xl mx-auto px-6">
-
-                            {/* VRTX Text - exact same styling as hero, fades with background */}
-                            <motion.h1
-                                className="md:text-8xl lg:text-9xl leading-[0.9] text-6xl font-black tracking-tighter mb-8 cursor-default text-white"
-                                initial={{ opacity: 1 }}
-                                animate={{ opacity: isFadingOut ? 0 : 1 }}
-                                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                            >
-                                {letters.map((letter, index) => (
-                                    <motion.span
-                                        key={letter}
-                                        initial={{ y: 80, opacity: 0 }}
-                                        animate={{ y: 0, opacity: 1 }}
-                                        transition={{
-                                            delay: 0.1 + index * 0.03,
-                                            type: 'spring',
-                                            stiffness: 150,
-                                            damping: 25,
-                                        }}
-                                        className="inline-block"
-                                    >
-                                        {letter}
-                                    </motion.span>
-                                ))}
-                            </motion.h1>
-
-                            {/* Loading bar - positioned below VRTX */}
-                            <motion.div
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: isFadingOut ? 0 : 1 }}
-                                transition={{ delay: 0.4, duration: 0.3 }}
-                                className="mx-auto w-32"
-                            >
-                                <div className="h-[2px] w-full bg-neutral-800 rounded-full overflow-hidden">
-                                    <motion.div
-                                        className="h-full bg-white"
-                                        initial={{ width: '0%' }}
-                                        animate={{ width: `${progress}%` }}
-                                        transition={{ duration: 0.05, ease: 'linear' }}
-                                    />
-                                </div>
-                                <p className="mt-3 text-[10px] uppercase tracking-[0.4em] text-neutral-500">
-                                    Loading
-                                </p>
-                            </motion.div>
-                        </div>
-                    </div>
-                </motion.div>
-            )}
-        </AnimatePresence>
+        <div
+            ref={preloaderRef}
+            className="preloader"
+            style={{ clipPath: 'inset(0 0 0 0)' }}
+        >
+            <div ref={logoRef} className="preloader__logo">
+                VRTXZ
+            </div>
+            <div className="preloader__progress">
+                <div ref={progressBarRef} className="preloader__progress-bar" />
+            </div>
+            <div ref={counterRef} className="preloader__counter">
+                0%
+            </div>
+        </div>
     );
 }

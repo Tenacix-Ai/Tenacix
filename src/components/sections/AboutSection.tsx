@@ -28,7 +28,7 @@ export default function AboutSection() {
     return (
         <section
             id="about"
-            className="dark:bg-black bg-white py-24 md:py-32 border-b dark:border-white/10 border-gray-100 relative overflow-hidden"
+            className="dark:bg-neutral-900 bg-white py-24 md:py-32 border-b dark:border-white/10 border-gray-100 relative overflow-hidden"
         >
             {/* Decorative Glass Elements */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-b from-zinc-200/20 to-transparent dark:from-zinc-800/20 blur-[100px] rounded-full mix-blend-overlay pointer-events-none" />

@@ -16,13 +16,13 @@ export default function Header() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     return (
-        <header className="fixed top-0 w-full z-50 backdrop-blur-md border-b dark:bg-black/80 bg-white/80 dark:border-gray-800/50 border-gray-200/50 transition-colors duration-300">
+        <header className="fixed top-0 w-full z-50 backdrop-blur-md border-b dark:bg-neutral-900/80 bg-white/80 dark:border-gray-800/50 border-gray-200/50 transition-colors duration-300">
             <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between relative">
                 {/* Brand */}
                 <Link href="#home" className="flex items-center gap-2 group z-20">
                     <div className="flex items-center gap-1">
                         <span className="font-bold text-2xl tracking-tighter dark:text-white text-black font-sans">
-                            VRTX
+                            VRTXZ
                         </span>
                     </div>
                 </Link>
@@ -71,7 +71,7 @@ export default function Header() {
 
             {/* Mobile Menu */}
             {mobileMenuOpen && (
-                <div className="md:hidden absolute top-16 left-0 w-full dark:bg-black/95 bg-white/95 backdrop-blur-lg border-b dark:border-gray-800 border-gray-200">
+                <div className="md:hidden absolute top-16 left-0 w-full dark:bg-neutral-900/95 bg-white/95 backdrop-blur-lg border-b dark:border-gray-800 border-gray-200">
                     <nav className="flex flex-col p-6 gap-4">
                         {navLinks.map((link) => (
                             <Link

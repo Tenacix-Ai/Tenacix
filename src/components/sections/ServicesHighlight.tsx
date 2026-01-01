@@ -26,7 +26,7 @@ export default function ServicesHighlight() {
     return (
         <section
             id="services-highlight"
-            className="py-32 bg-white dark:bg-black text-neutral-900 dark:text-white relative overflow-hidden transition-colors duration-500"
+            className="py-32 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white relative overflow-hidden transition-colors duration-500"
         >
 
             <div className="max-w-[90%] mx-auto relative z-10">

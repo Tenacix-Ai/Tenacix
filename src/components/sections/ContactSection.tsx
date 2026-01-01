@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { MapPin, Mail, Instagram, Linkedin, ArrowRight } from 'lucide-react';
+import { MapPin, Mail, Instagram, Twitter, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 const contactCards = [
@@ -30,9 +30,9 @@ const contactCards = [
         labelColor: 'dark:text-zinc-400 text-zinc-600',
     },
     {
-        icon: Linkedin,
-        label: 'LinkedIn',
-        value: 'VRTX Agency',
+        icon: Twitter,
+        label: 'Twitter',
+        value: '@vrtx_agency',
         href: '#',
         gradient: 'dark:bg-white/10 bg-black/5',
         labelColor: 'dark:text-zinc-400 text-zinc-600',
@@ -43,7 +43,7 @@ export default function ContactSection() {
     return (
         <section
             id="contact"
-            className="dark:bg-black bg-white pt-32 pb-24 px-6 min-h-[60vh] relative overflow-hidden"
+            className="dark:bg-neutral-900 bg-white pt-32 pb-24 px-6 min-h-[60vh] relative overflow-hidden"
         >
             {/* Background gradient orbs - REMOVED */}
             {/* <div className="absolute top-0 left-1/4 w-96 h-96 bg-white/5 rounded-full blur-3xl pointer-events-none" /> */}
