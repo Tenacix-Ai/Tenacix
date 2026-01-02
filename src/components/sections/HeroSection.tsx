@@ -5,6 +5,8 @@ import { ArrowRight, ArrowDown } from 'lucide-react';
 import Link from 'next/link';
 import { LavaLamp } from '@/components/ui/fluid-blob';
 import { Button } from '@/components/ui/button';
+import { BookingModal } from '@/components/ui/booking-modal';
+import { useState } from 'react';
 
 const tickerItems = [
     { text: 'Strategy', highlight: false },
@@ -25,11 +27,15 @@ export default function HeroSection({ isLoaded = false }: HeroSectionProps) {
     const title = "TENACIX";
     const words = title.split(" ");
 
+    const [isBookingOpen, setIsBookingOpen] = useState(false);
+
     return (
         <section
             id="home"
             className="relative min-h-[90vh] w-full flex flex-col items-center justify-center overflow-hidden bg-white dark:bg-neutral-950 border-b border-black/10 dark:border-white/10"
         >
+            <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
+
             {/* Background Lava Lamp Animation */}
             <div className="absolute inset-0 z-0">
                 <LavaLamp />
@@ -91,22 +97,21 @@ export default function HeroSection({ isLoaded = false }: HeroSectionProps) {
                     transition={{ duration: 0.8, delay: 0.4 }}
                     className="flex flex-col sm:flex-row gap-4 items-center justify-center pointer-events-auto"
                 >
-                    <Link href="#contact" passHref>
-                        <Button
-                            className="rounded-full h-auto px-8 py-4 text-base font-semibold liquid-glass-button
-                            group hover:shadow-lg"
+                    <Button
+                        onClick={() => setIsBookingOpen(true)}
+                        className="rounded-full h-auto px-8 py-4 text-base font-semibold liquid-glass-button
+                        group hover:shadow-lg"
+                    >
+                        <span className="opacity-90 group-hover:opacity-100 transition-opacity">
+                            Book a Call
+                        </span>
+                        <span
+                            className="ml-2 opacity-70 group-hover:opacity-100 group-hover:translate-x-1.5 
+                            transition-all duration-300"
                         >
-                            <span className="opacity-90 group-hover:opacity-100 transition-opacity">
-                                Book a Call
-                            </span>
-                            <span
-                                className="ml-2 opacity-70 group-hover:opacity-100 group-hover:translate-x-1.5 
-                                transition-all duration-300"
-                            >
-                                <ArrowRight className="w-5 h-5" />
-                            </span>
-                        </Button>
-                    </Link>
+                            <ArrowRight className="w-5 h-5" />
+                        </span>
+                    </Button>
 
                     <Link
                         href="#services-highlight"
