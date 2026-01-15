@@ -32,7 +32,7 @@ export default function HeroSection({ isLoaded = false }: HeroSectionProps) {
     return (
         <section
             id="home"
-            className="relative min-h-[90vh] w-full flex flex-col items-center justify-center overflow-hidden bg-white dark:bg-neutral-950 border-b border-black/10 dark:border-white/10"
+            className="relative min-h-[90vh] w-full flex flex-col items-center justify-center overflow-hidden border-b border-black/10 dark:border-white/10"
         >
             <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
 

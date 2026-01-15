@@ -155,7 +155,7 @@ function LavaLampShader() {
 
 export const LavaLamp = () => {
     return (
-        <div className="w-full h-full absolute top-0 left-0 bg-white dark:bg-neutral-900 transition-colors duration-500">
+        <div className="w-full h-full absolute top-0 left-0 transition-colors duration-500">
             {/* Invert canvas in light mode to get Black Blobs on White BG. 
                 Added opacity-30 for Light Mode so black blobs are "Soft Shadows" and don't make black text unreadable. */}
             <div className="w-full h-full invert opacity-30 dark:opacity-100 dark:invert-0 transition-all duration-500">

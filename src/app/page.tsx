@@ -15,7 +15,7 @@ export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   return (
-    <div className="min-h-screen w-full dark:bg-neutral-900 bg-white transition-colors duration-300">
+    <div className="min-h-screen w-full transition-colors duration-300 relative z-10">
       <LoadingScreen onLoadingComplete={() => setIsLoaded(true)} />
 
       <Header />

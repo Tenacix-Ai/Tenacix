@@ -31,7 +31,7 @@ const steps = [
 
 export default function ProcessTimeline() {
     return (
-        <section className="py-24 md:py-32 dark:bg-neutral-900 bg-white relative overflow-hidden border-b dark:border-white/10 border-gray-100 transition-colors duration-300">
+        <section className="py-24 md:py-32 relative overflow-hidden border-b dark:border-white/10 border-gray-100 transition-colors duration-300">
             {/* Timeline line */}
             <div className="absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2 hidden md:block bg-gradient-to-b from-transparent via-zinc-500/20 to-transparent" />
 
