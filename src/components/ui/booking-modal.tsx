@@ -85,7 +85,7 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
                         initial={{ opacity: 0, scale: 0.95, y: 20 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                        className="relative w-full max-w-4xl h-[85vh] bg-white dark:bg-neutral-900 rounded-2xl shadow-2xl overflow-hidden border border-neutral-200 dark:border-neutral-800"
+                        className="relative w-full max-w-4xl h-[85vh] bg-white dark:bg-black rounded-2xl shadow-2xl overflow-hidden border border-neutral-200 dark:border-neutral-800"
                     >
                         <Button
                             variant="ghost"

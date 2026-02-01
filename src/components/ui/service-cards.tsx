@@ -2,7 +2,8 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Globe, Bot, X } from 'lucide-react';
+import { ArrowRight, X } from 'lucide-react';
+import { Globe3D, Bot3D } from '@/components/ui/icons-3d';
 
 interface ServiceCardData {
     id: string;
@@ -58,11 +59,11 @@ const servicesData: ServiceCardData[] = [
     },
 ];
 
-function ServiceIcon({ type, className }: { type: 'globe' | 'bot'; className?: string }) {
+function ServiceIcon({ type, size = 40 }: { type: 'globe' | 'bot'; size?: number }) {
     if (type === 'globe') {
-        return <Globe className={className} />;
+        return <Globe3D size={size} />;
     }
-    return <Bot className={className} />;
+    return <Bot3D size={size} />;
 }
 
 interface ServiceCardProps {
@@ -93,12 +94,12 @@ function ServiceCard({ service, isExpanded, onToggle, index }: ServiceCardProps)
             className={`
                 relative cursor-pointer overflow-hidden
                 rounded-2xl border 
-                bg-neutral-900/80 backdrop-blur-xl
+                bg-black/80 backdrop-blur-xl
                 p-8
                 transition-all duration-500 ease-out
                 ${isExpanded
-                    ? 'border-white/25 bg-neutral-800/90'
-                    : 'border-white/10 hover:border-white/20 hover:bg-neutral-800/80'
+                    ? 'border-white/25 bg-black/90'
+                    : 'border-white/10 hover:border-white/20 hover:bg-black/80'
                 }
             `}
         >
@@ -142,7 +143,7 @@ function ServiceCard({ service, isExpanded, onToggle, index }: ServiceCardProps)
                             {isExpanded ? (
                                 <X className="w-5 h-5 text-white/80" />
                             ) : (
-                                <ServiceIcon type={service.icon} className="w-5 h-5 text-white/60" />
+                                <ServiceIcon type={service.icon} size={24} />
                             )}
                         </div>
                     </div>

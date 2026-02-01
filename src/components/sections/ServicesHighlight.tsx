@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import ServiceCards from '@/components/ui/service-cards';
+import { ServiceShowcase } from '@/components/ui/laptop-mockup';
 
 export default function ServicesHighlight() {
     return (
@@ -12,7 +12,7 @@ export default function ServicesHighlight() {
             {/* Ambient Background Animation */}
             <div className="absolute inset-0 pointer-events-none">
                 <motion.div
-                    className="absolute top-1/4 -left-20 w-96 h-96 bg-gradient-to-br from-blue-500/5 to-purple-500/5 rounded-full blur-3xl"
+                    className="absolute top-1/4 -left-20 w-96 h-96 bg-gradient-to-br from-neutral-500/5 to-zinc-500/5 rounded-full blur-3xl"
                     animate={{
                         x: [0, 50, 0],
                         y: [0, 30, 0],
@@ -25,7 +25,7 @@ export default function ServicesHighlight() {
                     }}
                 />
                 <motion.div
-                    className="absolute bottom-1/4 -right-20 w-80 h-80 bg-gradient-to-bl from-cyan-500/5 to-blue-500/5 rounded-full blur-3xl"
+                    className="absolute bottom-1/4 -right-20 w-80 h-80 bg-gradient-to-bl from-zinc-500/5 to-neutral-500/5 rounded-full blur-3xl"
                     animate={{
                         x: [0, -40, 0],
                         y: [0, -20, 0],
@@ -48,14 +48,15 @@ export default function ServicesHighlight() {
                     transition={{ duration: 0.8 }}
                     className="mb-16 px-4"
                 >
-                    <motion.h2
-                        className="text-sm font-mono uppercase tracking-[0.2em] text-neutral-500 mb-4"
+                    <motion.span
+                        className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-100 dark:bg-white/10 border border-zinc-200 dark:border-white/20 text-[10px] font-mono text-zinc-600 dark:text-zinc-300 uppercase tracking-widest mb-4"
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.6, delay: 0.2 }}
                     >
+                        <span className="w-1 h-1 rounded-full bg-zinc-500 dark:bg-zinc-300 animate-pulse" />
                         Our Expertise
-                    </motion.h2>
+                    </motion.span>
                     <motion.p
                         className="text-3xl md:text-4xl font-light text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-3xl"
                         initial={{ opacity: 0, y: 20 }}
@@ -74,11 +75,12 @@ export default function ServicesHighlight() {
                     </motion.p>
                 </motion.div>
 
-                {/* New Expandable Service Cards */}
+                {/* 3D Laptop Showcase Grid */}
                 <div className="px-4">
-                    <ServiceCards />
+                    <ServiceShowcase />
                 </div>
             </div>
         </section>
     );
 }
+

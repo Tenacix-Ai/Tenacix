@@ -1,6 +1,6 @@
 'use client';
 
-import { Sun, Moon } from 'lucide-react';
+import { Sun3D, Moon3D } from '@/components/ui/icons-3d';
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from 'next-themes';
@@ -201,8 +201,8 @@ export default function CinematicThemeSwitcher() {
                 />
                 {/* Background Icons */}
                 <div className="absolute inset-0 flex items-center justify-between px-4">
-                    <Sun size={20} className={isDark ? 'text-neutral-200' : 'text-neutral-600'} />
-                    <Moon size={20} className={isDark ? 'text-neutral-200' : 'text-neutral-700'} />
+                    <Sun3D size={20} />
+                    <Moon3D size={20} />
                 </div>
 
                 {/* Circular Thumb with Bouncy Spring Physics */}
@@ -264,8 +264,8 @@ export default function CinematicThemeSwitcher() {
                                     width: '10px',
                                     height: '10px',
                                     background: isDark
-                                        ? 'radial-gradient(circle, rgba(147, 197, 253, 0.5) 0%, rgba(147, 197, 253, 0) 70%)'
-                                        : 'radial-gradient(circle, rgba(251, 191, 36, 0.7) 0%, rgba(251, 191, 36, 0) 70%)',
+                                        ? 'radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 70%)'
+                                        : 'radial-gradient(circle, rgba(24, 24, 27, 0.7) 0%, rgba(24, 24, 27, 0) 70%)',
                                     mixBlendMode: 'normal',
                                 }}
                                 initial={{ scale: 0, opacity: 0 }}
@@ -291,9 +291,9 @@ export default function CinematicThemeSwitcher() {
                     {/* Icon */}
                     <div className="relative z-10">
                         {isDark ? (
-                            <Moon size={20} className="text-white" />
+                            <Moon3D size={20} />
                         ) : (
-                            <Sun size={20} className="text-neutral-600" />
+                            <Sun3D size={20} />
                         )}
                     </div>
                 </motion.div>

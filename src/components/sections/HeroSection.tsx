@@ -41,25 +41,25 @@ export default function HeroSection({ isLoaded = false }: HeroSectionProps) {
                 <LavaLamp />
             </div>
 
-            <div className="relative z-10 text-center max-w-5xl mx-auto px-6 pointer-events-none">
+            <div className="relative z-10 text-center max-w-7xl mx-auto px-6 pointer-events-none">
                 {/* Status Badge */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                     transition={{ duration: 0.6, delay: 0.2 }}
-                    className="inline-flex gap-2 bg-neutral-100/50 dark:bg-white/10 border-neutral-200 dark:border-white/20 border rounded-full mb-8 py-1.5 px-4 items-center backdrop-blur-md pointer-events-auto dark:mix-blend-difference"
+                    className="inline-flex items-center gap-2 px-4 py-1.5 mb-8 rounded-full bg-zinc-100 dark:bg-white/10 border border-zinc-200 dark:border-white/20 backdrop-blur-md pointer-events-auto"
                 >
                     <span className="relative flex h-2 w-2">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-neutral-900 dark:bg-white opacity-75" />
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-neutral-900 dark:bg-white" />
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-zinc-600 dark:bg-zinc-300 opacity-75" />
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-zinc-600 dark:bg-zinc-300" />
                     </span>
-                    <span className="uppercase text-xs font-medium text-neutral-900 dark:text-white tracking-wider">
-                        AI Agents and Websites
+                    <span className="uppercase text-[10px] font-mono text-zinc-600 dark:text-zinc-300 tracking-widest">
+                        AI Agents & Websites
                     </span>
                 </motion.div>
 
                 {/* Main Title with Letter Animation */}
-                <h1 className="md:text-8xl lg:text-9xl leading-[0.9] text-6xl font-black tracking-tighter mb-8 cursor-default text-neutral-950 dark:text-white dark:mix-blend-difference">
+                <h1 className="md:text-9xl lg:text-[10rem] leading-[0.85] text-7xl font-black tracking-tighter mb-8 cursor-default text-neutral-950 dark:text-white dark:mix-blend-difference">
                     {words.map((word, wordIndex) => (
                         <span
                             key={wordIndex}

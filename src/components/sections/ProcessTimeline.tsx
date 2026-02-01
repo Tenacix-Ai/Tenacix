@@ -1,109 +1,122 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useState } from 'react';
+import Image from 'next/image';
 
 const steps = [
     {
-        number: 1,
-        title: 'Audit & Discover',
-        description: 'We map the terrain. Deep dive into technical constraints, audience psychology, and market gaps.',
-        phase: 'Phase 01 / Input',
-        color: 'zinc',
-        position: 'left',
+        id: 'discover',
+        label: '1. Audit & Discover',
+        title: 'Think it.',
+        description: 'Deep dive into technical constraints, audience psychology, and market gaps.',
     },
     {
-        number: 2,
-        title: 'Architect & Design',
-        description: 'Iterative prototyping. We develop high-fidelity models and code structures aligned with OKRs.',
-        phase: 'Phase 02 / Process',
-        color: 'zinc',
-        position: 'right',
+        id: 'design',
+        label: '2. Architect & Design',
+        title: 'Build it.',
+        description: 'Iterative prototyping and high-fidelity models aligned with OKRs.',
     },
     {
-        number: 3,
-        title: 'Deploy & Scale',
-        description: 'Execution with surgical precision. CI/CD pipelines, seamless launch, and continuous optimization.',
-        phase: 'Phase 03 / Output',
-        color: 'zinc',
-        position: 'left',
+        id: 'deploy',
+        label: '3. Deploy & Scale',
+        title: 'Extend it.',
+        description: 'CI/CD pipelines, seamless launch, and continuous optimization.',
     },
 ];
 
 export default function ProcessTimeline() {
-    return (
-        <section className="py-24 md:py-32 relative overflow-hidden border-b dark:border-white/10 border-gray-100 transition-colors duration-300">
-            {/* Timeline line */}
-            <div className="absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2 hidden md:block bg-gradient-to-b from-transparent via-zinc-500/20 to-transparent" />
+    const [activeStep, setActiveStep] = useState(0);
 
-            <div className="max-w-4xl mx-auto px-6 relative">
+    return (
+        <section className="py-24 md:py-32 relative overflow-hidden">
+            <div className="max-w-7xl mx-auto px-6">
+                {/* Header */}
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="text-center mb-12"
+                >
+                    <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-zinc-900 dark:text-white tracking-tight mb-6">
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-600 to-zinc-900 dark:from-zinc-300 dark:to-white">Think it.</span>{' '}
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-600 to-zinc-900 dark:from-zinc-300 dark:to-white">Build it.</span>{' '}
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-600 to-zinc-900 dark:from-zinc-300 dark:to-white">Extend it.</span>
+                    </h2>
+                    <p className="text-lg md:text-xl text-zinc-500 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed">
+                        Simple enough to ship in hours, sophisticated enough to scale. We help you automate business processes without limits on your logic.
+                    </p>
+                </motion.div>
+
+                {/* Tab Navigation */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    className="flex flex-wrap justify-center gap-2 mb-12"
+                >
+                    {steps.map((step, idx) => (
+                        <button
+                            key={step.id}
+                            onClick={() => setActiveStep(idx)}
+                            className={`
+                                px-6 py-3 rounded-full text-sm font-medium transition-all duration-300
+                                ${activeStep === idx
+                                    ? 'bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 shadow-lg'
+                                    : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'
+                                }
+                            `}
+                        >
+                            {step.label}
+                        </button>
+                    ))}
+                </motion.div>
+
+                {/* Screenshot/Image Container */}
                 <motion.div
                     initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.8 }}
-                    className="text-center mb-20"
+                    transition={{ duration: 0.7, delay: 0.3 }}
+                    className="relative"
                 >
-                    <span className="block text-xs font-mono mb-3 dark:text-zinc-400 text-zinc-500 uppercase tracking-widest">
-                        Our Process
-                    </span>
-                    <h2 className="text-3xl md:text-4xl font-semibold dark:text-white text-black tracking-tight">
-                        Systematic Execution
-                    </h2>
-                </motion.div>
+                    {/* Browser Frame */}
+                    <div className="relative rounded-2xl md:rounded-3xl overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-2xl bg-zinc-100 dark:bg-zinc-900">
+                        {/* Browser Header */}
+                        <div className="flex items-center gap-2 px-4 py-3 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/80">
+                            <div className="flex gap-1.5">
+                                <div className="w-3 h-3 rounded-full bg-red-400" />
+                                <div className="w-3 h-3 rounded-full bg-yellow-400" />
+                                <div className="w-3 h-3 rounded-full bg-green-400" />
+                            </div>
+                            <div className="flex-1 flex justify-center">
+                                <div className="px-4 py-1 rounded-md bg-zinc-200 dark:bg-zinc-800 text-xs text-zinc-500 dark:text-zinc-400 font-mono">
+                                    app.tenacix.com
+                                </div>
+                            </div>
+                        </div>
 
-                {/* Steps */}
-                {steps.map((step, idx) => (
-                    <motion.div
-                        key={step.number}
-                        initial={{ opacity: 0, x: step.position === 'left' ? -40 : 40 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: idx * 0.1 }}
-                        className={`relative grid grid-cols-1 md:grid-cols-2 gap-12 ${idx < steps.length - 1 ? 'mb-20' : ''}`}
-                    >
-                        {step.position === 'left' ? (
-                            <>
-                                <div className="md:text-right md:pr-16">
-                                    <h3 className="text-xl font-medium dark:text-white text-black mb-2 tracking-tight">
-                                        {step.title}
-                                    </h3>
-                                    <p className="text-sm dark:text-zinc-400 text-zinc-600">{step.description}</p>
-                                </div>
-                                {/* Circle */}
-                                <div
-                                    className={`hidden md:flex absolute left-1/2 top-0 -translate-x-1/2 w-10 h-10 rounded-full border dark:border-white/20 border-black/10 dark:bg-neutral-900 bg-white items-center justify-center z-10 shadow-lg`}
-                                >
-                                    <span className={`text-sm font-semibold dark:text-white text-black`}>{step.number}</span>
-                                </div>
-                                <div className="md:pl-16 md:col-start-2">
-                                    <span className={`text-xs font-mono dark:text-zinc-500 text-zinc-400 uppercase tracking-widest`}>
-                                        {step.phase}
-                                    </span>
-                                </div>
-                            </>
-                        ) : (
-                            <>
-                                <div className="hidden md:block md:text-right md:pr-16">
-                                    <span className={`text-xs font-mono dark:text-zinc-500 text-zinc-400 uppercase tracking-widest`}>
-                                        {step.phase}
-                                    </span>
-                                </div>
-                                {/* Circle */}
-                                <div
-                                    className={`hidden md:flex absolute left-1/2 top-0 -translate-x-1/2 w-10 h-10 rounded-full border dark:border-white/20 border-black/10 dark:bg-neutral-900 bg-white items-center justify-center z-10 shadow-lg`}
-                                >
-                                    <span className={`text-sm font-semibold dark:text-white text-black`}>{step.number}</span>
-                                </div>
-                                <div className="md:pl-16">
-                                    <h3 className="text-xl font-medium dark:text-white text-black mb-2 tracking-tight">
-                                        {step.title}
-                                    </h3>
-                                    <p className="text-sm dark:text-zinc-400 text-zinc-600">{step.description}</p>
-                                </div>
-                            </>
-                        )}
-                    </motion.div>
-                ))}
+                        {/* Image */}
+                        <div className="relative aspect-[16/10] bg-zinc-900">
+                            <Image
+                                src="/images/ai-workflow.png"
+                                alt="AI Workflow Dashboard"
+                                fill
+                                className="object-cover"
+                                priority
+                            />
+
+                            {/* Gradient Overlays for Premium Effect */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/20 to-transparent pointer-events-none" />
+                            <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-zinc-900/60 to-transparent pointer-events-none" />
+                        </div>
+                    </div>
+
+                    {/* Decorative Glow */}
+                    <div className="absolute -inset-4 bg-gradient-to-r from-zinc-500/10 via-slate-500/10 to-zinc-500/10 blur-3xl -z-10 opacity-50" />
+                </motion.div>
             </div>
         </section>
     );

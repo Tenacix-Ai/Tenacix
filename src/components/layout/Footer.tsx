@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { MapPin, Mail, Instagram, Twitter } from 'lucide-react';
+import { Instagram3D, Twitter3D, Mail3D } from '@/components/ui/icons-3d';
 
 const quickLinks = [
     { href: '#home', label: 'Home' },
@@ -16,14 +16,14 @@ const founders = [
 ];
 
 const socialLinks = [
-    { href: '#', icon: Instagram, hoverColor: 'hover:bg-zinc-800' },
-    { href: '#', icon: Twitter, hoverColor: 'hover:bg-zinc-800' },
-    { href: 'mailto:vrtxbuisness@gmail.com', icon: Mail, hoverColor: 'hover:bg-zinc-800' },
+    { href: '#', Icon: Instagram3D, hoverColor: 'hover:bg-zinc-800' },
+    { href: '#', Icon: Twitter3D, hoverColor: 'hover:bg-zinc-800' },
+    { href: 'mailto:vrtxbuisness@gmail.com', Icon: Mail3D, hoverColor: 'hover:bg-zinc-800' },
 ];
 
 export default function Footer() {
     return (
-        <footer className="dark:bg-neutral-900 bg-white border-t dark:border-white/10 border-black/5 text-zinc-600 dark:text-zinc-400 py-16 relative overflow-hidden">
+        <footer className="dark:bg-black bg-white border-t dark:border-white/10 border-black/5 text-zinc-600 dark:text-zinc-400 py-16 relative overflow-hidden">
             {/* Animated gradient line */}
             <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-zinc-500/20 to-transparent" />
 
@@ -87,9 +87,9 @@ export default function Footer() {
                                 <Link
                                     key={idx}
                                     href={social.href}
-                                    className={`w-10 h-10 rounded-full dark:bg-zinc-800 bg-zinc-200 flex items-center justify-center dark:hover:bg-white hover:bg-black dark:hover:text-black hover:text-white transition-all duration-300`}
+                                    className={`w-10 h-10 rounded-full dark:bg-zinc-800 bg-zinc-200 flex items-center justify-center dark:hover:bg-white hover:bg-black transition-all duration-300`}
                                 >
-                                    <social.icon size={18} />
+                                    <social.Icon size={18} />
                                 </Link>
                             ))}
                         </div>

@@ -8,7 +8,7 @@ import {
 	TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
-import { CheckCircleIcon, StarIcon } from 'lucide-react';
+import { Check3D, Star3D } from '@/components/ui/icons-3d';
 import Link from 'next/link';
 import { motion, Transition } from 'framer-motion';
 
@@ -67,10 +67,13 @@ export function PricingSection({
 					</p>
 				)}
 			</div>
-			<PricingFrequencyToggle
-				frequency={frequency}
-				setFrequency={setFrequency}
-			/>
+			<div className="flex w-full justify-center">
+				<PricingFrequencyToggle
+					frequency={frequency}
+					onFrequencyChange={setFrequency}
+					className="mb-8"
+				/>
+			</div>
 			<div className="mx-auto grid w-full max-w-4xl grid-cols-1 gap-4 md:grid-cols-3">
 				{plans.map((plan) => (
 					<PricingCard plan={plan} key={plan.name} frequency={frequency} />
@@ -82,33 +85,37 @@ export function PricingSection({
 
 type PricingFrequencyToggleProps = React.ComponentProps<'div'> & {
 	frequency: FREQUENCY;
-	setFrequency: React.Dispatch<React.SetStateAction<FREQUENCY>>;
+	onFrequencyChange: React.Dispatch<React.SetStateAction<FREQUENCY>>;
 };
 
 export function PricingFrequencyToggle({
 	frequency,
-	setFrequency,
+	onFrequencyChange,
 	...props
 }: PricingFrequencyToggleProps) {
 	return (
 		<div
 			className={cn(
-				'bg-neutral-800/50 mx-auto flex w-fit rounded-full border border-neutral-700 p-1',
+				'bg-neutral-900/80 backdrop-blur-sm mx-auto flex w-fit rounded-full border border-white/10 p-1 shadow-inner shadow-black/50',
 				props.className,
 			)}
 			{...props}
 		>
 			{frequencies.map((freq) => (
 				<button
-					onClick={() => setFrequency(freq)}
-					className="relative px-4 py-1 text-sm capitalize"
+					key={freq}
+					onClick={() => onFrequencyChange(freq)}
+					className={cn(
+						"relative px-6 py-2 text-sm font-medium capitalize transition-colors duration-200 z-10",
+						frequency === freq ? "text-white" : "text-neutral-500 hover:text-neutral-300"
+					)}
 				>
 					<span className="relative z-10">{freq}</span>
 					{frequency === freq && (
 						<motion.span
 							layoutId="frequency"
-							transition={{ type: 'spring', duration: 0.4 }}
-							className="bg-foreground absolute inset-0 z-10 rounded-full mix-blend-difference"
+							transition={{ type: 'spring', damping: 20, stiffness: 300 }}
+							className="bg-zinc-700/80 absolute inset-0 z-0 rounded-full border border-white/10 shadow-sm"
 						/>
 					)}
 				</button>
@@ -146,6 +153,15 @@ export function PricingCard({
 					size={100}
 				/>
 			)}
+			{plan.highlighted && (
+				<div className="absolute -top-3 left-0 right-0 mx-auto w-fit z-20">
+					<p className="bg-gradient-to-r from-zinc-500/90 to-slate-500/90 border border-zinc-500/50 text-white flex items-center gap-1.5 rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-wider shadow-lg shadow-zinc-500/20 backdrop-blur-md">
+						<Star3D size={12} className="text-white" />
+						Most Popular
+					</p>
+				</div>
+			)}
+
 			<div
 				className={cn(
 					'bg-neutral-800/40 rounded-t-lg border-b border-neutral-700 p-4',
@@ -153,14 +169,8 @@ export function PricingCard({
 				)}
 			>
 				<div className="absolute top-2 right-2 z-10 flex items-center gap-2">
-					{plan.highlighted && (
-						<p className="bg-background flex items-center gap-1 rounded-md border px-2 py-0.5 text-xs">
-							<StarIcon className="h-3 w-3 fill-current" />
-							Popular
-						</p>
-					)}
 					{frequency === 'yearly' && (
-						<p className="bg-primary text-primary-foreground flex items-center gap-1 rounded-md border px-2 py-0.5 text-xs">
+						<p className="bg-green-500/10 text-green-400 border border-green-500/20 flex items-center gap-1 rounded-md px-2 py-0.5 text-xs font-medium">
 							{Math.round(
 								((plan.price.monthly * 12 - plan.price.yearly) /
 									plan.price.monthly /
@@ -191,7 +201,7 @@ export function PricingCard({
 			>
 				{plan.features.map((feature, index) => (
 					<div key={index} className="flex items-center gap-2">
-						<CheckCircleIcon className="text-white h-4 w-4" />
+						<Check3D size={16} />
 						<TooltipProvider>
 							<Tooltip delayDuration={0}>
 								<TooltipTrigger asChild>

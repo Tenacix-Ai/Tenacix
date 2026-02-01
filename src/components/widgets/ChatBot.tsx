@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { MessageCircle, X, Send, Sparkles } from 'lucide-react';
+import { X } from 'lucide-react';
+import { MessageCircle3D, Sparkles3D, Send3D } from '@/components/ui/icons-3d';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface Message {
@@ -123,7 +124,7 @@ export default function ChatBot() {
                             exit={{ scale: 0, opacity: 0 }}
                             transition={{ duration: 0.15 }}
                         >
-                            <MessageCircle size={22} className="text-white dark:text-black" />
+                            <MessageCircle3D size={22} />
                         </motion.div>
                     )}
                 </AnimatePresence>
@@ -137,15 +138,15 @@ export default function ChatBot() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 10, scale: 0.95 }}
                         transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
-                        className="absolute bottom-20 right-0 w-[340px] sm:w-[380px] bg-white dark:bg-neutral-900 rounded-2xl shadow-2xl border border-neutral-200 dark:border-neutral-800 flex flex-col overflow-hidden"
+                        className="absolute bottom-20 right-0 w-[340px] sm:w-[380px] bg-white dark:bg-black rounded-2xl shadow-2xl border border-neutral-200 dark:border-neutral-800 flex flex-col overflow-hidden"
                         style={{ height: '520px' }}
                     >
                         {/* Header */}
-                        <div className="px-5 py-4 border-b border-neutral-100 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900">
+                        <div className="px-5 py-4 border-b border-neutral-100 dark:border-neutral-800 bg-neutral-50 dark:bg-black">
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center gap-3">
                                     <div className="w-9 h-9 bg-neutral-900 dark:bg-white rounded-lg flex items-center justify-center">
-                                        <Sparkles size={16} className="text-white dark:text-black" />
+                                        <Sparkles3D size={16} />
                                     </div>
                                     <div>
                                         <h3 className="font-semibold text-sm text-neutral-900 dark:text-white">TENACIX</h3>
@@ -208,7 +209,7 @@ export default function ChatBot() {
                         </div>
 
                         {/* Input */}
-                        <div className="p-3 border-t border-neutral-100 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900">
+                        <div className="p-3 border-t border-neutral-100 dark:border-neutral-800 bg-neutral-50 dark:bg-black">
                             <div className="flex gap-2">
                                 <input
                                     type="text"
@@ -223,7 +224,7 @@ export default function ChatBot() {
                                     disabled={!input.trim()}
                                     className="w-10 h-10 bg-neutral-900 dark:bg-white hover:bg-neutral-800 dark:hover:bg-neutral-100 disabled:opacity-40 disabled:cursor-not-allowed rounded-xl flex items-center justify-center transition-all"
                                 >
-                                    <Send size={16} className="text-white dark:text-black" />
+                                    <Send3D size={16} />
                                 </button>
                             </div>
                             <p className="text-[10px] text-neutral-400 text-center mt-2">

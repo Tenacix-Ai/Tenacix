@@ -3,7 +3,8 @@
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { BookingModal } from '@/components/ui/booking-modal';
-import { LampContainer } from '@/components/ui/lamp';
+// import { LampContainer } from '@/components/ui/lamp'; // Removing LampContainer
+// import { HeroSphere } from '@/components/ui/hero-sphere';
 import { PricingSection } from '@/components/ui/pricing';
 import { useState } from 'react';
 
@@ -99,8 +100,32 @@ export default function ContactSection() {
             id="contact"
             className="min-h-screen relative overflow-hidden"
         >
-            {/* Lamp animation header */}
-            <LampContainer className="pt-20">
+            {/* Subtle Ambient Glow - Premium Style */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                {/* Very subtle top gradient for depth */}
+                <div
+                    className="absolute top-0 left-0 right-0 h-[600px]"
+                    style={{
+                        background: 'radial-gradient(ellipse 80% 50% at 50% 0%, rgba(99, 102, 241, 0.08) 0%, transparent 60%)',
+                    }}
+                />
+                {/* Subtle side accents */}
+                <div
+                    className="absolute top-32 left-0 w-[400px] h-[400px] blur-3xl opacity-30"
+                    style={{
+                        background: 'radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%)',
+                    }}
+                />
+                <div
+                    className="absolute top-32 right-0 w-[400px] h-[400px] blur-3xl opacity-30"
+                    style={{
+                        background: 'radial-gradient(circle, rgba(168, 85, 247, 0.1) 0%, transparent 70%)',
+                    }}
+                />
+            </div>
+
+            {/* Content previously in LampContainer, now relative */}
+            <div className="relative z-10 pt-20 flex flex-col items-center max-w-7xl mx-auto px-6">
                 <motion.h2
                     initial={{ opacity: 0.5, y: 100 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -147,10 +172,10 @@ export default function ContactSection() {
                         <ArrowRight className="w-6 h-6 transition-transform group-hover:translate-x-2" />
                     </button>
                 </motion.div>
-            </LampContainer>
+            </div>
 
             {/* Pricing Section */}
-            <div className="relative z-10 -mt-20 pb-24">
+            <div className="relative z-10 mt-20 pb-24">
                 <motion.div
                     initial={{ opacity: 0, y: 60 }}
                     whileInView={{ opacity: 1, y: 0 }}

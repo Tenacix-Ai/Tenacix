@@ -1,85 +1,88 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { BrainCircuit, ScanEye, Network } from 'lucide-react';
-import { ContainerScroll } from '@/components/ui/container-scroll-animation';
 
 const features = [
     {
-        icon: BrainCircuit,
+        number: '01',
         title: 'Cognitive Architecture',
         description: 'We architect digital ecosystems that think. Scalable, self-correcting design systems built for the next decade of web evolution.',
-        iconColor: 'dark:text-zinc-200 text-zinc-900',
     },
     {
-        icon: ScanEye,
+        number: '02',
         title: 'Visual Intelligence',
         description: 'Design that speaks before you do. We craft distinct aesthetic identities that command authority and dissolve competition.',
-        iconColor: 'dark:text-zinc-200 text-zinc-900',
     },
     {
-        icon: Network,
+        number: '03',
         title: 'Neural Operations',
         description: 'Silence the noise. Autonomous AI agents that handle complex workflows, support, and sales while you sleep.',
-        iconColor: 'dark:text-zinc-200 text-zinc-900',
     },
 ];
 
 export default function AboutSection() {
     return (
-        <section id="about" className="relative w-full overflow-hidden">
-            <ContainerScroll
-                titleComponent={
-                    <>
+        <section id="about" className="py-32 relative overflow-hidden">
+            <div className="max-w-7xl mx-auto px-6">
+                {/* Header */}
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="mb-20"
+                >
+                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-[10px] font-mono text-zinc-500 dark:text-zinc-400 uppercase tracking-widest mb-6">
+                        <span className="w-1 h-1 rounded-full bg-zinc-400 animate-pulse" />
+                        What We Do
+                    </span>
+                    <h2 className="text-4xl md:text-6xl font-bold text-zinc-900 dark:text-white tracking-tight mb-6">
+                        About Us
+                    </h2>
+                    <p className="text-lg md:text-xl text-zinc-500 dark:text-zinc-400 max-w-2xl leading-relaxed">
+                        We are the architects of the new digital frontier, blending cognitive intelligence with immersive design.
+                    </p>
+                </motion.div>
+
+                {/* Feature List - Clean Minimal Design */}
+                <div className="space-y-0">
+                    {features.map((feature, idx) => (
                         <motion.div
+                            key={idx}
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8 }}
-                            className="mb-8"
+                            viewport={{ once: true, margin: "-50px" }}
+                            transition={{ duration: 0.5, delay: idx * 0.1 }}
+                            className="group"
                         >
-                            <span className="block text-xs font-mono mb-3 dark:text-zinc-400 text-zinc-500 uppercase tracking-widest">
-                                Where we come into play
-                            </span>
-                            <h2 className="text-5xl sm:text-6xl md:text-8xl font-black dark:text-white text-black leading-[0.9] tracking-tighter uppercase mb-6">
-                                About Us.
-                            </h2>
-                            <p className="text-xl md:text-2xl text-zinc-600 dark:text-white/80 max-w-3xl mx-auto leading-relaxed font-light">
-                                We are the architects of the new digital frontier, blending cognitive intelligence with immersive design.
-                            </p>
+                            <div className="py-10 border-t border-zinc-200 dark:border-zinc-800 grid md:grid-cols-12 gap-8 items-start cursor-default">
+                                {/* Number */}
+                                <div className="md:col-span-1">
+                                    <span className="text-sm font-mono text-zinc-400 dark:text-zinc-600">
+                                        {feature.number}
+                                    </span>
+                                </div>
+
+                                {/* Title */}
+                                <div className="md:col-span-4">
+                                    <h3 className="text-2xl md:text-3xl font-semibold text-zinc-900 dark:text-white tracking-tight group-hover:text-zinc-700 dark:group-hover:text-zinc-200 transition-colors duration-300">
+                                        {feature.title}
+                                    </h3>
+                                </div>
+
+                                {/* Description */}
+                                <div className="md:col-span-7">
+                                    <p className="text-base md:text-lg text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                                        {feature.description}
+                                    </p>
+                                </div>
+                            </div>
                         </motion.div>
-                    </>
-                }
-            >
-                {/* Bento Grid Layout - Adjusted for Container */}
-                <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-4 h-full w-full p-4 overflow-y-auto mix-blend-normal">
-                    {/* Feature 1: Cognitive Architecture - Large Horizontal */}
-                    <div className="group relative md:col-span-2 md:row-span-1 p-6 md:p-8 rounded-[1.5rem] border dark:border-white/10 border-black/5 bg-white dark:bg-black/40 overflow-hidden hover:border-white/20 transition-all duration-500 flex flex-col justify-center">
-                        <div className="absolute top-6 right-6 text-6xl font-black text-black/5 dark:text-white/5 pointer-events-none group-hover:scale-110 transition-transform duration-700">01</div>
-                        <div className="relative z-10">
-                            <h3 className="text-2xl font-bold mb-2 dark:text-white text-black tracking-tight">{features[0].title}</h3>
-                            <p className="text-base dark:text-zinc-400 text-zinc-600 max-w-xl leading-relaxed">{features[0].description}</p>
-                        </div>
-                    </div>
-
-                    {/* Feature 2: Visual Intelligence - Vertical */}
-                    <div className="group relative md:col-span-1 md:row-span-2 p-6 md:p-8 rounded-[1.5rem] border dark:border-white/10 border-black/5 bg-white dark:bg-black/40 overflow-hidden hover:border-white/20 transition-all duration-500 flex flex-col justify-end">
-                        <div className="absolute top-6 left-6 text-8xl font-black text-black/5 dark:text-white/5 pointer-events-none group-hover:rotate-12 transition-transform duration-700">02</div>
-                        <div className="relative z-10">
-                            <h3 className="text-2xl font-bold mb-2 dark:text-white text-black tracking-tight">{features[1].title}</h3>
-                            <p className="text-base dark:text-zinc-400 text-zinc-600 leading-relaxed">{features[1].description}</p>
-                        </div>
-                    </div>
-
-                    {/* Feature 3: Neural Operations - Remaining Horizontal */}
-                    <div className="group relative md:col-span-2 md:row-span-1 p-6 md:p-8 rounded-[1.5rem] border dark:border-white/10 border-black/5 bg-white dark:bg-black/40 overflow-hidden hover:border-white/20 transition-all duration-500 flex flex-col justify-center">
-                        <div className="absolute top-6 right-6 text-6xl font-black text-black/5 dark:text-white/5 pointer-events-none group-hover:scale-110 transition-transform duration-700">03</div>
-                        <div className="relative z-10">
-                            <h3 className="text-2xl font-bold mb-2 dark:text-white text-black tracking-tight">{features[2].title}</h3>
-                            <p className="text-base dark:text-zinc-400 text-zinc-600 max-w-xl leading-relaxed">{features[2].description}</p>
-                        </div>
-                    </div>
+                    ))}
+                    {/* Bottom Border */}
+                    <div className="border-t border-zinc-200 dark:border-zinc-800" />
                 </div>
-            </ContainerScroll>
+            </div>
         </section>
     );
 }

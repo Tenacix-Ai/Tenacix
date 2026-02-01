@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
-import { BackgroundBubbles } from "@/components/ui/background-bubbles";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -19,6 +18,8 @@ export const metadata: Metadata = {
   description: "TENACIX is your strategic digital partner. We design high-performance websites and AI agents that automate, convert, and scale modern businesses.",
 };
 
+import { BackgroundBeams } from "@/components/ui/background-beams";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -27,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-neutral-900`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-black`}
       >
         <ThemeProvider
           attribute="class"
@@ -35,8 +36,12 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange={false}
         >
-          <BackgroundBubbles />
-          {children}
+          <div className="relative min-h-screen w-full">
+            <BackgroundBeams className="fixed inset-0 z-0 h-screen w-full pointer-events-none" />
+            <div className="relative z-10 w-full">
+              {children}
+            </div>
+          </div>
         </ThemeProvider>
       </body>
     </html>
