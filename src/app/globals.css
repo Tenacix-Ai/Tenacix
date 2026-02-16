@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import "tw-animate-css";
+/* @import "tw-animate-css"; */
 
 @custom-variant dark (&:is(.dark *));
 
@@ -62,15 +62,16 @@
   --muted-foreground: oklch(0.45 0 0);
   --accent: oklch(0.96 0 0);
   --accent-foreground: oklch(0.145 0 0);
-  /* Metallic Silver Palette */
+  /* Monochrome Palette */
   --silver-50: oklch(0.98 0 0);
   --silver-100: oklch(0.95 0 0);
   --silver-200: oklch(0.88 0 0);
   --silver-300: oklch(0.78 0 0);
   --silver-400: oklch(0.65 0 0);
   --silver-500: oklch(0.55 0 0);
-  --accent-blue: oklch(0.55 0 0);
-  --accent-blue-light: oklch(0.65 0 0);
+  --accent-blue: oklch(0.85 0 0);
+  /* Replaced with Light Grey */
+  --accent-blue-light: oklch(0.95 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.90 0 0);
   --input: oklch(0.90 0 0);
@@ -91,11 +92,12 @@
 }
 
 .dark {
-  --background: oklch(0.05 0 0);
+  --background: oklch(0 0 0);
+  /* Pure Black */
   --foreground: oklch(0.985 0 0);
-  --card: oklch(0.08 0 0);
+  --card: oklch(0.05 0 0);
   --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.08 0 0);
+  --popover: oklch(0.05 0 0);
   --popover-foreground: oklch(0.985 0 0);
   --primary: oklch(0.985 0 0);
   --primary-foreground: oklch(0.05 0 0);
@@ -439,4 +441,36 @@ html::-webkit-scrollbar {
     0 15px 40px rgba(0, 0, 0, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.8);
   transform: translateY(-2px);
+}
+
+/* ===== Generic Liquid Glass Card ===== */
+.liquid-glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 4px 30px rgba(0, 0, 0, 0.1),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.liquid-glass-card {
+  @apply rounded-2xl transition-all duration-500;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 4px 30px rgba(0, 0, 0, 0.1),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.liquid-glass-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.2),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
 }

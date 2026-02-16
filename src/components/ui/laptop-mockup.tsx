@@ -525,9 +525,11 @@ export function LaptopMockup({
 
 
 
+import { CardContainer, CardBody, CardItem } from '@/components/ui/3d-card';
+
 export function ServiceShowcase() {
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 w-full max-w-[1600px] mx-auto px-4 md:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-[1600px] mx-auto px-4 md:px-8">
             {showcaseData.map((service, index) => (
                 <motion.div
                     key={service.id}
@@ -537,55 +539,63 @@ export function ServiceShowcase() {
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                     className="group relative"
                 >
-                    {/* Card Container - Now uses motion for hover control */}
-                    <motion.div
-                        initial="initial" // Set initial state for all children
-                        whileHover="hover" // Trigger hover state for all children
-                        className="relative rounded-2xl border border-white/10 bg-black/60 backdrop-blur-sm p-8 pb-12
-                                   hover:border-white/20 transition-all duration-500 cursor-pointer overflow-visible perspective-[2000px]"
-                    >
-                        {/* Background Gradient */}
-                        <div
-                            className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl`}
-                        />
+                    <CardContainer className="inter-var w-full">
+                        <CardBody className="liquid-glass-card relative group/card w-full h-auto rounded-3xl p-8 border-white/10 hover:border-white/20">
 
-                        {/* Cross Icon */}
-                        <div className="absolute top-4 left-4 w-3 h-3 opacity-40">
-                            <div className="absolute top-1/2 left-0 w-full h-px bg-white/60 -translate-y-1/2" />
-                            <div className="absolute top-0 left-1/2 w-px h-full bg-white/60 -translate-x-1/2" />
-                        </div>
+                            {/* Background Gradient */}
+                            <CardItem
+                                translateZ="50"
+                                className="absolute inset-0 -z-10"
+                            >
+                                <div className={`w-full h-full rounded-3xl bg-gradient-to-br ${service.gradient} opacity-0 group-hover/card:opacity-100 transition-opacity duration-500`} />
+                            </CardItem>
 
-                        {/* Title & Context */}
-                        <div className="relative z-10 mb-6 group-hover:-translate-y-1 transition-transform duration-500">
-                            <div className="flex flex-col gap-1">
-                                <div className="flex items-baseline gap-2">
-                                    <h3 className="text-4xl md:text-5xl font-bold tracking-tight text-white">
-                                        {service.title}
-                                    </h3>
-                                    <span className="text-xl md:text-2xl font-light text-zinc-500">
-                                        {service.subtitle}
-                                    </span>
-                                </div>
-                                <div className="h-px w-12 bg-zinc-700 my-2 group-hover:w-full group-hover:bg-white/30 transition-all duration-700" />
-                                <p className="text-sm text-zinc-400 font-normal leading-relaxed max-w-[90%]">
-                                    {service.description}
-                                </p>
+                            {/* Cross Icon */}
+                            <div className="absolute top-6 left-6 w-3 h-3 opacity-40">
+                                <div className="absolute top-1/2 left-0 w-full h-px bg-white/60 -translate-y-1/2" />
+                                <div className="absolute top-0 left-1/2 w-px h-full bg-white/60 -translate-x-1/2" />
                             </div>
-                        </div>
 
-                        {/* Laptop Mockup with Screen Content */}
-                        <div className="relative z-10 flex justify-center mt-8 scale-75 origin-top transition-transform duration-500 group-hover:scale-[0.78]">
-                            <LaptopMockup
-                                rotateY={service.mockupRotation.y}
-                                rotateX={service.mockupRotation.x}
-                                className="w-full max-w-[280px]"
-                                screenContent={getScreenContent(service.id)}
-                                popupElements={getPopupElements(service.id)}
-                            />
-                        </div>
+                            {/* Title & Context */}
+                            <CardItem
+                                translateZ="60"
+                                className="relative z-10 mb-8 w-full"
+                            >
+                                <div className="flex flex-col gap-2">
+                                    <div className="flex items-baseline gap-3">
+                                        <h3 className="text-4xl md:text-5xl font-bold tracking-tight text-white">
+                                            {service.title}
+                                        </h3>
+                                        <span className="text-xl md:text-2xl font-light text-zinc-500">
+                                            {service.subtitle}
+                                        </span>
+                                    </div>
+                                    <div className="h-px w-12 bg-zinc-700 my-4 group-hover/card:w-full group-hover/card:bg-cyan-500/50 transition-all duration-700" />
+                                    <p className="text-base text-zinc-400 font-normal leading-relaxed max-w-[90%]">
+                                        {service.description}
+                                    </p>
+                                </div>
+                            </CardItem>
 
-                        {/* Add some bottom padding via a spacer if needed, or rely on pb-12 and scaling */}
-                    </motion.div>
+                            {/* Laptop Mockup with Screen Content */}
+                            <CardItem
+                                translateZ="100"
+                                rotateX={10}
+                                rotateY={-10}
+                                className="w-full mt-8"
+                            >
+                                <div className="relative flex justify-center scale-90 group-hover/card:scale-100 transition-transform duration-500">
+                                    <LaptopMockup
+                                        rotateY={service.mockupRotation.y}
+                                        rotateX={service.mockupRotation.x}
+                                        className="w-full max-w-[320px]"
+                                        screenContent={getScreenContent(service.id)}
+                                        popupElements={getPopupElements(service.id)}
+                                    />
+                                </div>
+                            </CardItem>
+                        </CardBody>
+                    </CardContainer>
                 </motion.div>
             ))}
         </div>

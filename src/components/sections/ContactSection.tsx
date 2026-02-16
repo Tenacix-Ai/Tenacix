@@ -20,22 +20,30 @@ export default function ContactSection() {
             {/* Subtle Ambient Glow - Premium Style - REMOVED */}
 
 
+
+
             {/* Content previously in LampContainer, now relative */}
             <div className="relative z-10 pt-20 flex flex-col items-center max-w-7xl mx-auto px-6">
-                <motion.h2
-                    initial={{ opacity: 0.5, y: 100 }}
+                <motion.div
+                    initial={{ opacity: 0, y: 100 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{
                         delay: 0.3,
                         duration: 0.8,
                         ease: "easeInOut",
                     }}
-                    className="mt-8 bg-gradient-to-br from-white to-gray-400 py-4 bg-clip-text text-center text-5xl sm:text-6xl md:text-8xl font-bold tracking-tighter text-transparent"
+                    className="relative mt-8 text-center"
                 >
-                    Let&apos;s Build Something
-                    <br />
-                    Amazing Together
-                </motion.h2>
+                    {/* Cinematic Spotlights - Flanking the Text */}
+                    <div className="absolute top-1/2 -left-20 -translate-y-1/2 w-[200px] h-[200px] bg-white/10 blur-[60px] rounded-full pointer-events-none mix-blend-overlay" />
+                    <div className="absolute top-1/2 -right-20 -translate-y-1/2 w-[200px] h-[200px] bg-white/10 blur-[60px] rounded-full pointer-events-none mix-blend-overlay" />
+
+                    <h2 className="bg-gradient-to-br from-white to-gray-400 py-4 bg-clip-text text-5xl sm:text-6xl md:text-8xl font-bold tracking-tighter text-transparent relative z-10">
+                        Let&apos;s Build Something
+                        <br />
+                        Amazing Together
+                    </h2>
+                </motion.div>
                 <motion.p
                     initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}

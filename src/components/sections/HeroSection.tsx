@@ -7,6 +7,7 @@ import { LavaLamp } from '@/components/ui/fluid-blob';
 import { Button } from '@/components/ui/button';
 import { BookingModal } from '@/components/ui/booking-modal';
 import { useState } from 'react';
+import { TextGenerateEffect } from '@/components/ui/text-generate-effect';
 
 const tickerItems = [
     { text: 'Strategy', highlight: false },
@@ -32,12 +33,12 @@ export default function HeroSection({ isLoaded = false }: HeroSectionProps) {
     return (
         <section
             id="home"
-            className="relative min-h-[90vh] w-full flex flex-col items-center justify-center overflow-hidden border-b border-black/10 dark:border-white/10"
+            className="relative min-h-[90vh] w-full flex flex-col items-center justify-center overflow-hidden border-b border-black/10 dark:border-white/10 bg-black"
         >
             <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
 
-            {/* Background Lava Lamp Animation */}
-            <div className="absolute inset-0 z-0">
+            {/* Background Animation - Reverted to LavaLamp but Monochrome */}
+            <div className="absolute inset-0 z-0 opacity-50 contrast-125 grayscale">
                 <LavaLamp />
             </div>
 
@@ -47,28 +48,28 @@ export default function HeroSection({ isLoaded = false }: HeroSectionProps) {
                     initial={{ opacity: 0, y: 20 }}
                     animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                     transition={{ duration: 0.6, delay: 0.2 }}
-                    className="inline-flex items-center gap-2 px-4 py-1.5 mb-8 rounded-full bg-zinc-100 dark:bg-white/10 border border-zinc-200 dark:border-white/20 backdrop-blur-md pointer-events-auto"
+                    className="inline-flex items-center gap-2 px-4 py-1.5 mb-8 rounded-full bg-zinc-100/10 dark:bg-white/5 border border-zinc-200/20 dark:border-white/10 backdrop-blur-md pointer-events-auto"
                 >
                     <span className="relative flex h-2 w-2">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-zinc-600 dark:bg-zinc-300 opacity-75" />
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-zinc-600 dark:bg-zinc-300" />
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75" />
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-white" />
                     </span>
-                    <span className="uppercase text-[10px] font-mono text-zinc-600 dark:text-zinc-300 tracking-widest">
+                    <span className="uppercase text-[10px] font-sans font-medium text-zinc-400 tracking-widest">
                         AI Agents & Websites
                     </span>
                 </motion.div>
 
                 {/* Main Title with Letter Animation */}
-                <h1 className="md:text-9xl lg:text-[10rem] leading-[0.85] text-7xl font-black tracking-tighter mb-8 cursor-default text-neutral-950 dark:text-white dark:mix-blend-difference">
+                <h1 className="md:text-9xl lg:text-[10rem] leading-[0.85] text-7xl font-black tracking-tighter mb-8 cursor-default text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40 mix-blend-difference">
                     {words.map((word, wordIndex) => (
                         <span
                             key={wordIndex}
-                            className="inline-block mr-4 last:mr-0"
+                            className="inline-block mr-4 last:mr-0 hover:text-zinc-400 transition-colors duration-500"
                         >
                             {word.split("").map((letter, letterIndex) => (
                                 <span
                                     key={`${wordIndex}-${letterIndex}`}
-                                    className="inline-block"
+                                    className="inline-block hover:-translate-y-4 transition-transform duration-300"
                                 >
                                     {letter}
                                 </span>
@@ -78,44 +79,36 @@ export default function HeroSection({ isLoaded = false }: HeroSectionProps) {
                 </h1>
 
                 {/* Description */}
-                <motion.p
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                    transition={{ duration: 0.8, delay: 0.3 }}
-                    className="md:text-xl leading-relaxed text-lg font-light text-neutral-600 dark:text-white max-w-2xl mx-auto mb-12 dark:mix-blend-difference"
-                >
-                    At TENACIX, we design{' '}
-                    <span className="font-bold text-neutral-900 dark:text-white">high-performance websites</span> and{' '}
-                    <span className="font-bold text-neutral-900 dark:text-white">AI agents</span> that automate, convert, and
-                    scale modern businesses.
-                </motion.p>
+                <div className="max-w-3xl mx-auto mb-12">
+                    <TextGenerateEffect words="At TENACIX, we design high-performance websites and AI agents that automate, convert, and scale modern businesses." className="md:text-xl text-lg font-light text-neutral-300" />
+                </div>
 
                 {/* CTA Buttons */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                     transition={{ duration: 0.8, delay: 0.4 }}
-                    className="flex flex-col sm:flex-row gap-4 items-center justify-center pointer-events-auto"
+                    className="flex flex-col sm:flex-row gap-6 items-center justify-center pointer-events-auto"
                 >
                     <Button
                         onClick={() => setIsBookingOpen(true)}
                         className="rounded-full h-auto px-8 py-4 text-base font-semibold liquid-glass-button
-                        group hover:shadow-lg"
+                        group hover:shadow-[0_0_40px_rgba(255,255,255,0.2)] border-white/20 bg-white/5"
                     >
-                        <span className="opacity-90 group-hover:opacity-100 transition-opacity">
+                        <span className="opacity-90 group-hover:opacity-100 transition-opacity text-white">
                             Book a Call
                         </span>
                         <span
                             className="ml-2 opacity-70 group-hover:opacity-100 group-hover:translate-x-1.5 
                             transition-all duration-300"
                         >
-                            <ArrowRight className="w-5 h-5" />
+                            <ArrowRight className="w-5 h-5 text-zinc-300" />
                         </span>
                     </Button>
 
                     <Link
                         href="#services-highlight"
-                        className="group inline-flex items-center justify-center text-neutral-600 dark:text-white dark:mix-blend-difference hover:text-neutral-900 dark:hover:text-white/80 text-sm font-medium transition-colors duration-300 px-6 py-4"
+                        className="group inline-flex items-center justify-center text-neutral-400 hover:text-white text-sm font-medium transition-colors duration-300 px-6 py-4"
                     >
                         <span>Explore Services</span>
                         <ArrowDown className="ml-2 w-4 h-4 transition-transform group-hover:translate-y-1" />
@@ -124,15 +117,15 @@ export default function HeroSection({ isLoaded = false }: HeroSectionProps) {
             </div>
 
             {/* Ticker */}
-            <div className="overflow-hidden bg-neutral-100/50 dark:bg-white/5 w-full border-t border-neutral-200 dark:border-white/10 py-4 absolute bottom-0 backdrop-blur-sm z-20 dark:mix-blend-difference pointer-events-none">
+            <div className="overflow-hidden bg-black/20 w-full border-t border-white/5 py-4 absolute bottom-0 backdrop-blur-sm z-20 pointer-events-none">
                 <div className="flex whitespace-nowrap gap-16 animate-marquee">
                     {/* Double the items for seamless loop */}
                     {[...tickerItems, ...tickerItems].map((item, idx) => (
                         <span
                             key={idx}
                             className={`text-xs font-medium uppercase tracking-widest ${item.highlight
-                                ? 'text-neutral-900 dark:text-white font-bold'
-                                : 'text-neutral-400'
+                                ? 'text-white font-bold'
+                                : 'text-zinc-600'
                                 }`}
                         >
                             {item.text}

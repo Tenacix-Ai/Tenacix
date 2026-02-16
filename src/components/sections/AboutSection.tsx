@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { TextGenerateEffect } from '@/components/ui/text-generate-effect';
 
 const features = [
     {
@@ -36,9 +37,9 @@ export default function AboutSection() {
                     <h2 className="text-4xl md:text-6xl font-bold text-zinc-900 dark:text-white tracking-tight mb-6">
                         About Us
                     </h2>
-                    <p className="text-lg md:text-xl text-zinc-500 dark:text-zinc-400 max-w-2xl leading-relaxed">
-                        We are the architects of the new digital frontier, blending cognitive intelligence with immersive design.
-                    </p>
+                    <div className="max-w-2xl">
+                        <TextGenerateEffect words="We are the architects of the new digital frontier, blending cognitive intelligence with immersive design." className="text-lg md:text-xl text-zinc-500 dark:text-zinc-400" />
+                    </div>
                 </motion.div>
 
                 {/* Feature List - Clean Minimal Design */}
