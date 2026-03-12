@@ -33,23 +33,21 @@ export function ProcessMonolith({
                     <div className={cn(
                         "w-[600px] p-10 rounded-3xl",
                         "liquid-glass-card", // Uses the premium utility from globals.css
-                        "border border-white/10 shadow-2xl",
+                        "dark:border dark:border-white/10 shadow-2xl", // Only apply border/shadow via Tailwind in dark mode, in light mode use global CSS overrides
                         "flex flex-col gap-6",
                         "text-left"
                     )}>
                         <div className="flex items-center justify-between relative">
-                            {/* Giant outlined number behind text */}
-                            <span className="text-[12rem] font-black text-transparent stroke-white/10 absolute -top-24 -left-10 select-none pointer-events-none"
-                                style={{ WebkitTextStroke: '2px rgba(255,255,255,0.1)' }}>
+                            <span className="text-[12rem] font-black text-transparent absolute -top-24 -left-10 select-none pointer-events-none [-webkit-text-stroke:2px_rgba(0,0,0,0.05)] dark:[-webkit-text-stroke:2px_rgba(255,255,255,0.1)]">
                                 {stepNumber}
                             </span>
                         </div>
 
-                        <h3 className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-zinc-400 mt-4">
+                        <h3 className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-500 dark:from-white dark:to-zinc-400 mt-4">
                             {title}
                         </h3>
 
-                        <p className="text-xl text-zinc-300 font-light leading-relaxed max-w-[90%]">
+                        <p className="text-xl text-zinc-600 dark:text-zinc-300 font-light leading-relaxed max-w-[90%]">
                             {description}
                         </p>
                     </div>

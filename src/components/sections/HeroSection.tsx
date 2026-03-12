@@ -4,9 +4,9 @@ import { motion } from 'framer-motion';
 import { ArrowRight, ArrowDown } from 'lucide-react';
 import Link from 'next/link';
 import { LavaLamp } from '@/components/ui/fluid-blob';
-import { Button } from '@/components/ui/button';
-import { BookingModal } from '@/components/ui/booking-modal';
-import { useState } from 'react';
+
+import { useEffect } from 'react';
+import { getCalApi } from '@calcom/embed-react';
 import { TextGenerateEffect } from '@/components/ui/text-generate-effect';
 
 const tickerItems = [
@@ -28,14 +28,18 @@ export default function HeroSection({ isLoaded = false }: HeroSectionProps) {
     const title = "TENACIX";
     const words = title.split(" ");
 
-    const [isBookingOpen, setIsBookingOpen] = useState(false);
+    useEffect(() => {
+        (async function () {
+            const cal = await getCalApi({ namespace: "30min" });
+            cal("ui", { hideEventTypeDetails: false, layout: "month_view" });
+        })();
+    }, []);
 
     return (
         <section
             id="home"
             className="relative min-h-[90vh] w-full flex flex-col items-center justify-center overflow-hidden border-b border-black/10 dark:border-white/10 bg-black"
         >
-            <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
 
             {/* Background Animation - Reverted to LavaLamp but Monochrome */}
             <div className="absolute inset-0 z-0 opacity-50 contrast-125 grayscale">
@@ -90,10 +94,12 @@ export default function HeroSection({ isLoaded = false }: HeroSectionProps) {
                     transition={{ duration: 0.8, delay: 0.4 }}
                     className="flex flex-col sm:flex-row gap-6 items-center justify-center pointer-events-auto"
                 >
-                    <Button
-                        onClick={() => setIsBookingOpen(true)}
-                        className="rounded-full h-auto px-8 py-4 text-base font-semibold liquid-glass-button
-                        group hover:shadow-[0_0_40px_rgba(255,255,255,0.2)] border-white/20 bg-white/5"
+                    <button
+                        data-cal-namespace="30min"
+                        data-cal-link="tenacix/30min"
+                        data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
+                        className="inline-flex items-center gap-2 hover:gap-3 rounded-full px-8 py-4 text-base font-semibold liquid-glass-button
+                        group hover:shadow-[0_0_40px_rgba(255,255,255,0.2)] border-white/20 bg-white/5 transition-all duration-300 cursor-pointer"
                     >
                         <span className="opacity-90 group-hover:opacity-100 transition-opacity text-white">
                             Book a Call
@@ -104,7 +110,7 @@ export default function HeroSection({ isLoaded = false }: HeroSectionProps) {
                         >
                             <ArrowRight className="w-5 h-5 text-zinc-300" />
                         </span>
-                    </Button>
+                    </button>
 
                     <Link
                         href="#services-highlight"

@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ServiceShowcase } from '@/components/ui/laptop-mockup';
+import { ServiceExpandGrid } from '@/components/ui/service-expand-card';
 
 export default function ServicesHighlight() {
     return (
@@ -75,9 +75,9 @@ export default function ServicesHighlight() {
                     </motion.p>
                 </motion.div>
 
-                {/* 3D Laptop Showcase Grid */}
+                {/* Service Expand Cards Grid */}
                 <div className="px-4">
-                    <ServiceShowcase />
+                    <ServiceExpandGrid />
                 </div>
             </div>
         </section>

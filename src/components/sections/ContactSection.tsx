@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import { Hero } from "@/components/ui/animated-hero";
 import { BookingModal } from '@/components/ui/booking-modal';
 import { useState } from 'react';
 // import { LampContainer } from '@/components/ui/lamp'; // Removing LampContainer
@@ -38,11 +39,7 @@ export default function ContactSection() {
                     <div className="absolute top-1/2 -left-20 -translate-y-1/2 w-[200px] h-[200px] bg-white/10 blur-[60px] rounded-full pointer-events-none mix-blend-overlay" />
                     <div className="absolute top-1/2 -right-20 -translate-y-1/2 w-[200px] h-[200px] bg-white/10 blur-[60px] rounded-full pointer-events-none mix-blend-overlay" />
 
-                    <h2 className="bg-gradient-to-br from-white to-gray-400 py-4 bg-clip-text text-5xl sm:text-6xl md:text-8xl font-bold tracking-tighter text-transparent relative z-10">
-                        Let&apos;s Build Something
-                        <br />
-                        Amazing Together
-                    </h2>
+                    <Hero />
                 </motion.div>
                 <motion.p
                     initial={{ opacity: 0, y: 40 }}
