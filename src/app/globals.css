@@ -161,30 +161,6 @@
   opacity: 0;
 }
 
-.preloader__progress {
-  width: 8rem;
-  height: 2px;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 9999px;
-  overflow: hidden;
-}
-
-.preloader__progress-bar {
-  height: 100%;
-  width: 0%;
-  background: #fff;
-  border-radius: 9999px;
-  transition: width 0.1s linear;
-}
-
-.preloader__counter {
-  font-size: 0.625rem;
-  font-weight: 500;
-  letter-spacing: 0.4em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.5);
-}
-
 .is-loading,
 .is-loading body,
 .is-loading html {

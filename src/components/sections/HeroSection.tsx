@@ -38,7 +38,7 @@ export default function HeroSection({ isLoaded = false }: HeroSectionProps) {
   return (
     <section
       id="home"
-      className="relative min-h-[90vh] w-full flex flex-col items-center justify-center overflow-x-hidden border-b border-black/10 dark:border-white/10 bg-black"
+      className="relative min-h-[90vh] w-full flex flex-col items-center justify-center overflow-x-hidden border-b border-black/10 dark:border-white/10 bg-transparent"
     >
       {/* Background Animation - Reverted to LavaLamp but Monochrome */}
       <div className="absolute inset-0 z-0 opacity-50 contrast-125 grayscale overflow-hidden">

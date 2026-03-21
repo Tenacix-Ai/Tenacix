@@ -52,7 +52,7 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
       window.Cal.ns['30min']('inline', {
         elementOrSelector: '#my-cal-inline-30min',
         config: { layout: 'month_view' },
-        calLink: 'tenacix-vqaold/30min',
+        calLink: 'tenacix/30min',
       });
 
       window.Cal.ns['30min']('ui', { hideEventTypeDetails: false, layout: 'month_view' });

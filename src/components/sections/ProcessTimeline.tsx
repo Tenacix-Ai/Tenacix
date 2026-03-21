@@ -2,7 +2,6 @@
 
 import React, { useRef, useMemo, useState, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { Stars } from '@react-three/drei';
 import * as THREE from 'three';
 import { useScroll, useMotionValueEvent } from 'framer-motion';
 import { ProcessMonolith } from '@/components/ui/ProcessMonolith';
@@ -86,12 +85,14 @@ function InfiniteCanvasScene({
         intensity={isDark ? 1 : 1.5}
         color={isDark ? '#aaa' : '#fff'}
       />
-      <fog attach="fog" args={[isDark ? '#000' : '#ffffff', 10, 60]} />
+      <fog attach="fog" args={[isDark ? '#000' : '#ffffff', 5, 50]} />
 
-      {/* Stars for depth (Only render once, and only in dark mode where they are visible) */}
-      {isDark && (
-        <Stars radius={100} depth={50} count={1500} factor={4} saturation={0} fade speed={1} />
-      )}
+      {/* Cleaner light setup for cinematic depth */}
+      <pointLight
+        position={[0, 0, 10]}
+        intensity={isDark ? 0.8 : 1.2}
+        color={isDark ? '#fff' : '#fff'}
+      />
 
       {/* Render Monoliths */}
       {steps.map((step, index) => (
@@ -134,13 +135,12 @@ export default function ProcessTimeline() {
   });
 
   return (
-    <section
-      id="process"
-      ref={containerRef}
-      className="h-[400vh] w-full relative bg-white dark:bg-black transition-colors duration-500"
-    >
+    <section id="process" ref={containerRef} className="h-[400vh] w-full relative bg-transparent">
       {/* Sticky container for the 3D Canvas */}
       <div className="sticky top-0 h-screen w-full overflow-hidden">
+        {/* Soft Ambient Glow - Matching About Section Robot style */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[70%] bg-zinc-300/10 dark:bg-white/5 blur-[120px] rounded-full pointer-events-none" />
+
         <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-white via-white/50 to-transparent dark:from-black dark:via-black/50 z-20 pointer-events-none" />
 
         {/* Re-introduced Standard DOM Title for crispness */}
