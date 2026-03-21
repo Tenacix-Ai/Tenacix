@@ -33,8 +33,6 @@ export default function Header() {
 
                     {/* CTA & Theme Toggle */}
                     <div className="flex items-center gap-3 z-20">
-
-
                         {/* Start Project CTA - Liquid Glass Style */}
                         <Link
                             href="#contact"
@@ -45,14 +43,24 @@ export default function Header() {
                                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                             </span>
                         </Link>
+                    </div>
 
-                        {/* Mobile Menu Button Removed - handled by NavBar */}
+                    {/* Integrated NavBar - Hidden on extremely small screens if needed, otherwise centered */}
+                    <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 hidden md:block">
+                        <NavBar items={navItems} isStatic />
                     </div>
                 </div>
+
+                {/* Mobile version of NavBar - still fixed at the bottom for better UX or Integrated? 
+                    Based on screenshot it looks like it should be at the top. 
+                    Let's keep it in the header for desktop, and let NavBar handle its own mobile positioning or adjust it here.
+                */}
             </header>
 
-            {/* Nav (Desktop & Mobile) - Centered via TubelightNavbar - Rendered outside Header to avoid containing block issues with fixed position */}
-            <NavBar items={navItems} className="top-0 pt-2" />
+            {/* Render mobile-only version if floating at bottom is preferred, or let NavBar handle it */}
+            <div className="md:hidden">
+                <NavBar items={navItems} />
+            </div>
         </>
     );
 }
