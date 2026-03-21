@@ -1,2 +1,2 @@
-# VRTX Website
-Vrtx v0.1.0 Base Design - Animations + Structure Design + Components - Updated By Arnav 21-12-2025
+# Tenacix Website
+Tenacix v0.1.0 Base Design - Animations + Structure Design + Components - Updated By Arnav 21-12-2025
