@@ -1,0 +1,7 @@
+node_modules
+.next
+dist
+build
+.husky
+package-lock.json
+public

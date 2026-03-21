@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 /* @import "tw-animate-css"; */
 
 @custom-variant dark (&:is(.dark *));
@@ -73,8 +73,8 @@
   /* Replaced with Light Grey */
   --accent-blue-light: oklch(0.95 0 0);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.90 0 0);
-  --input: oklch(0.90 0 0);
+  --border: oklch(0.9 0 0);
+  --input: oklch(0.9 0 0);
   --ring: oklch(0.145 0 0);
   --chart-1: oklch(0.145 0 0);
   --chart-2: oklch(0.45 0 0);
@@ -109,10 +109,10 @@
   --accent-foreground: oklch(0.985 0 0);
   /* Metallic Silver Palette - Dark Mode */
   --silver-50: oklch(0.25 0 0);
-  --silver-100: oklch(0.30 0 0);
-  --silver-200: oklch(0.40 0 0);
+  --silver-100: oklch(0.3 0 0);
+  --silver-200: oklch(0.4 0 0);
   --silver-300: oklch(0.55 0 0);
-  --silver-400: oklch(0.70 0 0);
+  --silver-400: oklch(0.7 0 0);
   --silver-500: oklch(0.85 0 0);
   --accent-blue: oklch(0.85 0 0);
   --accent-blue-light: oklch(0.75 0 0);
@@ -242,7 +242,6 @@ html.is-loading::-webkit-scrollbar {
 }
 
 @keyframes glow-pulse {
-
   0%,
   100% {
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
@@ -266,7 +265,6 @@ html.is-loading::-webkit-scrollbar {
 }
 
 @keyframes float {
-
   0%,
   100% {
     transform: translateY(0px);
@@ -328,10 +326,12 @@ html::-webkit-scrollbar {
 .liquid-glass-button {
   position: relative;
   /* Ultra-subtle gradient base */
-  background: linear-gradient(180deg,
-      rgba(255, 255, 255, 0.03) 0%,
-      rgba(255, 255, 255, 0.08) 40%,
-      rgba(255, 255, 255, 0.01) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.03) 0%,
+    rgba(255, 255, 255, 0.08) 40%,
+    rgba(255, 255, 255, 0.01) 100%
+  );
 
   /* Heavy gloss & saturation for "thick glass" feel */
   backdrop-filter: blur(24px) saturate(180%);
@@ -349,13 +349,15 @@ html::-webkit-scrollbar {
   box-shadow:
     /* Ambient occlusion shadow */
     0 8px 32px -8px rgba(0, 0, 0, 0.5),
-    /* Subtle inner glow at top */
-    inset 0 1px 0 rgba(255, 255, 255, 0.15),
-    /* Deep inner shadow at bottom for volume */
-    inset 0 -1px 20px rgba(255, 255, 255, 0.05);
+    /* Subtle inner glow at top */ inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    /* Deep inner shadow at bottom for volume */ inset 0 -1px 20px rgba(255, 255, 255, 0.05);
 
   overflow: hidden;
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.4s ease,
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
   will-change: transform, box-shadow;
 }
 
@@ -367,9 +369,7 @@ html::-webkit-scrollbar {
   left: 0;
   right: 0;
   height: 50%;
-  background: linear-gradient(180deg,
-      rgba(255, 255, 255, 0.08) 0%,
-      transparent 100%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, transparent 100%);
   pointer-events: none;
 }
 
@@ -381,12 +381,14 @@ html::-webkit-scrollbar {
   left: -150%;
   width: 150%;
   height: 100%;
-  background: linear-gradient(90deg,
-      transparent 0%,
-      rgba(255, 255, 255, 0.1) 45%,
-      rgba(255, 255, 255, 0.2) 50%,
-      rgba(255, 255, 255, 0.1) 55%,
-      transparent 100%);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 45%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.1) 55%,
+    transparent 100%
+  );
   transform: skewX(-20deg);
   pointer-events: none;
   transition: none;
@@ -395,10 +397,12 @@ html::-webkit-scrollbar {
 /* Hover State */
 .liquid-glass-button:hover {
   transform: translateY(-2px) scale(1.02);
-  background: linear-gradient(180deg,
-      rgba(255, 255, 255, 0.08) 0%,
-      rgba(255, 255, 255, 0.12) 40%,
-      rgba(255, 255, 255, 0.05) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.12) 40%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
   border-color: rgba(255, 255, 255, 0.3);
   box-shadow:
     0 12px 40px -10px rgba(255, 255, 255, 0.1),
@@ -422,9 +426,7 @@ html::-webkit-scrollbar {
 
 /* Light Mode Overrides (Frosted White Glass) */
 :root:not(.dark) .liquid-glass-button {
-  background: linear-gradient(180deg,
-      rgba(255, 255, 255, 0.9) 0%,
-      rgba(240, 240, 240, 0.95) 100%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(240, 240, 240, 0.95) 100%);
   border: 1px solid rgba(0, 0, 0, 0.1);
   box-shadow:
     0 8px 30px rgba(0, 0, 0, 0.05),
@@ -434,9 +436,7 @@ html::-webkit-scrollbar {
 }
 
 :root:not(.dark) .liquid-glass-button:hover {
-  background: linear-gradient(180deg,
-      rgba(255, 255, 255, 1) 0%,
-      rgba(250, 250, 250, 1) 100%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(250, 250, 250, 1) 100%);
   box-shadow:
     0 15px 40px rgba(0, 0, 0, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.8);
@@ -482,8 +482,7 @@ html::-webkit-scrollbar {
   /* Subtle dark border */
   box-shadow:
     0 10px 40px rgba(0, 0, 0, 0.08),
-    /* Softer, broader shadow */
-    inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+    /* Softer, broader shadow */ inset 0 0 0 1px rgba(255, 255, 255, 0.5);
   /* Inner highlight */
   color: #171717;
 }

@@ -1,14 +1,11 @@
-"use client";
+'use client';
 
-import { useEffect, useMemo, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useMemo, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 function Hero() {
   const [titleNumber, setTitleNumber] = useState(0);
-  const titles = useMemo(
-    () => ["Amazing", "New", "Wonderful", "Beautiful", "Smart"],
-    []
-  );
+  const titles = useMemo(() => ['Amazing', 'New', 'Wonderful', 'Beautiful', 'Smart'], []);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -31,14 +28,14 @@ function Hero() {
             <AnimatePresence mode="popLayout">
               <motion.span
                 key={titles[titleNumber]}
-                initial={{ opacity: 0, y: 50, filter: "blur(10px)" }}
-                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                exit={{ opacity: 0, y: -50, filter: "blur(10px)" }}
+                initial={{ opacity: 0, y: 50, filter: 'blur(10px)' }}
+                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                exit={{ opacity: 0, y: -50, filter: 'blur(10px)' }}
                 transition={{
-                  type: "spring",
+                  type: 'spring',
                   stiffness: 70,
                   damping: 15,
-                  mass: 0.8
+                  mass: 0.8,
                 }}
                 className="absolute right-0 top-0 whitespace-nowrap bg-gradient-to-br from-white to-gray-400 bg-clip-text text-transparent"
               >
