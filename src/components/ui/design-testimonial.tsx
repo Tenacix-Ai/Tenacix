@@ -1,66 +1,67 @@
-"use client"
+'use client';
 
-import type React from "react"
+import type React from 'react';
 
-import { useState, useEffect, useRef } from "react"
-import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion"
+import { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
 
 const testimonials = [
   {
-    quote: "Transformed our entire creative process overnight.",
-    author: "Sarah Chen",
-    role: "Design Director",
-    company: "Linear",
+    quote: 'Transformed our entire creative process overnight.',
+    author: 'Sarah Chen',
+    role: 'Design Director',
+    company: 'Linear',
   },
   {
     quote: "The most elegant solution we've ever implemented.",
-    author: "Marcus Webb",
-    role: "Creative Lead",
-    company: "Vercel",
+    author: 'Marcus Webb',
+    role: 'Creative Lead',
+    company: 'Vercel',
   },
   {
-    quote: "Pure craftsmanship in every single detail.",
-    author: "Elena Frost",
-    role: "Head of Product",
-    company: "Stripe",
+    quote: 'Pure craftsmanship in every single detail.',
+    author: 'Elena Frost',
+    role: 'Head of Product',
+    company: 'Stripe',
   },
-]
+];
 
 export function Testimonial() {
-  const [activeIndex, setActiveIndex] = useState(0)
-  const containerRef = useRef<HTMLDivElement>(null)
+  const [activeIndex, setActiveIndex] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   // Mouse position for magnetic effect
-  const mouseX = useMotionValue(0)
-  const mouseY = useMotionValue(0)
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
 
-  const springConfig = { damping: 25, stiffness: 200 }
-  const x = useSpring(mouseX, springConfig)
-  const y = useSpring(mouseY, springConfig)
+  const springConfig = { damping: 25, stiffness: 200 };
+  const x = useSpring(mouseX, springConfig);
+  const y = useSpring(mouseY, springConfig);
 
   // Transform for parallax on the large number
-  const numberX = useTransform(x, [-200, 200], [-20, 20])
-  const numberY = useTransform(y, [-200, 200], [-10, 10])
+  const numberX = useTransform(x, [-200, 200], [-20, 20]);
+  const numberY = useTransform(y, [-200, 200], [-10, 10]);
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    const rect = containerRef.current?.getBoundingClientRect()
+    const rect = containerRef.current?.getBoundingClientRect();
     if (rect) {
-      const centerX = rect.left + rect.width / 2
-      const centerY = rect.top + rect.height / 2
-      mouseX.set(e.clientX - centerX)
-      mouseY.set(e.clientY - centerY)
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      mouseX.set(e.clientX - centerX);
+      mouseY.set(e.clientY - centerY);
     }
-  }
+  };
 
-  const goNext = () => setActiveIndex((prev) => (prev + 1) % testimonials.length)
-  const goPrev = () => setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)
+  const goNext = () => setActiveIndex((prev) => (prev + 1) % testimonials.length);
+  const goPrev = () =>
+    setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
 
   useEffect(() => {
-    const timer = setInterval(goNext, 6000)
-    return () => clearInterval(timer)
-  }, [])
+    const timer = setInterval(goNext, 6000);
+    return () => clearInterval(timer);
+  }, []);
 
-  const current = testimonials[activeIndex]
+  const current = testimonials[activeIndex];
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-background overflow-hidden">
@@ -73,13 +74,13 @@ export function Testimonial() {
           <AnimatePresence mode="wait">
             <motion.span
               key={activeIndex}
-              initial={{ opacity: 0, scale: 0.8, filter: "blur(10px)" }}
-              animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-              exit={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
+              initial={{ opacity: 0, scale: 0.8, filter: 'blur(10px)' }}
+              animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+              exit={{ opacity: 0, scale: 1.1, filter: 'blur(10px)' }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               className="block"
             >
-              {String(activeIndex + 1).padStart(2, "0")}
+              {String(activeIndex + 1).padStart(2, '0')}
             </motion.span>
           </AnimatePresence>
         </motion.div>
@@ -90,7 +91,7 @@ export function Testimonial() {
           <div className="flex flex-col items-center justify-center pr-16 border-r border-border">
             <motion.span
               className="text-xs font-mono text-muted-foreground tracking-widest uppercase"
-              style={{ writingMode: "vertical-rl", textOrientation: "mixed" }}
+              style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
@@ -139,7 +140,7 @@ export function Testimonial() {
                   animate="visible"
                   exit="exit"
                 >
-                  {current.quote.split(" ").map((word, i) => (
+                  {current.quote.split(' ').map((word, i) => (
                     <motion.span
                       key={i}
                       className="inline-block mr-[0.3em]"
@@ -204,7 +205,7 @@ export function Testimonial() {
                 >
                   <motion.div
                     className="absolute inset-0 bg-foreground"
-                    initial={{ x: "-100%" }}
+                    initial={{ x: '-100%' }}
                     transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                   />
                   <svg
@@ -231,7 +232,7 @@ export function Testimonial() {
                 >
                   <motion.div
                     className="absolute inset-0 bg-foreground"
-                    initial={{ x: "100%" }}
+                    initial={{ x: '100%' }}
                     transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                   />
                   <svg
@@ -260,16 +261,16 @@ export function Testimonial() {
           <motion.div
             className="flex whitespace-nowrap text-6xl font-bold tracking-tight"
             animate={{ x: [0, -1000] }}
-            transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+            transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: 'linear' }}
           >
             {[...Array(10)].map((_, i) => (
               <span key={i} className="mx-8">
-                {testimonials.map((t) => t.company).join(" • ")} •
+                {testimonials.map((t) => t.company).join(' • ')} •
               </span>
             ))}
           </motion.div>
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -109,72 +109,75 @@ void main() {
 `;
 
 function LavaLampShader() {
-    const meshRef = useRef<THREE.Mesh>(null);
-    const { size } = useThree();
+  const meshRef = useRef<THREE.Mesh>(null);
+  const { size } = useThree();
 
-    const uniforms = useMemo(() => ({
-        time: { value: 0 },
-        resolution: { value: new THREE.Vector4() }
-    }), []);
+  const uniforms = useMemo(
+    () => ({
+      time: { value: 0 },
+      resolution: { value: new THREE.Vector4() },
+    }),
+    [],
+  );
 
-    // Update resolution when size changes
-    React.useEffect(() => {
-        const { width, height } = size;
-        const imageAspect = 1;
-        let a1, a2;
+  // Update resolution when size changes
+  React.useEffect(() => {
+    const { width, height } = size;
+    const imageAspect = 1;
+    let a1, a2;
 
-        if (height / width > imageAspect) {
-            a1 = (width / height) * imageAspect;
-            a2 = 1;
-        } else {
-            a1 = 1;
-            a2 = (height / width) / imageAspect;
-        }
+    if (height / width > imageAspect) {
+      a1 = (width / height) * imageAspect;
+      a2 = 1;
+    } else {
+      a1 = 1;
+      a2 = height / width / imageAspect;
+    }
 
-        uniforms.resolution.value.set(width, height, a1, a2);
-    }, [size, uniforms]);
+    uniforms.resolution.value.set(width, height, a1, a2);
+  }, [size, uniforms]);
 
-    useFrame((state) => {
-        if (meshRef.current) {
-            // @ts-ignore
-            uniforms.time.value = state.clock.elapsedTime;
-        }
-    });
+  useFrame((state) => {
+    if (meshRef.current) {
+      // @ts-ignore
+      uniforms.time.value = state.clock.elapsedTime;
+    }
+  });
 
-    return (
-        <mesh ref={meshRef}>
-            <planeGeometry args={[5, 5]} />
-            <shaderMaterial
-                uniforms={uniforms}
-                vertexShader={vertexShader}
-                fragmentShader={fragmentShader}
-            />
-        </mesh>
-    );
+  return (
+    <mesh ref={meshRef}>
+      <planeGeometry args={[5, 5]} />
+      <shaderMaterial
+        uniforms={uniforms}
+        vertexShader={vertexShader}
+        fragmentShader={fragmentShader}
+      />
+    </mesh>
+  );
 }
 
 export const LavaLamp = () => {
-    return (
-        <div className="w-full h-full absolute top-0 left-0 transition-colors duration-500">
-            {/* Invert canvas in light mode to get Black Blobs on White BG. 
+  return (
+    <div className="w-full h-full absolute top-0 left-0 transition-colors duration-500">
+      {/* Invert canvas in light mode to get Black Blobs on White BG. 
                 Added opacity-30 for Light Mode so black blobs are "Soft Shadows" and don't make black text unreadable. */}
-            <div className="w-full h-full invert opacity-30 dark:opacity-100 dark:invert-0 transition-all duration-500">
-                <Canvas
-                    camera={{
-                        left: -0.5,
-                        right: 0.5,
-                        top: 0.5,
-                        bottom: -0.5,
-                        near: -1000,
-                        far: 1000,
-                        position: [0, 0, 2]
-                    }}
-                    orthographic
-                    gl={{ antialias: true }}
-                >
-                    <LavaLampShader />
-                </Canvas>
-            </div>
-        </div>
-    );
-}
+      <div className="w-full h-full invert opacity-30 dark:opacity-100 dark:invert-0 transition-all duration-500">
+        <Canvas
+          camera={{
+            left: -0.5,
+            right: 0.5,
+            top: 0.5,
+            bottom: -0.5,
+            near: -1000,
+            far: 1000,
+            position: [0, 0, 2],
+          }}
+          orthographic
+          gl={{ antialias: true }}
+        >
+          <LavaLampShader />
+        </Canvas>
+      </div>
+    </div>
+  );
+};
