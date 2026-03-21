@@ -27,9 +27,9 @@ export default function AboutSection() {
     <section id="about" className="py-32 relative overflow-visible">
       {/* Expanded max-width constraint to utilize large monitors better */}
       <div className="max-w-[1600px] mx-auto px-6 sm:px-12 lg:px-16">
-        <div className="flex flex-col xl:flex-row gap-12 xl:gap-16 items-start justify-between">
+        <div className="flex flex-col xl:flex-row gap-12 xl:gap-16 items-center xl:items-start justify-between">
           {/* Left side - Content */}
-          <div className="flex-1 min-w-0 max-w-4xl">
+          <div className="flex-1 min-w-0 max-w-4xl w-full">
             {/* Header */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -99,18 +99,24 @@ export default function AboutSection() {
 
           {/* Right side - Spline Robot */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="w-[120%] -ml-[10%] xl:ml-0 xl:w-[800px] 2xl:w-[900px] h-[450px] sm:h-[600px] xl:h-[800px] relative xl:sticky xl:top-32 flex-shrink-0 max-w-[100vw] xl:max-w-none pointer-events-none"
+            initial={{ opacity: 0, scale: 0.9, y: 100, filter: 'brightness(0.5) blur(10px)' }}
+            whileInView={{ opacity: 1, scale: 1, y: 0, filter: 'brightness(1) blur(0px)' }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+            className="w-full xl:w-[800px] 2xl:w-[900px] h-[450px] sm:h-[600px] xl:h-[800px] relative xl:sticky xl:top-32 flex-shrink-0 max-w-[100vw] xl:max-w-none pointer-events-none ml-0"
             style={{
               maskImage: 'linear-gradient(to bottom, black 70%, transparent 100%)',
               WebkitMaskImage: 'linear-gradient(to bottom, black 70%, transparent 100%)',
             }}
           >
-            {/* Ambient Context Light */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-zinc-300/20 dark:bg-white/10 blur-[100px] rounded-full" />
+            {/* Ambient Context Light - Enhanced Flare */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 2, ease: 'easeOut', delay: 0.4 }}
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-zinc-300/20 dark:bg-white/10 blur-[100px] rounded-full"
+            />
 
             <div className="w-full h-full absolute inset-0 pointer-events-auto">
               <SplineScene
