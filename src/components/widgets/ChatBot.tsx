@@ -101,7 +101,7 @@ export default function ChatBot() {
   };
 
   return (
-    <div className="fixed bottom-4 sm:bottom-6 right-4 sm:right-6 z-50">
+    <div className="fixed bottom-24 sm:bottom-6 right-4 sm:right-6 z-50">
       {/* Floating Action Button */}
       <motion.button
         whileHover={{ scale: 1.05 }}
