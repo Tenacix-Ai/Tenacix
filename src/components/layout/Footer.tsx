@@ -27,8 +27,8 @@ export default function Footer() {
       {/* Animated gradient line */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-zinc-500/20 to-transparent" />
 
-      {/* Glow effects - REMOVED for monochrome cleanliness, or keep subtle white */}
-      {/* <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-32 bg-white/5 blur-3xl" /> */}
+      {/* Subtle ambient bottom glow */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80vw] max-w-[800px] h-[300px] bg-white/5 blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">

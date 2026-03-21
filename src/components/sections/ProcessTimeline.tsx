@@ -86,22 +86,11 @@ function InfiniteCanvasScene({
         intensity={isDark ? 1 : 1.5}
         color={isDark ? '#aaa' : '#fff'}
       />
-      <fog attach="fog" args={[isDark ? '#000' : '#ffffff', 5, 50]} />
+      <fog attach="fog" args={[isDark ? '#000' : '#ffffff', 10, 60]} />
 
-      {/* Stars for depth */}
-      <Stars radius={100} depth={50} count={3000} factor={4} saturation={0} fade speed={1} />
-      {/* Dark stars for light mode? Stars component doesn't support color prop easily, it uses white points. 
-                We can use a different background or color. 
-                Actually Stars from drei has no color prop for the stars themselves commonly, they are white. 
-                In light mode white stars on white fog won't be visible. 
-                We can invert the scene or use a dark points material. 
-                But Stars is simple. 
-                Let's stick to simple fog for now. 
-                If we want stars in light mode, we need custom points. 
-                For now, let's hide Stars in light mode or just use them in dark. 
-            */}
+      {/* Stars for depth (Only render once, and only in dark mode where they are visible) */}
       {isDark && (
-        <Stars radius={100} depth={50} count={3000} factor={4} saturation={0} fade speed={1} />
+        <Stars radius={100} depth={50} count={1500} factor={4} saturation={0} fade speed={1} />
       )}
 
       {/* Render Monoliths */}
@@ -154,13 +143,20 @@ export default function ProcessTimeline() {
         <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-white via-white/50 to-transparent dark:from-black dark:via-black/50 z-20 pointer-events-none" />
 
         {/* Re-introduced Standard DOM Title for crispness */}
-        <div className="absolute top-10 sm:top-20 left-0 w-full text-center z-10 pointer-events-none mix-blend-difference dark:mix-blend-normal">
-          <h2 className="text-4xl sm:text-6xl md:text-8xl font-black text-black dark:text-white tracking-tighter uppercase opacity-90 drop-shadow-2xl">
+        <div className="absolute top-24 sm:top-32 left-0 w-full text-center z-10 pointer-events-none mix-blend-difference dark:mix-blend-normal px-4">
+          <h2
+            className="text-5xl sm:text-6xl md:text-8xl font-black text-black dark:text-white tracking-tighter uppercase opacity-90 drop-shadow-2xl"
+            style={{ filter: 'drop-shadow(0 0 30px rgba(255,255,255,0.15))' }}
+          >
             Our Process.
           </h2>
         </div>
 
-        <Canvas camera={{ position: [0, 0, 5], fov: 60 }} gl={{ antialias: true, alpha: true }}>
+        <Canvas
+          camera={{ position: [0, 0, 5], fov: 60 }}
+          dpr={[1, 1.5]}
+          gl={{ antialias: false, powerPreference: 'high-performance', alpha: true }}
+        >
           <InfiniteCanvasScene scrollRef={scrollRef} isDark={isDark} />
         </Canvas>
       </div>

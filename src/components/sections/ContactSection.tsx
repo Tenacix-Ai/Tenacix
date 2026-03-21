@@ -58,8 +58,11 @@ export default function ContactSection() {
             duration: 0.8,
             ease: 'easeInOut',
           }}
-          className="flex justify-center mt-8"
+          className="flex justify-center mt-12 relative w-full"
         >
+          {/* Ambient Glow behind button */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[100px] bg-zinc-300/20 dark:bg-white/10 blur-[50px] rounded-full pointer-events-none" />
+
           <button
             onClick={() => setIsBookingOpen(true)}
             className="group inline-flex items-center gap-2 sm:gap-4 px-6 py-3 sm:px-10 sm:py-5 liquid-glass-button rounded-full text-white font-semibold text-base sm:text-lg transition-all duration-300 animate-glow-pulse"

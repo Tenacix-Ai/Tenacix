@@ -90,10 +90,10 @@ function ServiceExpandCard({
         }}
         animate={{
           height: isExpanded
-            ? window.innerWidth < 640
+            ? mounted && window.innerWidth < 640
               ? 460
               : 420
-            : window.innerWidth < 640
+            : mounted && window.innerWidth < 640
               ? 240
               : 220,
           borderColor: isExpanded
@@ -103,7 +103,8 @@ function ServiceExpandCard({
               : 'rgba(0,0,0,0.1)',
         }}
         whileHover={{
-          borderColor: `rgba(${accentRgb}, 0.25)`,
+          borderColor: `rgba(${accentRgb}, 0.5)`,
+          boxShadow: `0 0 40px rgba(${accentRgb}, 0.15)`,
         }}
         transition={{
           type: 'spring',

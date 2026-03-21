@@ -18,7 +18,8 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-0 w-full z-40 backdrop-blur-md border-b bg-black/80 border-gray-800/50 transition-colors duration-300">
+      <header className="fixed top-0 w-full z-40 backdrop-blur-md border-b bg-black/80 border-white/5 transition-colors duration-300">
+        <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent" />
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between relative">
           {/* Brand */}
           <Link href="#home" className="flex items-center gap-2 group z-20">

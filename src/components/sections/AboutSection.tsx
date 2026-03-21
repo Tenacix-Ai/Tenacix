@@ -25,10 +25,11 @@ const features = [
 export default function AboutSection() {
   return (
     <section id="about" className="py-32 relative overflow-visible">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-8 items-start">
+      {/* Expanded max-width constraint to utilize large monitors better */}
+      <div className="max-w-[1600px] mx-auto px-6 sm:px-12 lg:px-16">
+        <div className="flex flex-col xl:flex-row gap-12 xl:gap-16 items-start justify-between">
           {/* Left side - Content */}
-          <div className="flex-1 min-w-0">
+          <div className="flex-1 min-w-0 max-w-4xl">
             {/* Header */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -41,11 +42,11 @@ export default function AboutSection() {
                 <span className="w-1 h-1 rounded-full bg-zinc-400 animate-pulse" />
                 What We Do
               </span>
-              <h2 className="text-4xl sm:text-6xl md:text-8xl lg:text-[10rem] font-bold text-zinc-900 dark:text-white tracking-tight mb-4">
+              <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-8xl 2xl:text-9xl font-bold text-zinc-900 dark:text-white tracking-tight mb-4 whitespace-nowrap">
                 About Us.
               </h2>
               <motion.p
-                className="text-lg sm:text-2xl md:text-4xl lg:text-6xl font-light text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-2xl"
+                className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-light text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-3xl"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
@@ -102,12 +103,16 @@ export default function AboutSection() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="w-full lg:w-[600px] xl:w-[650px] h-[350px] sm:h-[500px] lg:h-[800px] relative lg:sticky lg:top-32 flex-shrink-0 overflow-visible -mx-4 sm:-mx-8 lg:-mx-12"
+            className="w-[120%] -ml-[10%] xl:ml-0 xl:w-[800px] 2xl:w-[900px] h-[450px] sm:h-[600px] xl:h-[800px] relative xl:sticky xl:top-32 flex-shrink-0 max-w-[100vw] xl:max-w-none pointer-events-none"
+            style={{
+              maskImage: 'linear-gradient(to bottom, black 70%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, black 70%, transparent 100%)',
+            }}
           >
-            <div
-              className="w-full h-full"
-              style={{ transform: 'scale(0.9)', transformOrigin: 'center center' }}
-            >
+            {/* Ambient Context Light */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-zinc-300/20 dark:bg-white/10 blur-[100px] rounded-full" />
+
+            <div className="w-full h-full absolute inset-0 pointer-events-auto">
               <SplineScene
                 scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
                 className="w-full h-full"

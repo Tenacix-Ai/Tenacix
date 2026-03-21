@@ -12,41 +12,32 @@ export default function ServicesHighlight() {
       {/* Ambient Background Animation */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
-          className="absolute top-1/4 -left-20 w-96 h-96 bg-gradient-to-br from-neutral-500/5 to-zinc-500/5 rounded-full blur-3xl"
-          animate={{
-            x: [0, 50, 0],
-            y: [0, 30, 0],
-            scale: [1, 1.1, 1],
+          className="absolute top-[10%] -left-32 w-[600px] h-[600px] rounded-full"
+          style={{
+            background: 'radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 70%)',
+            willChange: 'transform',
           }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
+          animate={{ x: [0, 100, 0], y: [0, 50, 0], scale: [1, 1.2, 1] }}
+          transition={{ duration: 20, repeat: Infinity, ease: 'easeInOut' }}
         />
         <motion.div
-          className="absolute bottom-1/4 -right-20 w-80 h-80 bg-gradient-to-bl from-zinc-500/5 to-neutral-500/5 rounded-full blur-3xl"
-          animate={{
-            x: [0, -40, 0],
-            y: [0, -20, 0],
-            scale: [1, 1.15, 1],
+          className="absolute bottom-[10%] -right-32 w-[700px] h-[700px] rounded-full"
+          style={{
+            background: 'radial-gradient(circle, rgba(16,185,129,0.15) 0%, transparent 70%)',
+            willChange: 'transform',
           }}
-          transition={{
-            duration: 12,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: 2,
-          }}
+          animate={{ x: [0, -80, 0], y: [0, -40, 0], scale: [1, 1.3, 1] }}
+          transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
         />
       </div>
 
-      <div className="max-w-[90%] mx-auto relative z-10">
+      <div className="max-w-[95%] sm:max-w-[90%] mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="mb-16 px-4"
+          className="mb-8 sm:mb-16 px-2 sm:px-4"
         >
           <motion.span
             className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-100 dark:bg-white/10 border border-zinc-200 dark:border-white/20 text-[10px] font-mono text-zinc-600 dark:text-zinc-300 uppercase tracking-widest mb-4"
@@ -76,7 +67,7 @@ export default function ServicesHighlight() {
         </motion.div>
 
         {/* Service Expand Cards Grid */}
-        <div className="px-4">
+        <div className="px-2 sm:px-4 mt-8">
           <ServiceExpandGrid />
         </div>
       </div>

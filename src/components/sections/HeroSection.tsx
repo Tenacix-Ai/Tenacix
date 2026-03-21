@@ -38,20 +38,30 @@ export default function HeroSection({ isLoaded = false }: HeroSectionProps) {
   return (
     <section
       id="home"
-      className="relative min-h-[90vh] w-full flex flex-col items-center justify-center overflow-hidden border-b border-black/10 dark:border-white/10 bg-black"
+      className="relative min-h-[90vh] w-full flex flex-col items-center justify-center overflow-x-hidden border-b border-black/10 dark:border-white/10 bg-black"
     >
       {/* Background Animation - Reverted to LavaLamp but Monochrome */}
-      <div className="absolute inset-0 z-0 opacity-50 contrast-125 grayscale">
+      <div className="absolute inset-0 z-0 opacity-50 contrast-125 grayscale overflow-hidden">
         <LavaLamp />
       </div>
 
-      <div className="relative z-10 text-center max-w-7xl mx-auto px-6 pointer-events-none">
+      {/* Ambient Space Glow */}
+      <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none">
+        <div
+          className="w-[80vw] h-[80vw] max-w-[800px] max-h-[800px] rounded-full"
+          style={{
+            background: 'radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 60%)',
+          }}
+        />
+      </div>
+
+      <div className="relative z-10 text-center max-w-screen-xl mx-auto px-4 sm:px-6 pointer-events-none w-full">
         {/* Status Badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 mb-8 rounded-full bg-zinc-100/10 dark:bg-white/5 border border-zinc-200/20 dark:border-white/10 backdrop-blur-md pointer-events-auto"
+          className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 sm:mb-8 rounded-full bg-zinc-100/10 dark:bg-white/5 border border-zinc-200/20 dark:border-white/10 backdrop-blur-md pointer-events-auto"
         >
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75" />
@@ -63,11 +73,14 @@ export default function HeroSection({ isLoaded = false }: HeroSectionProps) {
         </motion.div>
 
         {/* Main Title with Letter Animation */}
-        <h1 className="md:text-9xl lg:text-[10rem] leading-[0.85] text-5xl sm:text-6xl font-black tracking-tighter mb-8 cursor-default text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40 mix-blend-difference">
+        <h1
+          className="md:text-9xl lg:text-[10rem] leading-[0.85] text-[3rem] sm:text-6xl md:whitespace-nowrap font-black tracking-tighter mb-6 sm:mb-8 cursor-default text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40 mix-blend-difference w-full max-w-[100vw] overflow-hidden text-ellipsis"
+          style={{ filter: 'drop-shadow(0 0 40px rgba(255,255,255,0.15))' }}
+        >
           {words.map((word, wordIndex) => (
             <span
               key={wordIndex}
-              className="inline-block mr-4 last:mr-0 hover:text-zinc-400 transition-colors duration-500"
+              className="inline-block mr-2 sm:mr-4 last:mr-0 hover:text-zinc-400 transition-colors duration-500"
             >
               {word.split('').map((letter, letterIndex) => (
                 <span
@@ -85,7 +98,7 @@ export default function HeroSection({ isLoaded = false }: HeroSectionProps) {
         <div className="max-w-3xl mx-auto mb-12">
           <TextGenerateEffect
             words="At TENACIX, we design high-performance websites and AI agents that automate, convert, and scale modern businesses."
-            className="md:text-xl text-lg font-light text-neutral-300"
+            className="md:text-xl text-lg font-light text-neutral-300 drop-shadow-md"
           />
         </div>
 
@@ -100,8 +113,8 @@ export default function HeroSection({ isLoaded = false }: HeroSectionProps) {
             data-cal-namespace="30min"
             data-cal-link="tenacix/30min"
             data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
-            className="inline-flex items-center gap-2 hover:gap-3 rounded-full px-8 py-4 text-base font-semibold liquid-glass-button
-                        group hover:shadow-[0_0_40px_rgba(255,255,255,0.2)] border-white/20 bg-white/5 transition-all duration-300 cursor-pointer"
+            className="relative inline-flex items-center gap-2 hover:gap-3 rounded-full px-8 py-4 text-base font-semibold liquid-glass-button
+                        group hover:shadow-[0_0_60px_rgba(255,255,255,0.3)] border-white/20 bg-white/5 hover:bg-white/10 transition-all duration-300 cursor-pointer overflow-hidden"
           >
             <span className="opacity-90 group-hover:opacity-100 transition-opacity text-white">
               Book a Call
@@ -112,6 +125,8 @@ export default function HeroSection({ isLoaded = false }: HeroSectionProps) {
             >
               <ArrowRight className="w-5 h-5 text-zinc-300" />
             </span>
+            {/* Subtle inner highlight */}
+            <div className="absolute inset-0 rounded-full border border-white/0 group-hover:border-white/20 transition-colors duration-300" />
           </button>
 
           <Link
