@@ -91,6 +91,7 @@ function TestimonialCard({
       <div className="flex items-start gap-2 sm:gap-3 mb-2 sm:mb-3">
         <div className="size-9 sm:size-12 rounded-full bg-gradient-to-br from-green-400 via-yellow-400 to-green-500 flex items-center justify-center overflow-hidden shrink-0">
           {avatar ? (
+            // eslint-disable-next-line @next/next/no-img-element
             <img src={avatar} alt={username} className="w-full h-full object-cover" />
           ) : (
             <span className="text-lg sm:text-2xl">🐸</span>

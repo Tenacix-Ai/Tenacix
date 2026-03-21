@@ -20,17 +20,6 @@ interface NavBarProps {
 
 export function NavBar({ items, className, isStatic }: NavBarProps) {
   const [activeTab, setActiveTab] = useState(items[0].name);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   // Track which section is in view and update the active spotlight accordingly
   // Uses scroll events instead of IntersectionObserver to handle very tall

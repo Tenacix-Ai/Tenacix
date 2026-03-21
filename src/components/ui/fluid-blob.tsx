@@ -139,7 +139,7 @@ function LavaLampShader() {
 
   useFrame((state) => {
     if (meshRef.current) {
-      // @ts-ignore
+      // eslint-disable-next-line react-hooks/immutability
       uniforms.time.value = state.clock.elapsedTime;
     }
   });

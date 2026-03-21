@@ -16,6 +16,7 @@ export function ProcessBeam({
   color?: string;
   isActive?: boolean;
 }) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const ref = useRef<any>(null);
 
   useFrame((state, delta) => {

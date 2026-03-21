@@ -7,7 +7,6 @@ import { BookingModal } from '@/components/ui/booking-modal';
 import { useState } from 'react';
 // import { LampContainer } from '@/components/ui/lamp'; // Removing LampContainer
 // import { HeroSphere } from '@/components/ui/hero-sphere';
-import Link from 'next/link';
 import FAQSection from '@/components/sections/faq';
 
 export default function ContactSection() {

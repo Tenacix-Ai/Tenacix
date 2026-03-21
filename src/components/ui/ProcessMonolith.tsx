@@ -1,9 +1,8 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React from 'react';
 import { Html, Float } from '@react-three/drei';
 import { cn } from '@/lib/utils';
-import { motion } from 'framer-motion';
 
 interface ProcessMonolithProps {
   title: string;

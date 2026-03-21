@@ -69,12 +69,6 @@ export function ScrollServicesDisplay({ items }: ScrollServicesDisplayProps) {
   const numberX = useTransform(x, [-200, 200], [-20, 20]);
   const numberY = useTransform(y, [-200, 200], [-10, 10]);
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    // We need to target the sticky container for mouse move, which is inside
-    // But since the parent is tall, let's just listen on the sticky wrapper?
-    // Actually, let's keep it simple.
-  };
-
   const current = items[activeIndex];
 
   return (

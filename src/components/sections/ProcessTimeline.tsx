@@ -45,16 +45,16 @@ function InfiniteCanvasScene({
   const { camera } = useThree();
 
   // Define exact start and end points
-  const startPos = new THREE.Vector3(0, 1, 5);
-  const endPos = new THREE.Vector3(0, 0, -70);
+  const startPos = useMemo(() => new THREE.Vector3(0, 1, 5), []);
+  const endPos = useMemo(() => new THREE.Vector3(0, 0, -70), []);
 
   // Create a smooth curve passing through all steps
   const curve = useMemo(() => {
     const points = [startPos, ...steps.map((s) => s.position), endPos];
     return new THREE.CatmullRomCurve3(points, false, 'catmullrom', 0.5); // Smoother tension
-  }, []);
+  }, [startPos, endPos]);
 
-  useFrame((state, delta) => {
+  useFrame(() => {
     const scrollOffset = scrollRef.current;
     const clampedOffset = Math.max(0, Math.min(1, scrollOffset));
 
@@ -116,6 +116,7 @@ export default function ProcessTimeline() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
   }, []);
 

@@ -106,14 +106,10 @@ export const CardItem = ({
   rotateX?: number | string;
   rotateY?: number | string;
   rotateZ?: number | string;
-  [key: string]: any;
+  [key: string]: unknown;
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [isMouseEntered] = useMouseEnter();
-
-  useEffect(() => {
-    handleAnimations();
-  }, [isMouseEntered]);
 
   const handleAnimations = () => {
     if (!ref.current) return;
@@ -124,6 +120,11 @@ export const CardItem = ({
     }
   };
 
+  useEffect(() => {
+    handleAnimations();
+  }, [isMouseEntered]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const Component = Tag as any;
 
   return (

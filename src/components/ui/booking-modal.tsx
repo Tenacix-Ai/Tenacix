@@ -13,6 +13,7 @@ interface BookingModalProps {
 export function BookingModal({ isOpen, onClose }: BookingModalProps) {
   useEffect(() => {
     if (isOpen) {
+      /* eslint-disable @typescript-eslint/no-explicit-any */
       (function (C: any, A: string, L: string) {
         const p = function (a: any, ar: any) {
           a.q.push(ar);
@@ -20,9 +21,9 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
         const d = C.document;
         C.Cal =
           C.Cal ||
-          function () {
+          function (...args: any[]) {
             const cal = C.Cal;
-            const ar = arguments;
+            const ar = args;
             if (!cal.loaded) {
               cal.ns = {};
               cal.q = cal.q || [];
@@ -30,8 +31,8 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
               cal.loaded = true;
             }
             if (ar[0] === L) {
-              const api = function () {
-                p(api, arguments);
+              const api = function (...innerArgs: any[]) {
+                p(api, innerArgs);
               };
               const namespace = ar[1];
               (api as any).q = (api as any).q || [];

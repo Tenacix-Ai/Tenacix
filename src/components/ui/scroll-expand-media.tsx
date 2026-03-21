@@ -22,9 +22,7 @@ const ScrollExpandMedia = ({
   posterSrc,
   bgImageSrc,
   title,
-  date,
   scrollToExpand = 'Scroll to Interact',
-  textBlend,
   children,
 }: ScrollExpandMediaProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -68,7 +66,6 @@ const ScrollExpandMedia = ({
   // Appears after expansion
   const contentOpacity = useTransform(smoothProgress, [0.6, 0.8], [0, 1]);
   const contentY = useTransform(smoothProgress, [0.6, 0.8], [50, 0]);
-  const contentPointerEvents = useTransform(smoothProgress, (v) => (v > 0.6 ? 'auto' : 'none'));
 
   const firstWord = title ? title.split(' ')[0] : '';
   const restOfTitle = title ? title.split(' ').slice(1).join(' ') : '';

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { ArrowRight, X } from 'lucide-react';
 import { Globe3D, Bot3D } from '@/components/ui/icons-3d';
 
